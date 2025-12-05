@@ -285,7 +285,7 @@
           "type": "ai_gen_block_eeb503e",
           "settings": {
             "wave_style": "flowing",
-            "wave_position": "top",
+            "wave_position": "bottom",
             "wave_height": 130,
             "wave_amplitude": 0.8,
             "wave_spacing": 0,
