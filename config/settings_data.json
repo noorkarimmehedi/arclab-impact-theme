@@ -18,7 +18,7 @@
     "block_shadow_vertical_offset": -6,
     "block_shadow_blur": 10,
     "background": "#f5ece1",
-    "text_color": "#1a1a1a",
+    "text_color": "#0000ff",
     "header_background": "#f5f5f5",
     "header_text_color": "#1a1a1a",
     "footer_background": "#d50000",
