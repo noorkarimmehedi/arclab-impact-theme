@@ -1,6 +1,486 @@
+{% doc %}
+  @prompt
+    create a wave design for the website. all should be customizable from color to border to everyhting , i don't like the curved wave style , still flowing wave isn't beautiful. it should be four flowing visible eave
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-wave-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: {{ block.settings.background_color }};
+    padding-top: {{ block.settings.top_spacing }}px;
+    padding-bottom: {{ block.settings.bottom_spacing }}px;
+  }
+
+  .ai-wave-svg-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    height: {{ block.settings.wave_height }}px;
+    {% if block.settings.wave_position == 'top' %}
+      margin-bottom: {{ block.settings.wave_spacing }}px;
+    {% elsif block.settings.wave_position == 'bottom' %}
+      margin-top: {{ block.settings.wave_spacing }}px;
+    {% endif %}
+  }
+
+  .ai-wave-content-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 2;
+    max-width: {{ block.settings.content_width }}px;
+    margin: 0 auto;
+    padding: 0 {{ block.settings.horizontal_padding }}px;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-wave-heading-{{ ai_gen_id }} {
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    line-height: 1.2;
+  }
+
+  .ai-wave-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ai-wave-border-{{ ai_gen_id }} {
+    {% if block.settings.enable_border %}
+      border: {{ block.settings.border_width }}px {{ block.settings.border_style }} {{ block.settings.border_color }};
+      border-radius: {{ block.settings.border_radius }}px;
+    {% endif %}
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-wave-svg-{{ ai_gen_id }} {
+      height: {{ block.settings.wave_height | times: 0.6 }}px;
+    }
+
+    .ai-wave-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .ai-wave-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.9 }}px;
+    }
+
+    .ai-wave-container-{{ ai_gen_id }} {
+      padding-top: {{ block.settings.top_spacing | times: 0.6 }}px;
+      padding-bottom: {{ block.settings.bottom_spacing | times: 0.6 }}px;
+    }
+  }
+{% endstyle %}
+
+<div
+  class="ai-wave-container-{{ ai_gen_id }} ai-wave-border-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.wave_position == 'top' %}
+    <svg
+      class="ai-wave-svg-{{ ai_gen_id }}"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1200 {{ block.settings.wave_height }}"
+      preserveAspectRatio="none"
+    >
+      {% if block.settings.wave_style == 'smooth' %}
+        <path
+          d="M0,{{ block.settings.wave_height | times: 0.5 }} Q300,{{ block.settings.wave_height | times: block.settings.wave_amplitude }} 600,{{ block.settings.wave_height | times: 0.5 }} T1200,{{ block.settings.wave_height | times: 0.5 }} L1200,{{ block.settings.wave_height }} L0,{{ block.settings.wave_height }} Z"
+          fill="{{ block.settings.wave_color }}"
+          opacity="{{ block.settings.wave_opacity | divided_by: 100.0 }}"
+        />
+      {% elsif block.settings.wave_style == 'layered' %}
+        <path
+          d="M0,{{ block.settings.wave_height | times: 0.7 }} Q300,{{ block.settings.wave_height | times: 0.3 }} 600,{{ block.settings.wave_height | times: 0.7 }} T1200,{{ block.settings.wave_height | times: 0.7 }} L1200,{{ block.settings.wave_height }} L0,{{ block.settings.wave_height }} Z"
+          fill="{{ block.settings.wave_color }}"
+          opacity="{{ block.settings.wave_opacity | divided_by: 100.0 }}"
+        />
+        <path
+          d="M0,{{ block.settings.wave_height | times: 0.5 }} Q300,{{ block.settings.wave_height | times: 0.9 }} 600,{{ block.settings.wave_height | times: 0.5 }} T1200,{{ block.settings.wave_height | times: 0.5 }} L1200,{{ block.settings.wave_height }} L0,{{ block.settings.wave_height }} Z"
+          fill="{{ block.settings.wave_secondary_color }}"
+          opacity="{{ block.settings.wave_secondary_opacity | divided_by: 100.0 }}"
+        />
+      {% elsif block.settings.wave_style == 'sharp' %}
+        <path
+          d="M0,{{ block.settings.wave_height }} L200,{{ block.settings.wave_height | times: 0.3 }} L400,{{ block.settings.wave_height | times: 0.7 }} L600,{{ block.settings.wave_height | times: 0.2 }} L800,{{ block.settings.wave_height | times: 0.6 }} L1000,{{ block.settings.wave_height | times: 0.4 }} L1200,{{ block.settings.wave_height | times: 0.8 }} L1200,{{ block.settings.wave_height }} Z"
+          fill="{{ block.settings.wave_color }}"
+          opacity="{{ block.settings.wave_opacity | divided_by: 100.0 }}"
+        />
+      {% else %}
+        <path
+          d="M0,{{ block.settings.wave_height | times: 0.6 }} C100,{{ block.settings.wave_height | times: 0.2 }} 200,{{ block.settings.wave_height | times: 0.2 }} 300,{{ block.settings.wave_height | times: 0.6 }} C400,{{ block.settings.wave_height }} 500,{{ block.settings.wave_height }} 600,{{ block.settings.wave_height | times: 0.6 }} C700,{{ block.settings.wave_height | times: 0.2 }} 800,{{ block.settings.wave_height | times: 0.2 }} 900,{{ block.settings.wave_height | times: 0.6 }} C1000,{{ block.settings.wave_height }} 1100,{{ block.settings.wave_height }} 1200,{{ block.settings.wave_height | times: 0.6 }} L1200,{{ block.settings.wave_height }} L0,{{ block.settings.wave_height }} Z"
+          fill="{{ block.settings.wave_color }}"
+          opacity="{{ block.settings.wave_opacity | divided_by: 100.0 }}"
+        />
+      {% endif %}
+    </svg>
+  {% endif %}
+
+  <div class="ai-wave-content-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-wave-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    {% if block.settings.text != blank %}
+      <div class="ai-wave-text-{{ ai_gen_id }}">{{ block.settings.text }}</div>
+    {% endif %}
+  </div>
+
+  {% if block.settings.wave_position == 'bottom' %}
+    <svg
+      class="ai-wave-svg-{{ ai_gen_id }}"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1200 {{ block.settings.wave_height }}"
+      preserveAspectRatio="none"
+    >
+      {% if block.settings.wave_style == 'smooth' %}
+        <path
+          d="M0,0 L1200,0 L1200,{{ block.settings.wave_height | times: 0.5 }} Q900,{{ block.settings.wave_height | times: block.settings.wave_amplitude }} 600,{{ block.settings.wave_height | times: 0.5 }} T0,{{ block.settings.wave_height | times: 0.5 }} Z"
+          fill="{{ block.settings.wave_color }}"
+          opacity="{{ block.settings.wave_opacity | divided_by: 100.0 }}"
+        />
+      {% elsif block.settings.wave_style == 'layered' %}
+        <path
+          d="M0,0 L1200,0 L1200,{{ block.settings.wave_height | times: 0.3 }} Q900,{{ block.settings.wave_height | times: 0.7 }} 600,{{ block.settings.wave_height | times: 0.3 }} T0,{{ block.settings.wave_height | times: 0.3 }} Z"
+          fill="{{ block.settings.wave_color }}"
+          opacity="{{ block.settings.wave_opacity | divided_by: 100.0 }}"
+        />
+        <path
+          d="M0,0 L1200,0 L1200,{{ block.settings.wave_height | times: 0.5 }} Q900,{{ block.settings.wave_height | times: 0.1 }} 600,{{ block.settings.wave_height | times: 0.5 }} T0,{{ block.settings.wave_height | times: 0.5 }} Z"
+          fill="{{ block.settings.wave_secondary_color }}"
+          opacity="{{ block.settings.wave_secondary_opacity | divided_by: 100.0 }}"
+        />
+      {% elsif block.settings.wave_style == 'sharp' %}
+        <path
+          d="M0,0 L1200,0 L1200,{{ block.settings.wave_height | times: 0.2 }} L1000,{{ block.settings.wave_height | times: 0.6 }} L800,{{ block.settings.wave_height | times: 0.4 }} L600,{{ block.settings.wave_height | times: 0.8 }} L400,{{ block.settings.wave_height | times: 0.3 }} L200,{{ block.settings.wave_height | times: 0.7 }} L0,0 Z"
+          fill="{{ block.settings.wave_color }}"
+          opacity="{{ block.settings.wave_opacity | divided_by: 100.0 }}"
+        />
+      {% else %}
+        <path
+          d="M0,0 L1200,0 L1200,{{ block.settings.wave_height | times: 0.4 }} C1100,0 1000,0 900,{{ block.settings.wave_height | times: 0.4 }} C800,{{ block.settings.wave_height | times: 0.8 }} 700,{{ block.settings.wave_height | times: 0.8 }} 600,{{ block.settings.wave_height | times: 0.4 }} C500,0 400,0 300,{{ block.settings.wave_height | times: 0.4 }} C200,{{ block.settings.wave_height | times: 0.8 }} 100,{{ block.settings.wave_height | times: 0.8 }} 0,{{ block.settings.wave_height | times: 0.4 }} Z"
+          fill="{{ block.settings.wave_color }}"
+          opacity="{{ block.settings.wave_opacity | divided_by: 100.0 }}"
+        />
+      {% endif %}
+    </svg>
+  {% endif %}
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Wave design",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Wave style"
+    },
+    {
+      "type": "select",
+      "id": "wave_style",
+      "label": "Wave style",
+      "options": [
+        {
+          "value": "smooth",
+          "label": "Smooth"
+        },
+        {
+          "value": "flowing",
+          "label": "Four flowing waves"
+        },
+        {
+          "value": "sharp",
+          "label": "Sharp"
+        },
+        {
+          "value": "layered",
+          "label": "Layered"
+        }
+      ],
+      "default": "flowing"
+    },
+    {
+      "type": "select",
+      "id": "wave_position",
+      "label": "Wave position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "range",
+      "id": "wave_height",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Wave height",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "wave_amplitude",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Wave intensity",
+      "default": 0.5
+    },
+    {
+      "type": "range",
+      "id": "wave_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Wave spacing",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Wave colors"
+    },
+    {
+      "type": "color",
+      "id": "wave_color",
+      "label": "Primary wave color",
+      "default": "#00badb"
+    },
+    {
+      "type": "range",
+      "id": "wave_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Primary wave opacity",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "wave_secondary_color",
+      "label": "Secondary wave color",
+      "info": "Only visible with layered style",
+      "default": "#1e316a"
+    },
+    {
+      "type": "range",
+      "id": "wave_secondary_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Secondary wave opacity",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Wave Design Section</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Add your content here with beautiful wave designs</p>"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 600,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Content width",
+      "default": 1200
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Heading spacing",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#677279"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Text size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "top_spacing",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "bottom_spacing",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border",
+      "label": "Enable border",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        },
+        {
+          "value": "dotted",
+          "label": "Dotted"
+        },
+        {
+          "value": "double",
+          "label": "Double"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wave design"
+    }
+  ]
+}
 {% endschema %}
