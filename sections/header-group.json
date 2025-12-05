@@ -13,6 +13,7 @@
   "sections": {
     "announce_rGdPiY": {
       "type": "announce",
+      "disabled": true,
       "name": "Announcement Bar - V2",
       "settings": {
         "announcement": true,
@@ -36,8 +37,9 @@
       "blocks": {
         "message": {
           "type": "message",
+          "disabled": true,
           "settings": {
-            "text": "আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন:  +8801819502705",
+            "text": "Free shipping over Rs.599",
             "url": ""
           }
         }
@@ -45,13 +47,12 @@
       "block_order": [
         "message"
       ],
-      "disabled": true,
       "settings": {
         "enable_sticky": false,
         "text_size": "text-base",
         "navigation_mode": "arrows",
         "scrolling_speed": 10,
-        "background": "#d50000",
+        "background": "#0000ff",
         "background_gradient": "",
         "text_color": "#ffffff"
       }
@@ -61,7 +62,6 @@
       "settings": {
         "enable_sticky": true,
         "hide_on_scroll": false,
-        "logo": "shopify://shop_images/9.png",
         "logo_max_width": 120,
         "logo_mobile_max_width": 105,
         "menu": "main-menu",
