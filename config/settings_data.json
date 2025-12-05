@@ -17,7 +17,7 @@
     "block_shadow_horizontal_offset": 0,
     "block_shadow_vertical_offset": -6,
     "block_shadow_blur": 10,
-    "background": "#f5f5f5",
+    "background": "#f5ece1",
     "text_color": "#1a1a1a",
     "header_background": "#f5f5f5",
     "header_text_color": "#1a1a1a",
@@ -46,24 +46,7 @@
     "favicon": "shopify://shop_images/4_d1333f22-8507-4447-ad27-627f5860407e.png",
     "checkout_accent_color": "#f0c417",
     "checkout_button_color": "#1a1a1a",
-    "content_for_index": [],
-    "blocks": {
-      "9696655121035291526": {
-        "type": "shopify://apps/rapi/blocks/app-embed/99617c17-a32b-4e70-a883-7a155610d032",
-        "disabled": false,
-        "settings": {}
-      },
-      "13669795325273674392": {
-        "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
-        "disabled": false,
-        "settings": {}
-      },
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {}
-      }
-    }
+    "content_for_index": []
   },
   "presets": {
     "Sound": {
