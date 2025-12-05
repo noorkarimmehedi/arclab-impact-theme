@@ -30,6 +30,16 @@
       --product-list-carousel-item-width: calc(var(--container-inner-width) / {{ section.settings.products_per_row_desktop }} - (var(--product-list-column-gap) / {{ section.settings.products_per_row_desktop }} * {{ section.settings.products_per_row_desktop | minus: 1 }}));
     }
   }
+
+  #shopify-section-{{ section.id }} {
+    padding-top: 20px !important;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: 30px !important;
+    }
+  }
 </style>
 
 <div {% render 'section-properties' %}>
