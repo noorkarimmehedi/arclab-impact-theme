@@ -15,8 +15,6 @@
         "slide-1": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/le-quan-2vTKEbcd43M-unsplash_41772934-fa34-497c-90d1-159eb86cc38a_1.jpg",
-            "mobile_image": "shopify://shop_images/2800_x_1000_px_1200_x_1600_px_1_1.png",
             "content_max_width": 860,
             "mobile_text_position": "place-self-center text-center",
             "desktop_text_position": "sm:place-self-center sm:text-center",
@@ -79,8 +77,6 @@
         "ai_gen_block_f031582_LFGh7x": {
           "type": "ai_gen_block_f031582",
           "settings": {
-            "image_desktop": "shopify://shop_images/2800_x_1000_px_1.webp",
-            "image_mobile": "shopify://shop_images/1200_x_1600_px_1.webp",
             "show_overlay": true,
             "overlay_color": "#000000",
             "overlay_opacity": 5,
@@ -135,7 +131,6 @@
         "1664424046b00c932c-0": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/617Xie9ePfL._AC_SL1500.jpg",
             "stretch_image": true,
             "link_text": "",
             "link_url": "shopify://products/fruit-drain-and-storage-basket-with-lid",
@@ -148,7 +143,6 @@
         "1664424046b00c932c-1": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/bamboojar4_5b372d51-a6d5-467a-ab5a-8fa1f8a022cf.jpg",
             "stretch_image": true,
             "link_text": "",
             "link_url": "shopify://products/glass-food-container-square-glass-jars-with-bamboo-lids",
@@ -161,7 +155,6 @@
         "1664424046b00c932c-2": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/813j9smA7FL._AC_SL1500.jpg",
             "stretch_image": true,
             "link_text": "",
             "link_url": "shopify://products/stainless-steel-kitchen-sink-holder",
@@ -269,7 +262,6 @@
             "nav_button_hover_color": "#f5f5f5",
             "nav_icon_color": "#1a1a1a",
             "collection_1": "all-product",
-            "custom_image_1": "shopify://shop_images/6_3170c586-c76a-4a36-b73f-91a462918505.png",
             "collection_2": "best-sellers",
             "collection_3": "pre-booking",
             "collection_4": "kitchen",
@@ -283,6 +275,48 @@
       },
       "block_order": [
         "ai_gen_block_29bc342_xFwrcc"
+      ],
+      "settings": {}
+    },
+    "1764945958932561c6": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_eeb503e_YYCWeL": {
+          "type": "ai_gen_block_eeb503e",
+          "settings": {
+            "wave_style": "flowing",
+            "wave_position": "top",
+            "wave_height": 130,
+            "wave_amplitude": 0.8,
+            "wave_spacing": 0,
+            "wave_color": "#e0864a",
+            "wave_opacity": 100,
+            "wave_secondary_color": "#1e316a",
+            "wave_secondary_opacity": 60,
+            "heading": "",
+            "text": "",
+            "content_width": 1200,
+            "text_alignment": "center",
+            "heading_color": "#1a1a1a",
+            "heading_size": 48,
+            "heading_spacing": 20,
+            "text_color": "#677279",
+            "text_size": 16,
+            "background_color": "#f5ece1",
+            "top_spacing": 0,
+            "bottom_spacing": 0,
+            "horizontal_padding": 20,
+            "enable_border": false,
+            "border_width": 2,
+            "border_style": "solid",
+            "border_color": "#000000",
+            "border_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_eeb503e_YYCWeL"
       ],
       "settings": {}
     },
@@ -332,7 +366,6 @@
           "type": "collection",
           "settings": {
             "collection": "all-product",
-            "image": "shopify://shop_images/71uV0kz-adL._AC_SX679.jpg",
             "subheading": "",
             "title": "",
             "url": "",
@@ -347,7 +380,6 @@
           "type": "collection",
           "settings": {
             "collection": "pre-booking",
-            "image": "shopify://shop_images/813j9smA7FL._AC_SL1500.jpg",
             "subheading": "",
             "title": "",
             "url": "",
@@ -452,7 +484,6 @@
         "allow_transparent_header": false,
         "enable_parallax": false,
         "image_size": "auto",
-        "image": "shopify://shop_images/jason-leung-jWU9FpLW7fI-unsplash.jpg",
         "mobile_text_position": "place-self-center text-center",
         "desktop_text_position": "sm:place-self-center sm:text-center",
         "text_color": "#ffffff",
@@ -466,7 +497,6 @@
         "item-1": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/1_3944757c-8d0e-45b3-bcfa-50064af69aa4.webp",
             "title": "",
             "heading_tag": "h4",
             "link_url": "shopify://products/angonaloys-original-salad-pod",
@@ -488,7 +518,6 @@
         "item-2": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/813j9smA7FL._AC_SL1500.jpg",
             "title": "",
             "heading_tag": "h4",
             "link_url": "shopify://products/stainless-steel-kitchen-sink-holder",
@@ -510,7 +539,6 @@
         "item-3": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/1615CC7D-B81B-466C-A426-3FFD22B5A2B8.png",
             "title": "",
             "heading_tag": "h4",
             "link_url": "shopify://products/glass-cups-with-bamboo-lid-and-straw",
@@ -532,7 +560,6 @@
         "29246d34-c6e0-4373-84f6-b15e57736a00": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/4_03ea49fa-aa09-46a8-88b4-a2d92fed7b93.png",
             "title": "",
             "heading_tag": "h4",
             "link_url": "shopify://products/dish-washing-brush-with-soap-dispenser",
@@ -677,7 +704,6 @@
       ],
       "settings": {
         "full_width": true,
-        "image": "shopify://shop_images/1_3944757c-8d0e-45b3-bcfa-50064af69aa4.webp",
         "title": "",
         "content": "",
         "button_text": "",
@@ -704,7 +730,6 @@
         "1664424486a2b084ab-0": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/1615CC7D-B81B-466C-A426-3FFD22B5A2B8.png",
             "image_rotation_degrees": -2,
             "subheading": "",
             "title": "Heading 1",
@@ -1013,6 +1038,7 @@
     "image-link-blocks",
     "scrolling-text",
     "1763296371026b3ee6",
+    "1764945958932561c6",
     "featured-collection",
     "collection-list",
     "impact-text",
