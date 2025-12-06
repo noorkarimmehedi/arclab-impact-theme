@@ -1,7 +1,3 @@
-{% doc %}
-  @prompt
-     create a product carousel with scrollable product cards. below that the arrow keys. then a arrow key will be press there should be a main product in the center and on left and right side two products should be show , i want more compact product card size. in mobile version two product on left and right side should be visible half so that it looks beautiful., there shouldn't be no last dot. it should be like circle after last product there should be first product and it's scrollable. remove the dots icon, after the last product card when i click next be there is a flick not smooth like others. it should be smooth like others , still have the flick between last and first product card , keeping everything same i want neubrutalism ui. don't change any sizes , all should be customizable from font to color to shadow to border. section background color should be customizable too, add a sub heading and also i can't change the section background color. and move the arrrow key from center to left , move the arrow key from left to right 
-{% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -64,25 +60,25 @@
     transition: all 0.3s ease;
     opacity: 0.5;
     transform: scale(0.85);
-    box-shadow: {{ block.settings.card_shadow_x }}px {{ block.settings.card_shadow_y }}px 0 {{ block.settings.card_shadow_color }};
+    box-shadow: {{ block.settings.card_shadow_x }}px {{ block.settings.card_shadow_y }}px 0 0 {{ block.settings.card_shadow_color }};
   }
 
   .ai-product-carousel__card-{{ ai_gen_id }}.active {
     opacity: 1;
     transform: scale(1);
-    box-shadow: {{ block.settings.card_shadow_x | times: 1.5 }}px {{ block.settings.card_shadow_y | times: 1.5 }}px 0 {{ block.settings.card_shadow_color }};
+    box-shadow: {{ block.settings.card_shadow_x | times: 1.5 }}px {{ block.settings.card_shadow_y | times: 1.5 }}px 0 0 {{ block.settings.card_shadow_color }};
   }
 
   .ai-product-carousel__card-{{ ai_gen_id }}.side {
     opacity: 0.8;
     transform: scale(0.92);
-    box-shadow: {{ block.settings.card_shadow_x | times: 1.2 }}px {{ block.settings.card_shadow_y | times: 1.2 }}px 0 {{ block.settings.card_shadow_color }};
+    box-shadow: {{ block.settings.card_shadow_x | times: 1.2 }}px {{ block.settings.card_shadow_y | times: 1.2 }}px 0 0 {{ block.settings.card_shadow_color }};
   }
 
   .ai-product-carousel__image-wrapper-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
-    padding-bottom: 100%;
+    padding-bottom: 75%;
     overflow: hidden;
     background-color: #f4f4f4;
     border-bottom: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
@@ -115,7 +111,7 @@
   }
 
   .ai-product-carousel__info-{{ ai_gen_id }} {
-    padding: 12px;
+    padding: 16px;
   }
 
   .ai-product-carousel__title-{{ ai_gen_id }} {
@@ -123,7 +119,7 @@
     font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
     font-weight: {{ block.settings.title_font.weight }};
     font-style: {{ block.settings.title_font.style }};
-    margin: 0 0 6px;
+    margin: 0 0 8px;
     color: {{ block.settings.title_color }};
     overflow: hidden;
     text-overflow: ellipsis;
@@ -140,12 +136,12 @@
     font-weight: {{ block.settings.price_font.weight }};
     font-style: {{ block.settings.price_font.style }};
     color: {{ block.settings.price_color }};
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .ai-product-carousel__button-{{ ai_gen_id }} {
     width: 100%;
-    padding: 8px 12px;
+    padding: 10px 16px;
     background-color: {{ block.settings.button_background }};
     color: {{ block.settings.button_text_color }};
     border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
@@ -160,19 +156,19 @@
     text-align: center;
     transition: all 0.2s ease;
     text-transform: uppercase;
-    box-shadow: {{ block.settings.button_shadow_x }}px {{ block.settings.button_shadow_y }}px 0 {{ block.settings.button_shadow_color }};
+    box-shadow: {{ block.settings.button_shadow_x }}px {{ block.settings.button_shadow_y }}px 0 0 {{ block.settings.button_shadow_color }};
   }
 
   .ai-product-carousel__button-{{ ai_gen_id }}:hover {
     background-color: {{ block.settings.button_hover_background }};
     color: {{ block.settings.button_hover_text_color }};
     transform: translate(2px, 2px);
-    box-shadow: {{ block.settings.button_shadow_x | divided_by: 2 }}px {{ block.settings.button_shadow_y | divided_by: 2 }}px 0 {{ block.settings.button_shadow_color }};
+    box-shadow: {{ block.settings.button_shadow_x | divided_by: 2 }}px {{ block.settings.button_shadow_y | divided_by: 2 }}px 0 0 {{ block.settings.button_shadow_color }};
   }
 
   .ai-product-carousel__button-{{ ai_gen_id }}:active {
     transform: translate({{ block.settings.button_shadow_x }}px, {{ block.settings.button_shadow_y }}px);
-    box-shadow: 0 0 0 {{ block.settings.button_shadow_color }};
+    box-shadow: 0 0 0 0 {{ block.settings.button_shadow_color }};
   }
 
   .ai-product-carousel__controls-{{ ai_gen_id }} {
@@ -195,17 +191,17 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: {{ block.settings.arrow_shadow_x }}px {{ block.settings.arrow_shadow_y }}px 0 {{ block.settings.arrow_shadow_color }};
+    box-shadow: {{ block.settings.arrow_shadow_x }}px {{ block.settings.arrow_shadow_y }}px 0 0 {{ block.settings.arrow_shadow_color }};
   }
 
   .ai-product-carousel__arrow-{{ ai_gen_id }}:hover {
     transform: translate(2px, 2px);
-    box-shadow: {{ block.settings.arrow_shadow_x | divided_by: 2 }}px {{ block.settings.arrow_shadow_y | divided_by: 2 }}px 0 {{ block.settings.arrow_shadow_color }};
+    box-shadow: {{ block.settings.arrow_shadow_x | divided_by: 2 }}px {{ block.settings.arrow_shadow_y | divided_by: 2 }}px 0 0 {{ block.settings.arrow_shadow_color }};
   }
 
   .ai-product-carousel__arrow-{{ ai_gen_id }}:active {
     transform: translate({{ block.settings.arrow_shadow_x }}px, {{ block.settings.arrow_shadow_y }}px);
-    box-shadow: 0 0 0 {{ block.settings.arrow_shadow_color }};
+    box-shadow: 0 0 0 0 {{ block.settings.arrow_shadow_color }};
   }
 
   .ai-product-carousel__arrow-{{ ai_gen_id }} svg {
@@ -241,15 +237,15 @@
     .ai-product-carousel__card-{{ ai_gen_id }} {
       flex: 0 0 calc(70% - 12px);
       border: {{ block.settings.card_border_width | times: 0.75 }}px solid {{ block.settings.card_border_color }};
-      box-shadow: {{ block.settings.card_shadow_x | times: 0.75 }}px {{ block.settings.card_shadow_y | times: 0.75 }}px 0 {{ block.settings.card_shadow_color }};
+      box-shadow: {{ block.settings.card_shadow_x | times: 0.75 }}px {{ block.settings.card_shadow_y | times: 0.75 }}px 0 0 {{ block.settings.card_shadow_color }};
     }
 
     .ai-product-carousel__card-{{ ai_gen_id }}.active {
-      box-shadow: {{ block.settings.card_shadow_x }}px {{ block.settings.card_shadow_y }}px 0 {{ block.settings.card_shadow_color }};
+      box-shadow: {{ block.settings.card_shadow_x }}px {{ block.settings.card_shadow_y }}px 0 0 {{ block.settings.card_shadow_color }};
     }
 
     .ai-product-carousel__card-{{ ai_gen_id }}.side {
-      box-shadow: {{ block.settings.card_shadow_x | times: 0.85 }}px {{ block.settings.card_shadow_y | times: 0.85 }}px 0 {{ block.settings.card_shadow_color }};
+      box-shadow: {{ block.settings.card_shadow_x | times: 0.85 }}px {{ block.settings.card_shadow_y | times: 0.85 }}px 0 0 {{ block.settings.card_shadow_color }};
     }
 
     .ai-product-carousel__header-{{ ai_gen_id }} {
@@ -270,28 +266,28 @@
     }
 
     .ai-product-carousel__info-{{ ai_gen_id }} {
-      padding: 10px;
+      padding: 12px;
     }
 
     .ai-product-carousel__title-{{ ai_gen_id }} {
       font-size: {{ block.settings.title_size | times: 0.9 }}px;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
 
     .ai-product-carousel__price-{{ ai_gen_id }} {
       font-size: {{ block.settings.price_size | times: 0.9 }}px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .ai-product-carousel__button-{{ ai_gen_id }} {
-      padding: 7px 10px;
+      padding: 8px 12px;
       font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
       border: {{ block.settings.button_border_width | times: 0.75 }}px solid {{ block.settings.button_border_color }};
-      box-shadow: {{ block.settings.button_shadow_x | times: 0.75 }}px {{ block.settings.button_shadow_y | times: 0.75 }}px 0 {{ block.settings.button_shadow_color }};
+      box-shadow: {{ block.settings.button_shadow_x | times: 0.75 }}px {{ block.settings.button_shadow_y | times: 0.75 }}px 0 0 {{ block.settings.button_shadow_color }};
     }
 
     .ai-product-carousel__button-{{ ai_gen_id }}:hover {
-      box-shadow: {{ block.settings.button_shadow_x | divided_by: 4 }}px {{ block.settings.button_shadow_y | divided_by: 4 }}px 0 {{ block.settings.button_shadow_color }};
+      box-shadow: {{ block.settings.button_shadow_x | divided_by: 4 }}px {{ block.settings.button_shadow_y | divided_by: 4 }}px 0 0 {{ block.settings.button_shadow_color }};
     }
 
     .ai-product-carousel__controls-{{ ai_gen_id }} {
@@ -303,11 +299,11 @@
       width: {{ block.settings.arrow_size | times: 0.8 }}px;
       height: {{ block.settings.arrow_size | times: 0.8 }}px;
       border: {{ block.settings.arrow_border_width | times: 0.75 }}px solid {{ block.settings.arrow_border_color }};
-      box-shadow: {{ block.settings.arrow_shadow_x | times: 0.75 }}px {{ block.settings.arrow_shadow_y | times: 0.75 }}px 0 {{ block.settings.arrow_shadow_color }};
+      box-shadow: {{ block.settings.arrow_shadow_x | times: 0.75 }}px {{ block.settings.arrow_shadow_y | times: 0.75 }}px 0 0 {{ block.settings.arrow_shadow_color }};
     }
 
     .ai-product-carousel__arrow-{{ ai_gen_id }}:hover {
-      box-shadow: {{ block.settings.arrow_shadow_x | divided_by: 4 }}px {{ block.settings.arrow_shadow_y | divided_by: 4 }}px 0 {{ block.settings.arrow_shadow_color }};
+      box-shadow: {{ block.settings.arrow_shadow_x | divided_by: 4 }}px {{ block.settings.arrow_shadow_y | divided_by: 4 }}px 0 0 {{ block.settings.arrow_shadow_color }};
     }
 
     .ai-product-carousel__arrow-{{ ai_gen_id }} svg {
@@ -346,7 +342,7 @@
                     class="ai-product-carousel__image-{{ ai_gen_id }}"
                     loading="lazy"
                     width="600"
-                    height="600"
+                    height="450"
                   >
                 {% else %}
                   <div class="ai-product-carousel__image-placeholder-{{ ai_gen_id }}">
@@ -630,7 +626,7 @@
       "type": "color",
       "id": "section_background",
       "label": "Background",
-      "default": "#fef9c3"
+      "default": "#dfe5f2"
     },
     {
       "type": "header",
@@ -682,7 +678,7 @@
       "type": "color",
       "id": "subheading_color",
       "label": "Color",
-      "default": "#333333"
+      "default": "#000000"
     },
     {
       "type": "header",
@@ -702,7 +698,7 @@
       "step": 1,
       "unit": "px",
       "label": "Border width",
-      "default": 4
+      "default": 2
     },
     {
       "type": "color",
@@ -718,7 +714,7 @@
       "step": 2,
       "unit": "px",
       "label": "Border radius",
-      "default": 12
+      "default": 4
     },
     {
       "type": "range",
@@ -738,7 +734,7 @@
       "step": 1,
       "unit": "px",
       "label": "Shadow horizontal",
-      "default": 8
+      "default": 4
     },
     {
       "type": "range",
@@ -748,7 +744,7 @@
       "step": 1,
       "unit": "px",
       "label": "Shadow vertical",
-      "default": 8
+      "default": 4
     },
     {
       "type": "color",
@@ -832,7 +828,7 @@
       "type": "color",
       "id": "button_background",
       "label": "Background",
-      "default": "#a3e635"
+      "default": "#88aaee"
     },
     {
       "type": "color",
@@ -844,7 +840,7 @@
       "type": "color",
       "id": "button_hover_background",
       "label": "Hover background",
-      "default": "#84cc16"
+      "default": "#6b8fd9"
     },
     {
       "type": "color",
@@ -860,7 +856,7 @@
       "step": 1,
       "unit": "px",
       "label": "Border width",
-      "default": 3
+      "default": 2
     },
     {
       "type": "color",
@@ -876,7 +872,7 @@
       "step": 2,
       "unit": "px",
       "label": "Border radius",
-      "default": 8
+      "default": 4
     },
     {
       "type": "range",
@@ -922,7 +918,7 @@
       "type": "color",
       "id": "arrow_background",
       "label": "Background",
-      "default": "#fbbf24"
+      "default": "#88aaee"
     },
     {
       "type": "color",
@@ -938,7 +934,7 @@
       "step": 1,
       "unit": "px",
       "label": "Border width",
-      "default": 4
+      "default": 2
     },
     {
       "type": "color",
@@ -954,7 +950,7 @@
       "step": 1,
       "unit": "px",
       "label": "Shadow horizontal",
-      "default": 6
+      "default": 4
     },
     {
       "type": "range",
@@ -964,7 +960,7 @@
       "step": 1,
       "unit": "px",
       "label": "Shadow vertical",
-      "default": 6
+      "default": 4
     },
     {
       "type": "color",
