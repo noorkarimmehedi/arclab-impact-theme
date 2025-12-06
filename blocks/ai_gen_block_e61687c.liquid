@@ -100,8 +100,13 @@
       font-size: calc({{ block.settings.link_size }}px * 0.6);
     }
 
-    .ai-nav-menu__preview-{{ ai_gen_id }} {
-      display: none;
+    .ai-nav-menu__preview-image-{{ ai_gen_id }} {
+      width: calc({{ block.settings.image_width }}px * 0.8);
+      height: calc({{ block.settings.image_height }}px * 0.8);
+    }
+
+    .ai-nav-menu__preview-inner-{{ ai_gen_id }} {
+      padding: calc({{ block.settings.image_padding }}px * 0.8);
     }
   }
 {% endstyle %}
@@ -246,13 +251,19 @@
   
   if (!previewCard || !previewImage) return;
   
-  const cardWidth = {{ block.settings.image_width }} + ({{ block.settings.image_padding }} * 2);
-  const cardHeight = {{ block.settings.image_height }} + ({{ block.settings.image_padding }} * 2);
+  const isMobile = window.innerWidth <= 749;
+  const cardWidth = ({{ block.settings.image_width }} + ({{ block.settings.image_padding }} * 2)) * (isMobile ? 0.8 : 1);
+  const cardHeight = ({{ block.settings.image_height }} + ({{ block.settings.image_padding }} * 2)) * (isMobile ? 0.8 : 1);
   const offsetY = 20;
   
   function updatePosition(e) {
-    let x = e.clientX - cardWidth / 2;
-    let y = e.clientY - cardHeight - offsetY;
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+    
+    if (!clientX || !clientY) return;
+    
+    let x = clientX - cardWidth / 2;
+    let y = clientY - cardHeight - offsetY;
     
     if (x + cardWidth > window.innerWidth - 20) {
       x = window.innerWidth - cardWidth - 20;
@@ -262,24 +273,33 @@
     }
     
     if (y < 20) {
-      y = e.clientY + offsetY;
+      y = clientY + offsetY;
     }
     
     previewCard.style.left = x + 'px';
     previewCard.style.top = y + 'px';
   }
   
+  function showPreview(link, e) {
+    const imageUrl = link.getAttribute('data-preview-image');
+    const text = link.getAttribute('data-preview-text');
+    
+    if (imageUrl && imageUrl !== '') {
+      previewImage.src = imageUrl;
+      previewImage.alt = text || '';
+      previewCard.classList.add('visible');
+      updatePosition(e);
+    }
+  }
+  
+  function hidePreview() {
+    previewCard.classList.remove('visible');
+  }
+  
   links.forEach(function(link) {
+    // Desktop events
     link.addEventListener('mouseenter', function(e) {
-      const imageUrl = this.getAttribute('data-preview-image');
-      const text = this.getAttribute('data-preview-text');
-      
-      if (imageUrl && imageUrl !== '') {
-        previewImage.src = imageUrl;
-        previewImage.alt = text || '';
-        previewCard.classList.add('visible');
-        updatePosition(e);
-      }
+      showPreview(this, e);
     });
     
     link.addEventListener('mousemove', function(e) {
@@ -289,8 +309,37 @@
     });
     
     link.addEventListener('mouseleave', function() {
-      previewCard.classList.remove('visible');
+      hidePreview();
     });
+    
+    // Mobile touch events
+    link.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      showPreview(this, e);
+    });
+    
+    link.addEventListener('touchmove', function(e) {
+      if (previewCard.classList.contains('visible')) {
+        updatePosition(e);
+      }
+    });
+    
+    link.addEventListener('touchend', function() {
+      setTimeout(hidePreview, 300);
+    });
+  });
+  
+  // Close preview when touching outside
+  document.addEventListener('touchstart', function(e) {
+    let isLink = false;
+    links.forEach(function(link) {
+      if (link.contains(e.target)) {
+        isLink = true;
+      }
+    });
+    if (!isLink && previewCard.classList.contains('visible')) {
+      hidePreview();
+    }
   });
 })();
 </script>
