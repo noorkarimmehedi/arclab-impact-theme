@@ -9916,7 +9916,7 @@ split-lines {
   z-index: -2;
 }
 
-/* Edge/depth layer for sale-price - PURE #D50000 */
+/* Edge/depth layer for sale-price - PURE #0000FF */
 .price-list sale-price::after {
   content: '';
   position: absolute;
@@ -9925,7 +9925,7 @@ split-lines {
   width: 100%;
   height: 100%;
   border-radius: 4px;
-  background: #D50000;
+  background: #0000FF;
   transform: translateY(4px);
   z-index: -1;
 }
@@ -9987,7 +9987,7 @@ split-lines {
   font-size: 10px;
   font-weight: bold;
   color: #fff;
-  background-color: #D50000;
+  background-color: #0000FF;
   border-radius: 3px;
   transform: translateY(-2px);
   z-index: 1;
