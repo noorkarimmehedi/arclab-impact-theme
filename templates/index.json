@@ -125,6 +125,52 @@
       ],
       "settings": {}
     },
+    "1765008928d2016f31": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_e61687c_xFkQCa": {
+          "type": "ai_gen_block_e61687c",
+          "settings": {
+            "font_family": "serif",
+            "background_color": "#f5ece1",
+            "text_color": "#000000",
+            "hover_color": "#0000ff",
+            "border_color": "#000000",
+            "border_width": 1,
+            "padding_vertical": 10,
+            "padding_horizontal": 20,
+            "item_spacing": 10,
+            "number_size": 20,
+            "link_size": 48,
+            "link_1_text": "Shop All",
+            "link_1_url": "",
+            "link_2_text": "New",
+            "link_2_url": "",
+            "link_3_text": "Bubbles",
+            "link_3_url": "",
+            "link_4_text": "Non-Alcoholic",
+            "link_4_url": "",
+            "link_5_text": "Sale",
+            "link_5_url": "",
+            "link_6_text": "Reds",
+            "link_6_url": "",
+            "link_7_text": "White",
+            "link_7_url": "",
+            "link_8_text": "Pink/Orange",
+            "link_8_url": "",
+            "link_9_text": "Beer",
+            "link_9_url": "",
+            "link_10_text": "Spirits",
+            "link_10_url": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_e61687c_xFkQCa"
+      ],
+      "settings": {}
+    },
     "image-link-blocks": {
       "type": "image-link-blocks",
       "blocks": {
@@ -1140,6 +1186,7 @@
   "order": [
     "slideshow",
     "1762676303578b860e",
+    "1765008928d2016f31",
     "image-link-blocks",
     "scrolling-text",
     "1763296371026b3ee6",
