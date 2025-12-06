@@ -102,26 +102,47 @@
 
   @media screen and (max-width: 768px) {
     .ai-store-locator-{{ ai_gen_id }} {
-      padding: {{ block.settings.padding_top | times: 0.7 }}px 10px {{ block.settings.padding_bottom | times: 0.7 }}px 10px;
+      padding: {{ block.settings.padding_top | times: 0.5 }}px 8px {{ block.settings.padding_bottom | times: 0.5 }}px 8px;
     }
 
     .ai-store-locator-container-{{ ai_gen_id }} {
-      gap: 10px;
+      gap: 6px;
+      flex-wrap: nowrap;
     }
 
     .ai-store-locator-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.6 }}px;
+      font-size: {{ block.settings.heading_size | times: 0.5 }}px;
+      letter-spacing: -0.5px;
+      flex-shrink: 1;
+      min-width: 0;
+    }
+
+    .ai-store-locator-input-wrapper-{{ ai_gen_id }} {
+      box-shadow: {{ block.settings.shadow_offset | times: 0.7 }}px {{ block.settings.shadow_offset | times: 0.7 }}px 0 {{ block.settings.shadow_color }};
+    }
+
+    .ai-store-locator-input-wrapper-{{ ai_gen_id }}:focus-within {
+      box-shadow: {{ block.settings.shadow_offset }}px {{ block.settings.shadow_offset }}px 0 {{ block.settings.shadow_color }};
     }
 
     .ai-store-locator-input-{{ ai_gen_id }} {
-      width: 150px;
-      padding: 10px 12px;
-      font-size: 12px;
+      width: 120px;
+      padding: 8px 10px;
+      font-size: 11px;
     }
 
     .ai-store-locator-btn-{{ ai_gen_id }} {
-      padding: 10px 16px;
-      font-size: 12px;
+      padding: 8px 12px;
+      font-size: 11px;
+      box-shadow: {{ block.settings.shadow_offset | times: 0.7 }}px {{ block.settings.shadow_offset | times: 0.7 }}px 0px 0px {{ block.settings.shadow_color }};
+    }
+
+    .ai-store-locator-btn-{{ ai_gen_id }}:hover {
+      transform: translate({{ block.settings.shadow_offset | times: 0.7 }}px, {{ block.settings.shadow_offset | times: 0.7 }}px);
+    }
+
+    .ai-store-locator-btn-{{ ai_gen_id }}:active {
+      box-shadow: {{ block.settings.shadow_offset | times: 0.7 }}px {{ block.settings.shadow_offset | times: 0.7 }}px 0px 0px {{ block.settings.shadow_color }};
     }
   }
 {% endstyle %}
