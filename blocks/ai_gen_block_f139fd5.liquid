@@ -102,28 +102,26 @@
 
   @media screen and (max-width: 768px) {
     .ai-store-locator-{{ ai_gen_id }} {
-      padding: {{ block.settings.padding_top | times: 0.7 }}px 15px {{ block.settings.padding_bottom | times: 0.7 }}px 15px;
+      padding: {{ block.settings.padding_top | times: 0.7 }}px 10px {{ block.settings.padding_bottom | times: 0.7 }}px 10px;
     }
 
     .ai-store-locator-container-{{ ai_gen_id }} {
-      flex-direction: column;
-      gap: 15px;
+      gap: 10px;
     }
 
     .ai-store-locator-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
-      text-align: center;
-      white-space: normal;
+      font-size: {{ block.settings.heading_size | times: 0.6 }}px;
     }
 
     .ai-store-locator-input-{{ ai_gen_id }} {
-      width: 100%;
+      width: 150px;
+      padding: 10px 12px;
+      font-size: 12px;
     }
 
     .ai-store-locator-btn-{{ ai_gen_id }} {
-      width: 100%;
-      padding: 12px 20px;
-      font-size: 13px;
+      padding: 10px 16px;
+      font-size: 12px;
     }
   }
 {% endstyle %}
