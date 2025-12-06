@@ -9916,7 +9916,7 @@ split-lines {
   z-index: -2;
 }
 
-/* Edge/depth layer for sale-price - PURE #0000FF */
+/* Edge/depth layer for sale-price - PURE #D50000 */
 .price-list sale-price::after {
   content: '';
   position: absolute;
@@ -9925,14 +9925,14 @@ split-lines {
   width: 100%;
   height: 100%;
   border-radius: 4px;
-  background: #0000FF;
+  background: #D50000;
   transform: translateY(4px);
   z-index: -1;
 }
 
 /* On Sale Price variant */
 .price-list sale-price.text-on-sale {
-  background: #0000FF;
+  background: #D50000;
   color: #fff;
 }
 
@@ -9987,7 +9987,7 @@ split-lines {
   font-size: 10px;
   font-weight: bold;
   color: #fff;
-  background-color: #0000FF;
+  background-color: #D50000;
   border-radius: 3px;
   transform: translateY(-2px);
   z-index: 1;
