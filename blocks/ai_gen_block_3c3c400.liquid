@@ -2,7 +2,7 @@
 
 {% style %}
   .ai-instagram-grid-{{ ai_gen_id }} {
-    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    padding: {{ block.settings.section_padding_top }}px {{ block.settings.section_padding_horizontal }}px {{ block.settings.section_padding_bottom }}px;
     background-color: {{ block.settings.background_color }};
   }
 
@@ -10,6 +10,12 @@
     max-width: 100%;
     margin: 0 auto;
     padding: 0 20px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-instagram-grid-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    }
   }
 
   .ai-instagram-grid__header-{{ ai_gen_id }} {
