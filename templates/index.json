@@ -702,6 +702,58 @@
         "heading_gradient": ""
       }
     },
+    "1765031479c8636a7c": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a98fcce_byiqnX": {
+          "type": "ai_gen_block_a98fcce",
+          "settings": {
+            "section_title": "Shop by Category",
+            "title_font": "sans_serif_n4",
+            "title_font_size": 32,
+            "title_color": "#000000",
+            "vertical_padding": 40,
+            "products_per_collection": 8,
+            "heading_font": "sans_serif_n4",
+            "heading_font_size": 16,
+            "heading_gap": 15,
+            "heading_vertical_padding": 5,
+            "heading_horizontal_padding": 30,
+            "heading_border_radius": 0,
+            "heading_border_width": 2,
+            "heading_bg_color": "#ffffff",
+            "heading_text_color": "#000000",
+            "heading_border_color": "#000000",
+            "heading_hover_bg_color": "#f5f5f5",
+            "heading_hover_text_color": "#000000",
+            "heading_hover_border_color": "#000000",
+            "heading_active_bg_color": "#000000",
+            "heading_active_text_color": "#ffffff",
+            "heading_active_border_color": "#000000",
+            "scrollbar_color": "#cccccc",
+            "product_title_color": "#000000",
+            "product_price_color": "#000000",
+            "heading_1": "Collection 1",
+            "collection_1": "frontpage",
+            "heading_2": "Collection 2",
+            "collection_2": "",
+            "heading_3": "Collection 3",
+            "collection_3": "",
+            "heading_4": "Collection 4",
+            "collection_4": "",
+            "heading_5": "Collection 5",
+            "collection_5": "",
+            "heading_6": "Collection 6",
+            "collection_6": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a98fcce_byiqnX"
+      ],
+      "settings": {}
+    },
     "impact-text": {
       "type": "impact-text",
       "blocks": {
@@ -1336,6 +1388,7 @@
     "blocks_dF4aQ8",
     "17650044800eb784f2",
     "collection-list",
+    "1765031479c8636a7c",
     "impact-text",
     "image-with-text-overlay",
     "media-grid",
