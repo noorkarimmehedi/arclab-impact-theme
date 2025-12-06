@@ -456,6 +456,14 @@
       padding: {{ block.settings.section_padding_top_mobile }}px {{ block.settings.section_padding_horizontal_mobile }}px {{ block.settings.section_padding_bottom_mobile }}px;
     }
 
+    .ai-instagram-grid__header-{{ ai_gen_id }} {
+      position: relative;
+    }
+
+    .ai-instagram-grid__header-content-{{ ai_gen_id }} {
+      justify-content: center;
+    }
+
     .ai-instagram-grid__header-left-{{ ai_gen_id }} {
       width: 100%;
       align-items: center !important;
@@ -472,6 +480,9 @@
     }
 
     .ai-instagram-grid__badge-{{ ai_gen_id }} {
+      position: absolute;
+      top: 0;
+      right: 0;
       width: {{ block.settings.badge_width_mobile }}px;
       height: {{ block.settings.badge_height_mobile }}px;
     }
