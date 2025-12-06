@@ -1,6 +1,612 @@
+{% doc %}
+  @prompt
+    “Create a bold Shopify product carousel on a clean white background. Display one large square product card centered, with thick black borders, rounded corners, and an offset cartoon shadow. On both sides, show two additional product cards partially visible to indicate horizontal scrolling. Inside each card, place a padded product photo with a light backdrop and a neon-green starburst badge overlapping the top-right. Beneath each card, center an all-caps title, price, and short description. Add neon-green circular navigation arrows with black borders at the bottom-right. Use playful, high-contrast, modern comic-inspired styling throughout.”
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-comic-carousel-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-comic-carousel__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .ai-comic-carousel__track-wrapper-{{ ai_gen_id }} {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-comic-carousel__track-{{ ai_gen_id }} {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 20px 0;
+  }
+
+  .ai-comic-carousel__card-{{ ai_gen_id }} {
+    flex: 0 0 {{ block.settings.card_width }}px;
+    background-color: {{ block.settings.card_background }};
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    box-shadow: {{ block.settings.shadow_offset }}px {{ block.settings.shadow_offset }}px 0 {{ block.settings.shadow_color }};
+    padding: {{ block.settings.card_padding }}px;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-comic-carousel__card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+  }
+
+  .ai-comic-carousel__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    background-color: {{ block.settings.image_backdrop_color }};
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .ai-comic-carousel__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-comic-carousel__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-comic-carousel__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-comic-carousel__badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: {{ block.settings.badge_size }}px;
+    height: {{ block.settings.badge_size }}px;
+    background-color: {{ block.settings.badge_color }};
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 14px;
+    color: {{ block.settings.badge_text_color }};
+    text-transform: uppercase;
+    z-index: 2;
+    clip-path: polygon(
+      50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+    );
+    transform: rotate({{ block.settings.badge_rotation }}deg);
+  }
+
+  .ai-comic-carousel__info-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-comic-carousel__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 10px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.2;
+  }
+
+  .ai-comic-carousel__price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.price_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 10px;
+  }
+
+  .ai-comic-carousel__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .ai-comic-carousel__controls-{{ ai_gen_id }} {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 30px;
+  }
+
+  .ai-comic-carousel__arrow-{{ ai_gen_id }} {
+    width: {{ block.settings.arrow_size }}px;
+    height: {{ block.settings.arrow_size }}px;
+    background-color: {{ block.settings.arrow_color }};
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .ai-comic-carousel__arrow-{{ ai_gen_id }}:hover {
+    transform: scale(1.1);
+    background-color: {{ block.settings.arrow_hover_color }};
+  }
+
+  .ai-comic-carousel__arrow-{{ ai_gen_id }}:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .ai-comic-carousel__arrow-{{ ai_gen_id }}:disabled:hover {
+    transform: scale(1);
+    background-color: {{ block.settings.arrow_color }};
+  }
+
+  .ai-comic-carousel__arrow-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+    stroke: {{ block.settings.arrow_icon_color }};
+    stroke-width: 3;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-comic-carousel__card-{{ ai_gen_id }} {
+      flex: 0 0 280px;
+    }
+
+    .ai-comic-carousel__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+    }
+
+    .ai-comic-carousel__controls-{{ ai_gen_id }} {
+      justify-content: center;
+    }
+  }
+{% endstyle %}
+
+<comic-carousel-{{ ai_gen_id }} class="ai-comic-carousel-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-comic-carousel__container-{{ ai_gen_id }}">
+    <div class="ai-comic-carousel__track-wrapper-{{ ai_gen_id }}">
+      <div class="ai-comic-carousel__track-{{ ai_gen_id }}">
+        {% if block.settings.product_list != blank %}
+          {% for product in block.settings.product_list %}
+            <div class="ai-comic-carousel__card-{{ ai_gen_id }}">
+              <div class="ai-comic-carousel__image-wrapper-{{ ai_gen_id }}">
+                {% if product.featured_image %}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    class="ai-comic-carousel__image-{{ ai_gen_id }}"
+                    loading="lazy"
+                    width="600"
+                    height="600"
+                  >
+                {% else %}
+                  <div class="ai-comic-carousel__image-placeholder-{{ ai_gen_id }}">
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+                {% if block.settings.show_badge %}
+                  <div class="ai-comic-carousel__badge-{{ ai_gen_id }}">
+                    {{ block.settings.badge_text }}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="ai-comic-carousel__info-{{ ai_gen_id }}">
+                <h3 class="ai-comic-carousel__title-{{ ai_gen_id }}">{{ product.title }}</h3>
+                <div class="ai-comic-carousel__price-{{ ai_gen_id }}">{{ product.price | money }}</div>
+                {% if block.settings.show_description and product.description != blank %}
+                  <p class="ai-comic-carousel__description-{{ ai_gen_id }}">
+                    {{ product.description | strip_html | truncate: 80 }}
+                  </p>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for i in (1..5) %}
+            <div class="ai-comic-carousel__card-{{ ai_gen_id }}">
+              <div class="ai-comic-carousel__image-wrapper-{{ ai_gen_id }}">
+                <div class="ai-comic-carousel__image-placeholder-{{ ai_gen_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+                {% if block.settings.show_badge %}
+                  <div class="ai-comic-carousel__badge-{{ ai_gen_id }}">
+                    {{ block.settings.badge_text }}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="ai-comic-carousel__info-{{ ai_gen_id }}">
+                <h3 class="ai-comic-carousel__title-{{ ai_gen_id }}">Product Title</h3>
+                <div class="ai-comic-carousel__price-{{ ai_gen_id }}">$99.00</div>
+                {% if block.settings.show_description %}
+                  <p class="ai-comic-carousel__description-{{ ai_gen_id }}">
+                    A bold and playful product description goes here.
+                  </p>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="ai-comic-carousel__controls-{{ ai_gen_id }}">
+      <button
+        class="ai-comic-carousel__arrow-{{ ai_gen_id }} ai-comic-carousel__arrow-prev-{{ ai_gen_id }}"
+        aria-label="Previous products"
+      >
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button
+        class="ai-comic-carousel__arrow-{{ ai_gen_id }} ai-comic-carousel__arrow-next-{{ ai_gen_id }}"
+        aria-label="Next products"
+      >
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</comic-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ComicCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.cardWidth = {{ block.settings.card_width }};
+        this.gap = 30;
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('.ai-comic-carousel__track-{{ ai_gen_id }}');
+        this.cards = this.querySelectorAll('.ai-comic-carousel__card-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('.ai-comic-carousel__arrow-prev-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-comic-carousel__arrow-next-{{ ai_gen_id }}');
+
+        if (this.cards.length === 0) return;
+
+        this.maxIndex = Math.max(0, this.cards.length - 1);
+        this.centerCarousel();
+        this.updateButtons();
+
+        this.prevButton.addEventListener('click', () => this.prev());
+        this.nextButton.addEventListener('click', () => this.next());
+
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        this.track.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+          isDragging = true;
+        });
+
+        this.track.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          currentX = e.touches[0].clientX;
+        });
+
+        this.track.addEventListener('touchend', () => {
+          if (!isDragging) return;
+          const diff = startX - currentX;
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+              this.next();
+            } else {
+              this.prev();
+            }
+          }
+          isDragging = false;
+        });
+      }
+
+      centerCarousel() {
+        const containerWidth = this.track.parentElement.offsetWidth;
+        const offset = (containerWidth - this.cardWidth) / 2;
+        const translateX = offset - (this.currentIndex * (this.cardWidth + this.gap));
+        this.track.style.transform = `translateX(${translateX}px)`;
+      }
+
+      prev() {
+        if (this.currentIndex > 0) {
+          this.currentIndex--;
+          this.centerCarousel();
+          this.updateButtons();
+        }
+      }
+
+      next() {
+        if (this.currentIndex < this.maxIndex) {
+          this.currentIndex++;
+          this.centerCarousel();
+          this.updateButtons();
+        }
+      }
+
+      updateButtons() {
+        this.prevButton.disabled = this.currentIndex === 0;
+        this.nextButton.disabled = this.currentIndex === this.maxIndex;
+      }
+    }
+
+    customElements.define('comic-carousel-{{ ai_gen_id }}', ComicCarousel{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Comic product carousel",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Products",
+      "limit": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show product description",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "min": 300,
+      "max": 500,
+      "step": 20,
+      "unit": "px",
+      "label": "Card width",
+      "default": 400
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Card padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Card corner radius",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Border and shadow"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "shadow_offset",
+      "min": 4,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow offset",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "color",
+      "id": "image_backdrop_color",
+      "label": "Image backdrop",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Image corner radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "NEW"
+    },
+    {
+      "type": "range",
+      "id": "badge_size",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Badge size",
+      "default": 70
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge color",
+      "default": "#00ff00"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "badge_rotation",
+      "min": 0,
+      "max": 360,
+      "step": 15,
+      "unit": "deg",
+      "label": "Badge rotation",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "label": "Price size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Navigation arrows"
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "min": 40,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Arrow size",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow background",
+      "default": "#00ff00"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_color",
+      "label": "Arrow hover background",
+      "default": "#00cc00"
+    },
+    {
+      "type": "color",
+      "id": "arrow_icon_color",
+      "label": "Arrow icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comic product carousel"
+    }
+  ]
+}
 {% endschema %}
