@@ -1,6 +1,637 @@
+{% doc %}
+  @prompt
+    build a modern footer for me where links willl be squared box and a big logo at the very bottom the bottom logo opacity should be customizable. also all background to font to color should be customizable  
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-modern-footer-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    padding: 60px 20px 40px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-modern-footer__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-modern-footer__links-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  .ai-modern-footer__column-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ai-modern-footer__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-modern-footer__link-box-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: {{ block.settings.link_box_background }};
+    color: {{ block.settings.link_box_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.link_box_border_radius }}px;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: {{ block.settings.link_box_border_width }}px solid {{ block.settings.link_box_border_color }};
+  }
+
+  .ai-modern-footer__link-box-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.link_box_hover_background }};
+    color: {{ block.settings.link_box_hover_text_color }};
+    transform: translateY(-2px);
+  }
+
+  .ai-modern-footer__bottom-logo-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    border-top: 1px solid {{ block.settings.divider_color }};
+  }
+
+  .ai-modern-footer__bottom-logo-{{ ai_gen_id }} {
+    max-width: {{ block.settings.bottom_logo_width }}px;
+    opacity: {{ block.settings.bottom_logo_opacity | divided_by: 100.0 }};
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-modern-footer__bottom-logo-{{ ai_gen_id }} img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ai-modern-footer__bottom-logo-placeholder-{{ ai_gen_id }} {
+    width: {{ block.settings.bottom_logo_width }}px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: {{ block.settings.bottom_logo_opacity | divided_by: 100.0 }};
+  }
+
+  .ai-modern-footer__bottom-logo-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-modern-footer__links-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .ai-modern-footer__bottom-logo-{{ ai_gen_id }},
+    .ai-modern-footer__bottom-logo-placeholder-{{ ai_gen_id }} {
+      max-width: {{ block.settings.bottom_logo_width | times: 0.7 }}px;
+    }
+  }
+{% endstyle %}
+
+<footer
+  class="ai-modern-footer-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-modern-footer__container-{{ ai_gen_id }}">
+    <div class="ai-modern-footer__links-grid-{{ ai_gen_id }}">
+      {% if block.settings.column_1_heading != blank %}
+        <div class="ai-modern-footer__column-{{ ai_gen_id }}">
+          <h3 class="ai-modern-footer__heading-{{ ai_gen_id }}">{{ block.settings.column_1_heading }}</h3>
+          {% if block.settings.column_1_link_1_text != blank %}
+            <a
+              href="{{ block.settings.column_1_link_1_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_1_link_1_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_1_link_2_text != blank %}
+            <a
+              href="{{ block.settings.column_1_link_2_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_1_link_2_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_1_link_3_text != blank %}
+            <a
+              href="{{ block.settings.column_1_link_3_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_1_link_3_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_1_link_4_text != blank %}
+            <a
+              href="{{ block.settings.column_1_link_4_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_1_link_4_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.column_2_heading != blank %}
+        <div class="ai-modern-footer__column-{{ ai_gen_id }}">
+          <h3 class="ai-modern-footer__heading-{{ ai_gen_id }}">{{ block.settings.column_2_heading }}</h3>
+          {% if block.settings.column_2_link_1_text != blank %}
+            <a
+              href="{{ block.settings.column_2_link_1_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_2_link_1_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_2_link_2_text != blank %}
+            <a
+              href="{{ block.settings.column_2_link_2_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_2_link_2_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_2_link_3_text != blank %}
+            <a
+              href="{{ block.settings.column_2_link_3_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_2_link_3_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_2_link_4_text != blank %}
+            <a
+              href="{{ block.settings.column_2_link_4_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_2_link_4_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.column_3_heading != blank %}
+        <div class="ai-modern-footer__column-{{ ai_gen_id }}">
+          <h3 class="ai-modern-footer__heading-{{ ai_gen_id }}">{{ block.settings.column_3_heading }}</h3>
+          {% if block.settings.column_3_link_1_text != blank %}
+            <a
+              href="{{ block.settings.column_3_link_1_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_3_link_1_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_3_link_2_text != blank %}
+            <a
+              href="{{ block.settings.column_3_link_2_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_3_link_2_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_3_link_3_text != blank %}
+            <a
+              href="{{ block.settings.column_3_link_3_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_3_link_3_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_3_link_4_text != blank %}
+            <a
+              href="{{ block.settings.column_3_link_4_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_3_link_4_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.column_4_heading != blank %}
+        <div class="ai-modern-footer__column-{{ ai_gen_id }}">
+          <h3 class="ai-modern-footer__heading-{{ ai_gen_id }}">{{ block.settings.column_4_heading }}</h3>
+          {% if block.settings.column_4_link_1_text != blank %}
+            <a
+              href="{{ block.settings.column_4_link_1_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_4_link_1_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_4_link_2_text != blank %}
+            <a
+              href="{{ block.settings.column_4_link_2_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_4_link_2_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_4_link_3_text != blank %}
+            <a
+              href="{{ block.settings.column_4_link_3_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_4_link_3_text }}
+            </a>
+          {% endif %}
+          {% if block.settings.column_4_link_4_text != blank %}
+            <a
+              href="{{ block.settings.column_4_link_4_url }}"
+              class="ai-modern-footer__link-box-{{ ai_gen_id }}"
+            >
+              {{ block.settings.column_4_link_4_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-modern-footer__bottom-logo-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.bottom_logo %}
+        <div class="ai-modern-footer__bottom-logo-{{ ai_gen_id }}">
+          <img
+            src="{{ block.settings.bottom_logo | image_url: width: 800 }}"
+            alt="{{ block.settings.bottom_logo.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.bottom_logo.width }}"
+            height="{{ block.settings.bottom_logo.height }}"
+          >
+        </div>
+      {% else %}
+        <div class="ai-modern-footer__bottom-logo-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</footer>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Modern footer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Link boxes"
+    },
+    {
+      "type": "color",
+      "id": "link_box_background",
+      "label": "Background",
+      "default": "#2a2a2a"
+    },
+    {
+      "type": "color",
+      "id": "link_box_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_box_hover_background",
+      "label": "Hover background",
+      "default": "#3a3a3a"
+    },
+    {
+      "type": "color",
+      "id": "link_box_hover_text_color",
+      "label": "Hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_box_border_color",
+      "label": "Border",
+      "default": "#3a3a3a"
+    },
+    {
+      "type": "range",
+      "id": "link_box_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "link_box_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Bottom logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "bottom_logo_width",
+      "min": 100,
+      "max": 400,
+      "step": 20,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "bottom_logo_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Logo opacity",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "text",
+      "id": "column_1_heading",
+      "label": "Heading",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "column_1_link_1_text",
+      "label": "Link 1 text",
+      "default": "New arrivals"
+    },
+    {
+      "type": "url",
+      "id": "column_1_link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_1_link_2_text",
+      "label": "Link 2 text",
+      "default": "Best sellers"
+    },
+    {
+      "type": "url",
+      "id": "column_1_link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_1_link_3_text",
+      "label": "Link 3 text",
+      "default": "Sale"
+    },
+    {
+      "type": "url",
+      "id": "column_1_link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_1_link_4_text",
+      "label": "Link 4 text",
+      "default": "Collections"
+    },
+    {
+      "type": "url",
+      "id": "column_1_link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "text",
+      "id": "column_2_heading",
+      "label": "Heading",
+      "default": "About"
+    },
+    {
+      "type": "text",
+      "id": "column_2_link_1_text",
+      "label": "Link 1 text",
+      "default": "Our story"
+    },
+    {
+      "type": "url",
+      "id": "column_2_link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_2_link_2_text",
+      "label": "Link 2 text",
+      "default": "Contact us"
+    },
+    {
+      "type": "url",
+      "id": "column_2_link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_2_link_3_text",
+      "label": "Link 3 text",
+      "default": "Careers"
+    },
+    {
+      "type": "url",
+      "id": "column_2_link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_2_link_4_text",
+      "label": "Link 4 text",
+      "default": "Press"
+    },
+    {
+      "type": "url",
+      "id": "column_2_link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "header",
+      "content": "Column 3"
+    },
+    {
+      "type": "text",
+      "id": "column_3_heading",
+      "label": "Heading",
+      "default": "Help"
+    },
+    {
+      "type": "text",
+      "id": "column_3_link_1_text",
+      "label": "Link 1 text",
+      "default": "Shipping"
+    },
+    {
+      "type": "url",
+      "id": "column_3_link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_3_link_2_text",
+      "label": "Link 2 text",
+      "default": "Returns"
+    },
+    {
+      "type": "url",
+      "id": "column_3_link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_3_link_3_text",
+      "label": "Link 3 text",
+      "default": "FAQ"
+    },
+    {
+      "type": "url",
+      "id": "column_3_link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_3_link_4_text",
+      "label": "Link 4 text",
+      "default": "Size guide"
+    },
+    {
+      "type": "url",
+      "id": "column_3_link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "header",
+      "content": "Column 4"
+    },
+    {
+      "type": "text",
+      "id": "column_4_heading",
+      "label": "Heading",
+      "default": "Legal"
+    },
+    {
+      "type": "text",
+      "id": "column_4_link_1_text",
+      "label": "Link 1 text",
+      "default": "Privacy policy"
+    },
+    {
+      "type": "url",
+      "id": "column_4_link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_4_link_2_text",
+      "label": "Link 2 text",
+      "default": "Terms of service"
+    },
+    {
+      "type": "url",
+      "id": "column_4_link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_4_link_3_text",
+      "label": "Link 3 text",
+      "default": "Refund policy"
+    },
+    {
+      "type": "url",
+      "id": "column_4_link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "column_4_link_4_text",
+      "label": "Link 4 text",
+      "default": "Accessibility"
+    },
+    {
+      "type": "url",
+      "id": "column_4_link_4_url",
+      "label": "Link 4 URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Modern footer"
+    }
+  ]
+}
 {% endschema %}
