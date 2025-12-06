@@ -9932,7 +9932,7 @@ split-lines {
 
 /* On Sale Price variant */
 .price-list sale-price.text-on-sale {
-  background: #D50000;
+  background: #0000FF;
   color: #fff;
 }
 
