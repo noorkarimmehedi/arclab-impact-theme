@@ -102,7 +102,7 @@
           </svg>
 
         {%- when 'tote_bag' -%}
-         <span class="icon icon-cart">Cart</span>
+         <span class="icon icon-cart" style="font-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};">Cart</span>
 
         {%- when 'shopping_cart' -%}
           <svg role="presentation" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22">
