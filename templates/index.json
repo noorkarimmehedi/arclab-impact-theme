@@ -127,6 +127,41 @@
       ],
       "settings": {}
     },
+    "1765031093b9f12b37": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f2895dd_Uki9YE": {
+          "type": "ai_gen_block_f2895dd",
+          "settings": {
+            "background_color": "#f5ece1",
+            "section_padding": 5,
+            "logo_width": 150,
+            "logo_height": 80,
+            "logo_spacing": 60,
+            "logo_opacity": 1,
+            "logo_grayscale": 0,
+            "scroll_speed": 30,
+            "logo_1_enabled": true,
+            "logo_1": "shopify://shop_images/times_now-01_1_ef556f62-a326-4e79-bc40-719b55404163.webp",
+            "logo_2_enabled": true,
+            "logo_2": "shopify://shop_images/bw_disrupt-01_1_0b383340-7f2d-418e-8aaf-17e1ec4f8ec3.avif",
+            "logo_3_enabled": true,
+            "logo_3": "shopify://shop_images/londo_news_4a891de3-3d68-4a84-9c71-35816dd7725f.avif",
+            "logo_4_enabled": true,
+            "logo_4": "shopify://shop_images/ANI-01_1_aae65683-d898-45c7-8cfc-311e5a441993.webp",
+            "logo_5_enabled": false,
+            "logo_6_enabled": false,
+            "logo_7_enabled": false,
+            "logo_8_enabled": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f2895dd_Uki9YE"
+      ],
+      "settings": {}
+    },
     "blocks_QpwCX9": {
       "type": "_blocks",
       "blocks": {
@@ -1289,6 +1324,7 @@
   "order": [
     "slideshow",
     "1762676303578b860e",
+    "1765031093b9f12b37",
     "blocks_QpwCX9",
     "17650149705e0d2fbe",
     "1765008928d2016f31",
