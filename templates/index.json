@@ -9,6 +9,40 @@
  */
 {
   "sections": {
+    "17650149705e0d2fbe": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f139fd5_MUmmfL": {
+          "type": "ai_gen_block_f139fd5",
+          "settings": {
+            "heading": "Find a Beanly Store Near You!",
+            "search_placeholder": "Enter your city or zip code",
+            "button_text": "Find Store",
+            "maps_link": "",
+            "padding_top": 0,
+            "padding_bottom": 60,
+            "heading_font": "serif",
+            "body_font": "sans_serif_n4",
+            "heading_size": 30,
+            "background_color": "#f5ece1",
+            "heading_color": "#0000ff",
+            "text_color": "#000000",
+            "input_background": "#ffffff",
+            "button_color": "#0000ff",
+            "button_text_color": "#ffffff",
+            "border_color": "#000000",
+            "shadow_color": "#000000",
+            "border_width": 3,
+            "shadow_offset": 4
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f139fd5_MUmmfL"
+      ],
+      "settings": {}
+    },
     "slideshow": {
       "type": "slideshow",
       "blocks": {
@@ -273,42 +307,6 @@
         "text_color": "",
         "text_gradient": ""
       }
-    },
-    "17650149705e0d2fbe": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_f139fd5_MUmmfL": {
-          "type": "ai_gen_block_f139fd5",
-          "settings": {
-            "heading": "Find a Beanly Store Near You!",
-            "subtitle": "Visit us in person and experience the best coffee in town",
-            "search_placeholder": "Enter your city or zip code",
-            "button_text": "Find Store",
-            "maps_link": "",
-            "padding_top": 0,
-            "padding_bottom": 60,
-            "heading_font": "bagel_fat_one_n4",
-            "body_font": "sans_serif_n4",
-            "heading_size": 48,
-            "subtitle_size": 18,
-            "background_color": "#f5ece1",
-            "heading_color": "#0000ff",
-            "text_color": "#000000",
-            "input_background": "#ffffff",
-            "button_color": "#0000ff",
-            "button_text_color": "#ffffff",
-            "border_color": "#000000",
-            "shadow_color": "#000000",
-            "border_width": 4,
-            "shadow_offset": 6
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_f139fd5_MUmmfL"
-      ],
-      "settings": {}
     },
     "1763296371026b3ee6": {
       "type": "_blocks",
@@ -1230,12 +1228,12 @@
     }
   },
   "order": [
+    "17650149705e0d2fbe",
     "slideshow",
     "1762676303578b860e",
     "1765008928d2016f31",
     "image-link-blocks",
     "scrolling-text",
-    "17650149705e0d2fbe",
     "1763296371026b3ee6",
     "1764945958932561c6",
     "featured-collection",
