@@ -11,6 +11,71 @@
   "type": "footer",
   "name": "Footer group",
   "sections": {
+    "1765026326f972ef46": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_bc77064_wJzagC": {
+          "type": "ai_gen_block_bc77064",
+          "settings": {
+            "background_color": "#1a1a1a",
+            "text_color": "#ffffff",
+            "heading_color": "#ffffff",
+            "divider_color": "#333333",
+            "link_box_background": "#2a2a2a",
+            "link_box_text_color": "#ffffff",
+            "link_box_hover_background": "#3a3a3a",
+            "link_box_hover_text_color": "#ffffff",
+            "link_box_border_color": "#3a3a3a",
+            "link_box_border_width": 1,
+            "link_box_border_radius": 4,
+            "heading_size": 18,
+            "bottom_logo_width": 200,
+            "bottom_logo_opacity": 50,
+            "column_1_heading": "Shop",
+            "column_1_link_1_text": "New arrivals",
+            "column_1_link_1_url": "",
+            "column_1_link_2_text": "Best sellers",
+            "column_1_link_2_url": "",
+            "column_1_link_3_text": "Sale",
+            "column_1_link_3_url": "",
+            "column_1_link_4_text": "Collections",
+            "column_1_link_4_url": "",
+            "column_2_heading": "About",
+            "column_2_link_1_text": "Our story",
+            "column_2_link_1_url": "",
+            "column_2_link_2_text": "Contact us",
+            "column_2_link_2_url": "",
+            "column_2_link_3_text": "Careers",
+            "column_2_link_3_url": "",
+            "column_2_link_4_text": "Press",
+            "column_2_link_4_url": "",
+            "column_3_heading": "Help",
+            "column_3_link_1_text": "Shipping",
+            "column_3_link_1_url": "",
+            "column_3_link_2_text": "Returns",
+            "column_3_link_2_url": "",
+            "column_3_link_3_text": "FAQ",
+            "column_3_link_3_url": "",
+            "column_3_link_4_text": "Size guide",
+            "column_3_link_4_url": "",
+            "column_4_heading": "Legal",
+            "column_4_link_1_text": "Privacy policy",
+            "column_4_link_1_url": "",
+            "column_4_link_2_text": "Terms of service",
+            "column_4_link_2_url": "",
+            "column_4_link_3_text": "Refund policy",
+            "column_4_link_3_url": "",
+            "column_4_link_4_text": "Accessibility",
+            "column_4_link_4_url": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_bc77064_wJzagC"
+      ],
+      "settings": {}
+    },
     "text-with-icons": {
       "type": "text-with-icons",
       "blocks": {
@@ -122,7 +187,6 @@
         "text"
       ],
       "settings": {
-        "logo": "shopify://shop_images/8_d83f68b4-c6f5-4007-a3aa-39b16b6039df.png",
         "logo_width": 210,
         "show_social_media": true,
         "show_payment_icons": true,
@@ -135,6 +199,7 @@
   },
   "order": [
     "text-with-icons",
+    "1765026326f972ef46",
     "footer"
   ]
 }
