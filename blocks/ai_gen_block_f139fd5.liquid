@@ -7,7 +7,7 @@
 
 {% style %}
   .ai-store-locator-{{ ai_gen_id }} {
-    padding: {{ block.settings.padding_top }}px 20px 0 20px;
+    padding: {{ block.settings.padding_top }}px 20px {{ block.settings.padding_top }}px 20px;
     background-color: {{ block.settings.background_color }};
   }
 
@@ -102,7 +102,7 @@
 
   @media screen and (max-width: 768px) {
     .ai-store-locator-{{ ai_gen_id }} {
-      padding: {{ block.settings.padding_top | times: 0.5 }}px 8px 0 8px;
+      padding: {{ block.settings.padding_top | times: 0.5 }}px 8px {{ block.settings.padding_top | times: 0.5 }}px 8px;
     }
 
     .ai-store-locator-container-{{ ai_gen_id }} {
