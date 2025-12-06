@@ -1,7 +1,3 @@
-{% doc %}
-  @prompt
-    generate a instagram 4:5 grid section where i can upload image or video and option for on off. from font to size to padding to radius all should be cuatomizable , title and subtitle font should be customizable and also i want a little bit gap on left and right side on mobile version, whole section background color should be customizable. also reduce the gap on left and right sid eon desktop version
-{% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -31,13 +27,149 @@
     letter-spacing: {{ block.settings.title_letter_spacing }}px;
   }
 
-  .ai-instagram-grid__subtitle-{{ ai_gen_id }} {
+  .ai-instagram-grid__subtitle-wrapper-{{ ai_gen_id }} {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }} {
+    cursor: pointer;
+    width: 17.5em;
+    height: 5em;
+    border-radius: 1.5em;
+    border: none;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    box-shadow: 0em 0em 0.25em 0em rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+    background-color: #fafafa;
+    transition: all 0.25s ease-in-out;
+  }
+
+  .ai-instagram-grid__subtitle-text-{{ ai_gen_id }} {
     font-family: {{ block.settings.subtitle_font.family }}, {{ block.settings.subtitle_font.fallback_families }};
     font-weight: {{ block.settings.subtitle_font.weight }};
     font-style: {{ block.settings.subtitle_font.style }};
     font-size: {{ block.settings.subtitle_size }}px;
     color: {{ block.settings.subtitle_color }};
     margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 0.75em;
+    transform: translateY(-50%);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .ai-instagram-grid__subtitle-glow-{{ ai_gen_id }} {
+    width: 4em;
+    height: 3.5em;
+    background-color: #77ff9f;
+    border-radius: 1em;
+    position: relative;
+    box-shadow: 0em 0em 0.5em 0em rgba(0, 0, 0, 0.25), inset 0.25em 0em 0.25em rgb(195, 255, 0);
+    overflow: hidden;
+    margin-right: 0.75em;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .ai-instagram-grid__subtitle-icon-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+  }
+
+  .ai-instagram-grid__subtitle-white-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 2.5em;
+    position: absolute;
+    top: 0em;
+    filter: blur(0.5em);
+  }
+
+  .ai-instagram-grid__subtitle-red-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(4);
+    animation: rotar-{{ ai_gen_id }} 5s linear infinite;
+    filter: blur(0.2em);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .ai-instagram-grid__subtitle-blue-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-5%, -5%) scale(2);
+    animation: rotar-{{ ai_gen_id }} 5s linear infinite;
+    filter: blur(0.4em);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .ai-instagram-grid__subtitle-cian-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-75%, -5%) scale(2);
+    animation: rotar-{{ ai_gen_id }} 5s linear infinite;
+    filter: blur(0.25em);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .ai-instagram-grid__subtitle-yellow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-95%, -55%) scale(2.5);
+    animation: rotar-{{ ai_gen_id }} 5s linear infinite;
+    filter: blur(0.25em);
+    transition: all 0.5s ease-in-out;
+  }
+
+  @keyframes rotar-{{ ai_gen_id }} {
+    0% {
+      rotate: 0deg;
+    }
+    100% {
+      rotate: 360deg;
+    }
+  }
+
+  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-text-{{ ai_gen_id }} {
+    left: -25%;
+    color: white;
+  }
+
+  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-glow-{{ ai_gen_id }} {
+    width: 16em;
+    box-shadow: 0em 0em 0.5em 0em rgba(0, 0, 0, 0.25), inset 0.5em 0em 0.5em rgb(195, 255, 0);
+  }
+
+  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-red-{{ ai_gen_id }},
+  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-blue-{{ ai_gen_id }},
+  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-cian-{{ ai_gen_id }},
+  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-yellow-{{ ai_gen_id }} {
+    filter: blur(0.75em);
+    top: 50%;
+    left: 50%;
+  }
+
+  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:active {
+    transform: scale(0.95);
+  }
+
+  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:active .ai-instagram-grid__subtitle-glow-{{ ai_gen_id }} {
+    opacity: 0.75;
+    filter: brightness(0.75);
   }
 
   .ai-instagram-grid__grid-{{ ai_gen_id }} {
@@ -107,6 +239,15 @@
       padding: {{ block.settings.section_padding_top_mobile }}px {{ block.settings.section_padding_horizontal_mobile }}px {{ block.settings.section_padding_bottom_mobile }}px;
     }
 
+    .ai-instagram-grid__subtitle-button-{{ ai_gen_id }} {
+      width: 14em;
+      height: 4em;
+    }
+
+    .ai-instagram-grid__subtitle-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size_mobile }}px;
+    }
+
     .ai-instagram-grid__grid-{{ ai_gen_id }} {
       grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
       gap: {{ block.settings.grid_gap_mobile }}px;
@@ -115,10 +256,6 @@
 
     .ai-instagram-grid__title-{{ ai_gen_id }} {
       font-size: {{ block.settings.title_size_mobile }}px;
-    }
-
-    .ai-instagram-grid__subtitle-{{ ai_gen_id }} {
-      font-size: {{ block.settings.subtitle_size_mobile }}px;
     }
   }
 {% endstyle %}
@@ -131,7 +268,72 @@
           <h2 class="ai-instagram-grid__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
         {% endif %}
         {% if block.settings.subtitle != blank %}
-          <p class="ai-instagram-grid__subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+          <div class="ai-instagram-grid__subtitle-wrapper-{{ ai_gen_id }}">
+            <div class="ai-instagram-grid__subtitle-button-{{ ai_gen_id }}">
+              <p class="ai-instagram-grid__subtitle-text-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+              <div class="ai-instagram-grid__subtitle-glow-{{ ai_gen_id }}">
+                <svg
+                  class="ai-instagram-grid__subtitle-icon-{{ ai_gen_id }}"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#fafafa"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                <svg
+                  class="ai-instagram-grid__subtitle-red-{{ ai_gen_id }}"
+                  viewBox="0 0 200 200"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="#ff8b80"
+                    d="M50.1,-30.7C54.6,-21.2,40.8,-2.8,29.4,11.7C18,26.1,9,36.7,0.5,36.4C-8,36.1,-15.9,24.9,-26.5,10.9C-37.1,-3.1,-50.4,-19.9,-46.5,-29.1C-42.5,-38.3,-21.2,-39.9,0.8,-40.3C22.8,-40.8,45.6,-40.1,50.1,-30.7Z"
+                    transform="translate(100 100)"
+                  ></path>
+                </svg>
+                <svg
+                  class="ai-instagram-grid__subtitle-yellow-{{ ai_gen_id }}"
+                  viewBox="0 0 200 200"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="#F8D32C"
+                    d="M42.3,-26.7C50.5,-10.4,49.6,8.9,41.1,23.3C32.5,37.7,16.3,47.3,-2,48.4C-20.2,49.5,-40.3,42.2,-45.8,29.6C-51.2,17,-41.9,-0.9,-31.8,-18.4C-21.8,-35.9,-10.9,-52.9,3.1,-54.7C17.1,-56.5,34.2,-43.1,42.3,-26.7Z"
+                    transform="translate(100 100)"
+                  ></path>
+                </svg>
+                <svg
+                  class="ai-instagram-grid__subtitle-cian-{{ ai_gen_id }}"
+                  viewBox="0 0 200 200"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="#5CFBF8"
+                    d="M33.1,-23.8C40.7,-5.9,43.3,10.3,36.9,30.2C30.6,50.1,15.3,73.7,0.7,73.3C-14,72.9,-28,48.6,-36.1,27.7C-44.2,6.8,-46.4,-10.7,-39.4,-28.2C-32.5,-45.8,-16.2,-63.4,-1.8,-62.4C12.7,-61.4,25.4,-41.7,33.1,-23.8Z"
+                    transform="translate(100 100)"
+                  ></path>
+                </svg>
+                <svg
+                  class="ai-instagram-grid__subtitle-blue-{{ ai_gen_id }}"
+                  viewBox="0 0 200 200"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="#AE9BFD"
+                    d="M37.9,-16.5C44.5,-10.5,42.1,6.2,34.3,26.2C26.4,46.2,13.2,69.6,-3.7,71.7C-20.6,73.9,-41.2,54.8,-49,34.7C-56.8,14.7,-51.9,-6.2,-41.6,-14.3C-31.3,-22.5,-15.7,-17.8,0,-17.8C15.7,-17.8,31.3,-22.5,37.9,-16.5Z"
+                    transform="translate(100 100)"
+                  ></path>
+                </svg>
+                <div class="ai-instagram-grid__subtitle-white-{{ ai_gen_id }}"></div>
+              </div>
+            </div>
+          </div>
         {% endif %}
       </div>
     {% endif %}
@@ -1137,3 +1339,4 @@
   ]
 }
 {% endschema %}
+
