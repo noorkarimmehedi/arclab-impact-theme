@@ -131,10 +131,10 @@
         "ai_gen_block_e61687c_xFkQCa": {
           "type": "ai_gen_block_e61687c",
           "settings": {
-            "font_family": "serif",
+            "font_family": "bagel_fat_one_n4",
             "background_color": "#f5ece1",
-            "text_color": "#000000",
-            "hover_color": "#0000ff",
+            "text_color": "#0000ff",
+            "hover_color": "#000000",
             "border_color": "#000000",
             "border_width": 1,
             "padding_vertical": 10,
@@ -160,7 +160,7 @@
             "link_8_url": "",
             "link_9_text": "Beer",
             "link_9_url": "",
-            "link_10_text": "Spirits",
+            "link_10_text": "",
             "link_10_url": ""
           },
           "blocks": {}
