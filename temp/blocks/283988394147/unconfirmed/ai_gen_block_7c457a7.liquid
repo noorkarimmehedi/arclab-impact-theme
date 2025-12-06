@@ -1,6 +1,855 @@
+{% doc %}
+  @prompt
+    generate a instagram feed section , i don't like the layout it should be from left to right when hover it stops, still no let's create something like instagram grid posts, Image size should be 4:5 and also radius should be customizable. titile and sub title font color should be customizable , title font and sub title font should be customizable and alsosection  vertical padding should be customizable. i want option to on off images , in images i want both video and image can be selected also i got these errors: 
+    Go to item 1
+    Go to item 2
+    Next
+    @font-face { font-family: Bungee; font-weight: 400; font-style: normal; font-display: swap; src: url("https://fonts.shopifycdn.com/bungee/bungee_n4.0d6366885e0bb34c10d8bf3e895da25e044952f2.woff2") format("woff2"), url("https://fonts.shopifycdn.com/bungee/bungee_n4.7d75ce336960b2a5bb72a761446f782e57743e05.woff") format("woff"); }
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-instagram-grid-{{ ai_gen_id }} {
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-instagram-grid__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-instagram-grid__header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-instagram-grid__title-{{ ai_gen_id }} {
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    font-style: {{ block.settings.title_font.style }};
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 12px;
+  }
+
+  .ai-instagram-grid__subtitle-{{ ai_gen_id }} {
+    font-family: {{ block.settings.subtitle_font.family }}, {{ block.settings.subtitle_font.fallback_families }};
+    font-weight: {{ block.settings.subtitle_font.weight }};
+    font-style: {{ block.settings.subtitle_font.style }};
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+  }
+
+  .ai-instagram-grid__username-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: {{ block.settings.username_size }}px;
+    color: {{ block.settings.username_color }};
+    text-decoration: none;
+    margin-top: 16px;
+  }
+
+  .ai-instagram-grid__username-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  .ai-instagram-grid__username-icon-{{ ai_gen_id }} {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ai-instagram-grid__posts-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+    margin-bottom: {{ block.settings.button_spacing }}px;
+  }
+
+  .ai-instagram-grid__item-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    aspect-ratio: 4 / 5;
+    background-color: #f4f4f4;
+  }
+
+  .ai-instagram-grid__link-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .ai-instagram-grid__image-{{ ai_gen_id }},
+  .ai-instagram-grid__video-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-instagram-grid__placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  }
+
+  .ai-instagram-grid__placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.3;
+    fill: white;
+  }
+
+  .ai-instagram-grid__overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.overlay_color }};
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ block.settings.overlay_text_color }};
+  }
+
+  .ai-instagram-grid__link-{{ ai_gen_id }}:hover .ai-instagram-grid__overlay-{{ ai_gen_id }} {
+    opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+
+  .ai-instagram-grid__overlay-icon-{{ ai_gen_id }} {
+    width: 48px;
+    height: 48px;
+  }
+
+  .ai-instagram-grid__button-wrapper-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-instagram-grid__button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-instagram-grid__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  .ai-instagram-grid__button-icon-{{ ai_gen_id }} {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-instagram-grid__posts-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-instagram-grid__posts-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+
+    .ai-instagram-grid__title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.7);
+    }
+
+    .ai-instagram-grid-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.7 }}px 0 {{ block.settings.section_padding_bottom | times: 0.7 }}px;
+    }
+  }
+{% endstyle %}
+
+{{ block.settings.title_font | font_face: font_display: 'swap' }}
+{{ block.settings.subtitle_font | font_face: font_display: 'swap' }}
+
+<div class="ai-instagram-grid-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-instagram-grid__container-{{ ai_gen_id }}">
+    {% if block.settings.title != blank or block.settings.subtitle != blank or block.settings.instagram_username != blank %}
+      <div class="ai-instagram-grid__header-{{ ai_gen_id }}">
+        {% if block.settings.title != blank %}
+          <h2 class="ai-instagram-grid__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+        {% endif %}
+        
+        {% if block.settings.subtitle != blank %}
+          <div class="ai-instagram-grid__subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</div>
+        {% endif %}
+
+        {% if block.settings.instagram_username != blank %}
+          <a 
+            href="https://instagram.com/{{ block.settings.instagram_username }}" 
+            class="ai-instagram-grid__username-{{ ai_gen_id }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="ai-instagram-grid__username-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            @{{ block.settings.instagram_username }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-instagram-grid__posts-{{ ai_gen_id }}">
+      {% for i in (1..12) %}
+        {% assign media_key = 'media_' | append: i %}
+        {% assign link_key = 'link_' | append: i %}
+        {% assign show_key = 'show_media_' | append: i %}
+        {% assign media = block.settings[media_key] %}
+        {% assign link = block.settings[link_key] %}
+        {% assign show_media = block.settings[show_key] %}
+
+        {% if show_media %}
+          <div class="ai-instagram-grid__item-{{ ai_gen_id }}">
+            {% if link != blank %}
+              <a 
+                href="{{ link }}" 
+                class="ai-instagram-grid__link-{{ ai_gen_id }}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+            {% else %}
+              <div class="ai-instagram-grid__link-{{ ai_gen_id }}">
+            {% endif %}
+
+              {% if media %}
+                {% if media.media_type == 'video' %}
+                  {{
+                    media
+                    | video_tag:
+                      image_size: '600x',
+                      autoplay: true,
+                      loop: true,
+                      muted: true,
+                      controls: false,
+                      class: 'ai-instagram-grid__video-' | append: ai_gen_id
+                  }}
+                {% else %}
+                  <img
+                    src="{{ media | image_url: width: 600 }}"
+                    alt="{{ media.alt | escape }}"
+                    loading="lazy"
+                    width="600"
+                    height="750"
+                    class="ai-instagram-grid__image-{{ ai_gen_id }}"
+                  >
+                {% endif %}
+              {% else %}
+                <div class="ai-instagram-grid__placeholder-{{ ai_gen_id }}">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </div>
+              {% endif %}
+
+              {% if block.settings.show_overlay %}
+                <div class="ai-instagram-grid__overlay-{{ ai_gen_id }}">
+                  <svg class="ai-instagram-grid__overlay-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </div>
+              {% endif %}
+
+            {% if link != blank %}
+              </a>
+            {% else %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if block.settings.show_button and block.settings.button_text != blank %}
+      <div class="ai-instagram-grid__button-wrapper-{{ ai_gen_id }}">
+        <a 
+          href="{% if block.settings.instagram_username != blank %}https://instagram.com/{{ block.settings.instagram_username }}{% else %}{{ block.settings.button_link }}{% endif %}" 
+          class="ai-instagram-grid__button-{{ ai_gen_id }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ block.settings.button_text }}
+          <svg class="ai-instagram-grid__button-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Instagram grid",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Follow us on Instagram"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Tag us to be featured"
+    },
+    {
+      "type": "text",
+      "id": "instagram_username",
+      "label": "Instagram username"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on mobile",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between items",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 100,
+      "unit": "px",
+      "label": "Container width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Media 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_1",
+      "label": "Show media 1",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_1",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_1",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_2",
+      "label": "Show media 2",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_2",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_2",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_3",
+      "label": "Show media 3",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_3",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_3",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_4",
+      "label": "Show media 4",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_4",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_4",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_5",
+      "label": "Show media 5",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_5",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_5",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_6",
+      "label": "Show media 6",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_6",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_6",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_7",
+      "label": "Show media 7",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_7",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_7",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_8",
+      "label": "Show media 8",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_8",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_8",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_9",
+      "label": "Show media 9",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_9",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_9",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_10",
+      "label": "Show media 10",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_10",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_10",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 11"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_11",
+      "label": "Show media 11",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_11",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_11",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Media 12"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_12",
+      "label": "Show media 12",
+      "default": true
+    },
+    {
+      "type": "video",
+      "id": "media_12",
+      "label": "Image or video"
+    },
+    {
+      "type": "url",
+      "id": "link_12",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Hover overlay"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Show overlay on hover",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Overlay icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Follow us on Instagram"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5ece1"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "username_color",
+      "label": "Username",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Title font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 36
+    },
+    {
+      "type": "font_picker",
+      "id": "subtitle_font",
+      "label": "Subtitle font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "username_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Username size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button text size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Header spacing",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Button spacing",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram grid"
+    }
+  ]
+}
 {% endschema %}
