@@ -1,7 +1,7 @@
 {% comment %}
   Premium E-commerce Footer
-  Design: Clean, minimal footer with boxed link sections
-  Features: Scrolling marquee, logo, 2x2 box grid, copyright, social bar
+  Design: Clean, minimal footer with boxed link sections + large bottom logo
+  Features: Scrolling marquee, logo, 2x2 box grid, copyright, social bar, bottom logo with opacity
 {% endcomment %}
 
 {% style %}
@@ -179,6 +179,38 @@
     opacity: 0.7;
   }
 
+  /* Bottom Logo Section */
+  #shopify-section-{{ section.id }} .premium-footer__bottom-logo-section {
+    background-color: {{ section.settings.bottom_logo_bg_color }};
+    padding: 60px 20px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .premium-footer__bottom-logo-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .premium-footer__bottom-logo-image {
+    max-width: {{ section.settings.bottom_logo_max_width }}px;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    opacity: {{ section.settings.bottom_logo_opacity | divided_by: 100.0 }};
+    transition: opacity 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .premium-footer__bottom-logo-text {
+    font-size: {{ section.settings.bottom_logo_font_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.bottom_logo_color }};
+    letter-spacing: 4px;
+    margin: 0;
+    opacity: {{ section.settings.bottom_logo_opacity | divided_by: 100.0 }};
+    transition: opacity 0.3s ease;
+  }
+
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .premium-footer__marquee-text {
       font-size: 10px;
@@ -229,6 +261,18 @@
     #shopify-section-{{ section.id }} .premium-footer__social-link {
       font-size: 9px;
     }
+
+    #shopify-section-{{ section.id }} .premium-footer__bottom-logo-section {
+      padding: 40px 20px;
+    }
+
+    #shopify-section-{{ section.id }} .premium-footer__bottom-logo-image {
+      max-width: {{ section.settings.bottom_logo_max_width | divided_by: 2 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .premium-footer__bottom-logo-text {
+      font-size: {{ section.settings.bottom_logo_font_size | divided_by: 2 }}px;
+    }
   }
 
   @media screen and (min-width: 750px) {
@@ -266,6 +310,10 @@
     #shopify-section-{{ section.id }} .premium-footer__box-grid {
       flex: 1;
       max-width: 700px;
+    }
+
+    #shopify-section-{{ section.id }} .premium-footer__bottom-logo-section {
+      padding: 80px 20px;
     }
   }
 {% endstyle %}
@@ -343,6 +391,23 @@
       </div>
     </div>
   </div>
+
+  {% if section.settings.show_bottom_logo %}
+    <div class="premium-footer__bottom-logo-section">
+      <div class="premium-footer__bottom-logo-wrapper">
+        {% if section.settings.bottom_logo_image != blank %}
+          <img
+            src="{{ section.settings.bottom_logo_image | image_url: width: 2000 }}"
+            alt="{{ shop.name | escape }}"
+            class="premium-footer__bottom-logo-image"
+            loading="lazy"
+          >
+        {% else %}
+          <h2 class="premium-footer__bottom-logo-text">{{ shop.name }}</h2>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
 </footer>
 
 {% schema %}
@@ -528,6 +593,66 @@
       "type": "url",
       "id": "social_link_3_url",
       "label": "Instagram link URL"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Large Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_logo",
+      "label": "Show bottom logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_logo_image",
+      "label": "Bottom logo image",
+      "info": "Upload a large, high-resolution logo"
+    },
+    {
+      "type": "range",
+      "id": "bottom_logo_max_width",
+      "min": 200,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum logo width",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "bottom_logo_font_size",
+      "min": 40,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Text logo size",
+      "default": 100,
+      "info": "Only applies if no image is uploaded"
+    },
+    {
+      "type": "range",
+      "id": "bottom_logo_opacity",
+      "min": 5,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Logo opacity",
+      "default": 30
+    },
+    {
+      "type": "color",
+      "id": "bottom_logo_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bottom_logo_color",
+      "label": "Text logo color",
+      "default": "#000000",
+      "info": "Only applies if no image is uploaded"
     }
   ],
   "blocks": [
