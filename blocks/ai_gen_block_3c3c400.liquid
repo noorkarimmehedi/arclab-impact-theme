@@ -37,6 +37,9 @@
 
   .ai-instagram-grid__header-left-{{ ai_gen_id }} {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: {{ block.settings.text_alignment }};
   }
 
   .ai-instagram-grid__badge-{{ ai_gen_id }} {
@@ -455,9 +458,7 @@
 
     .ai-instagram-grid__header-left-{{ ai_gen_id }} {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      align-items: center !important;
     }
 
     .ai-instagram-grid__title-{{ ai_gen_id }} {
@@ -467,9 +468,7 @@
     }
 
     .ai-instagram-grid__subtitle-wrapper-{{ ai_gen_id }} {
-      justify-content: center;
       width: 100%;
-      margin: 0;
     }
 
     .ai-instagram-grid__badge-{{ ai_gen_id }} {
