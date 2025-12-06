@@ -1,5 +1,5 @@
 {% comment %}
-  Beanly Store Locator Section
+  Beanly Store Locator - Announcement Bar Style
   Neubrutalism UI with shadcn-style button tapping effect
 {% endcomment %}
 
@@ -12,9 +12,13 @@
   }
 
   .ai-store-locator-container-{{ ai_gen_id }} {
-    max-width: 800px;
+    max-width: 1400px;
     margin: 0 auto;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
   }
 
   .ai-store-locator-title-{{ ai_gen_id }} {
@@ -23,25 +27,10 @@
     font-style: {{ block.settings.heading_font.style }};
     font-size: {{ block.settings.heading_size }}px;
     color: {{ block.settings.heading_color }};
-    margin: 0 0 20px 0;
+    margin: 0;
     text-transform: uppercase;
     letter-spacing: -1px;
-  }
-
-  .ai-store-locator-subtitle-{{ ai_gen_id }} {
-    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
-    font-weight: {{ block.settings.body_font.weight }};
-    font-style: {{ block.settings.body_font.style }};
-    font-size: {{ block.settings.subtitle_size }}px;
-    color: {{ block.settings.text_color }};
-    margin: 0 0 40px 0;
-    line-height: 1.6;
-  }
-
-  .ai-store-locator-search-{{ ai_gen_id }} {
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
+    white-space: nowrap;
   }
 
   .ai-store-locator-input-wrapper-{{ ai_gen_id }} {
@@ -50,6 +39,7 @@
     background-color: {{ block.settings.input_background }};
     box-shadow: {{ block.settings.shadow_offset }}px {{ block.settings.shadow_offset }}px 0 {{ block.settings.shadow_color }};
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex-shrink: 0;
   }
 
   .ai-store-locator-input-wrapper-{{ ai_gen_id }}:focus-within {
@@ -58,11 +48,11 @@
   }
 
   .ai-store-locator-input-{{ ai_gen_id }} {
-    width: 100%;
-    padding: 18px 20px;
+    width: 250px;
+    padding: 12px 16px;
     font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
     font-weight: {{ block.settings.body_font.weight }};
-    font-size: 16px;
+    font-size: 14px;
     border: none;
     background: transparent;
     color: {{ block.settings.text_color }};
@@ -80,22 +70,22 @@
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    margin-top: 30px;
     background-color: {{ block.settings.button_color }};
     color: {{ block.settings.button_text_color }};
     border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
-    padding: 18px 40px;
+    padding: 12px 24px;
     cursor: pointer;
     font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
     font-weight: 700;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 14px;
     border-radius: 5px;
     box-shadow: {{ block.settings.shadow_offset }}px {{ block.settings.shadow_offset }}px 0px 0px {{ block.settings.shadow_color }};
     transition: all 0.1s ease;
     text-decoration: none;
     position: relative;
     user-select: none;
+    flex-shrink: 0;
   }
 
   /* Hover effect - moves button away from shadow, increasing shadow */
@@ -115,19 +105,25 @@
       padding: {{ block.settings.padding_top | times: 0.7 }}px 15px {{ block.settings.padding_bottom | times: 0.7 }}px 15px;
     }
 
-    .ai-store-locator-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    .ai-store-locator-container-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 15px;
     }
 
-    .ai-store-locator-subtitle-{{ ai_gen_id }} {
-      font-size: {{ block.settings.subtitle_size | times: 0.9 }}px;
-      margin-bottom: 30px;
+    .ai-store-locator-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+      text-align: center;
+      white-space: normal;
+    }
+
+    .ai-store-locator-input-{{ ai_gen_id }} {
+      width: 100%;
     }
 
     .ai-store-locator-btn-{{ ai_gen_id }} {
       width: 100%;
-      padding: 16px 30px;
-      font-size: 16px;
+      padding: 12px 20px;
+      font-size: 13px;
     }
   }
 {% endstyle %}
@@ -137,20 +133,14 @@
     {% if block.settings.heading != blank %}
       <h2 class="ai-store-locator-title-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
     {% endif %}
-    
-    {% if block.settings.subtitle != blank %}
-      <p class="ai-store-locator-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
-    {% endif %}
 
-    <div class="ai-store-locator-search-{{ ai_gen_id }}">
-      <div class="ai-store-locator-input-wrapper-{{ ai_gen_id }}">
-        <input
-          type="text"
-          class="ai-store-locator-input-{{ ai_gen_id }}"
-          placeholder="{{ block.settings.search_placeholder }}"
-          aria-label="Search for stores"
-        >
-      </div>
+    <div class="ai-store-locator-input-wrapper-{{ ai_gen_id }}">
+      <input
+        type="text"
+        class="ai-store-locator-input-{{ ai_gen_id }}"
+        placeholder="{{ block.settings.search_placeholder }}"
+        aria-label="Search for stores"
+      >
     </div>
 
     <a 
@@ -181,12 +171,6 @@
       "default": "Find a Beanly Store Near You!"
     },
     {
-      "type": "textarea",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Visit us in person and experience the best coffee in town"
-    },
-    {
       "type": "text",
       "id": "search_placeholder",
       "label": "Search placeholder",
@@ -212,21 +196,21 @@
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 120,
-      "step": 10,
+      "max": 60,
+      "step": 5,
       "unit": "px",
       "label": "Top padding",
-      "default": 60
+      "default": 20
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 120,
-      "step": 10,
+      "max": 60,
+      "step": 5,
       "unit": "px",
       "label": "Bottom padding",
-      "default": 60
+      "default": 20
     },
     {
       "type": "header",
@@ -247,22 +231,12 @@
     {
       "type": "range",
       "id": "heading_size",
-      "min": 24,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "label": "Heading size",
-      "default": 48
-    },
-    {
-      "type": "range",
-      "id": "subtitle_size",
-      "min": 14,
+      "min": 16,
       "max": 32,
       "step": 2,
       "unit": "px",
-      "label": "Subtitle size",
-      "default": 18
+      "label": "Heading size",
+      "default": 20
     },
     {
       "type": "header",
