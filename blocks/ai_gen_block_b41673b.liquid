@@ -31,10 +31,21 @@
     width: {{ block.settings.header_image_size }}px;
     height: {{ block.settings.header_image_size }}px;
     border: {{ block.settings.header_image_border_width }}px solid {{ block.settings.header_image_border_color }};
-    border-radius: {{ block.settings.header_image_border_radius }}px;
     overflow: hidden;
     background-color: {{ block.settings.header_image_background }};
     box-shadow: {{ block.settings.header_image_shadow_x }}px {{ block.settings.header_image_shadow_y }}px 0 0 {{ block.settings.header_image_shadow_color }};
+    clip-path: polygon(
+      50% 0%, 
+      61% 35%, 
+      98% 35%, 
+      68% 57%, 
+      79% 91%, 
+      50% 70%, 
+      21% 91%, 
+      32% 57%, 
+      2% 35%, 
+      39% 35%
+    );
   }
 
   .ai-product-carousel__header-image-{{ ai_gen_id }} img {
@@ -717,16 +728,6 @@
       "id": "header_image_border_color",
       "label": "Border color",
       "default": "#000000"
-    },
-    {
-      "type": "range",
-      "id": "header_image_border_radius",
-      "min": 0,
-      "max": 60,
-      "step": 2,
-      "unit": "px",
-      "label": "Border radius",
-      "default": 50
     },
     {
       "type": "range",
