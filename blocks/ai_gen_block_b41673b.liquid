@@ -187,7 +187,7 @@
     background-color: {{ block.settings.arrow_background }};
     color: {{ block.settings.arrow_color }};
     border: {{ block.settings.arrow_border_width }}px solid {{ block.settings.arrow_border_color }};
-    border-radius: 50%;
+    border-radius: {{ block.settings.arrow_border_radius }}px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -197,7 +197,7 @@
   }
 
   .ai-product-carousel__arrow-{{ ai_gen_id }}:hover {
-    transform: translate(2px, 2px);
+    transform: translate({{ block.settings.arrow_shadow_x | divided_by: 2 }}px, {{ block.settings.arrow_shadow_y | divided_by: 2 }}px);
     box-shadow: {{ block.settings.arrow_shadow_x | divided_by: 2 }}px {{ block.settings.arrow_shadow_y | divided_by: 2 }}px 0 0 {{ block.settings.arrow_shadow_color }};
   }
 
@@ -943,6 +943,16 @@
       "id": "arrow_border_color",
       "label": "Border color",
       "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "arrow_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 50
     },
     {
       "type": "range",
