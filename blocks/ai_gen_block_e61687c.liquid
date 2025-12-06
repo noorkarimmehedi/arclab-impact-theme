@@ -49,34 +49,45 @@
     transition: color 0.3s ease;
     font-size: {{ block.settings.link_size }}px;
     display: inline-block;
+    cursor: pointer;
   }
 
   .ai-nav-menu__link-{{ ai_gen_id }}:hover {
     color: {{ block.settings.hover_color }};
   }
 
-  .ai-nav-menu__image-{{ ai_gen_id }} {
+  .ai-nav-menu__preview-{{ ai_gen_id }} {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    transition: opacity {{ block.settings.image_transition_speed }}s ease, 
+                transform {{ block.settings.image_transition_speed }}s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform, opacity;
+  }
+
+  .ai-nav-menu__preview-{{ ai_gen_id }}.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .ai-nav-menu__preview-inner-{{ ai_gen_id }} {
+    background: {{ block.settings.image_background }};
+    border-radius: {{ block.settings.image_border_radius }}px;
+    padding: {{ block.settings.image_padding }}px;
+    box-shadow: 0 {{ block.settings.image_shadow_blur }}px {{ block.settings.image_shadow_spread }}px rgba(0, 0, 0, {{ block.settings.image_shadow_opacity }}),
+                0 0 0 {{ block.settings.image_border_width }}px {{ block.settings.image_border_color }};
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+
+  .ai-nav-menu__preview-image-{{ ai_gen_id }} {
     width: {{ block.settings.image_width }}px;
     height: {{ block.settings.image_height }}px;
     object-fit: cover;
-    border-radius: {{ block.settings.image_border_radius }}px;
-    box-shadow: 0 {{ block.settings.image_shadow_blur }}px {{ block.settings.image_shadow_spread }}px rgba(0, 0, 0, {{ block.settings.image_shadow_opacity }});
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity {{ block.settings.image_transition_speed }}s ease, visibility {{ block.settings.image_transition_speed }}s ease, transform {{ block.settings.image_transition_speed }}s ease;
-    z-index: 9999;
-    border: {{ block.settings.image_border_width }}px solid {{ block.settings.image_border_color }};
-  }
-
-  .ai-nav-menu__item-{{ ai_gen_id }}:hover .ai-nav-menu__image-{{ ai_gen_id }} {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale({{ block.settings.image_hover_scale }});
+    border-radius: calc({{ block.settings.image_border_radius }}px - 4px);
+    display: block;
   }
 
   @media screen and (max-width: 749px) {
@@ -89,7 +100,7 @@
       font-size: calc({{ block.settings.link_size }}px * 0.6);
     }
 
-    .ai-nav-menu__image-{{ ai_gen_id }} {
+    .ai-nav-menu__preview-{{ ai_gen_id }} {
       display: none;
     }
   }
@@ -100,154 +111,189 @@
     {% if block.settings.link_1_text != blank %}
       <li class="ai-nav-menu__item-{{ ai_gen_id }}">
         <span class="ai-nav-menu__number-{{ ai_gen_id }}">1</span>
-        <a href="{{ block.settings.link_1_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_1_url }}" 
+           class="ai-nav-menu__link-{{ ai_gen_id }}"
+           data-preview-image="{% if block.settings.link_1_image != blank %}{{ block.settings.link_1_image | img_url: 'master' }}{% endif %}"
+           data-preview-text="{{ block.settings.link_1_text }}">
           {{ block.settings.link_1_text }}
         </a>
-        {% if block.settings.link_1_image != blank %}
-          <img src="{{ block.settings.link_1_image | img_url: 'master' }}" 
-               alt="{{ block.settings.link_1_text }}" 
-               class="ai-nav-menu__image-{{ ai_gen_id }}"
-               loading="lazy">
-        {% endif %}
       </li>
     {% endif %}
 
     {% if block.settings.link_2_text != blank %}
       <li class="ai-nav-menu__item-{{ ai_gen_id }}">
         <span class="ai-nav-menu__number-{{ ai_gen_id }}">2</span>
-        <a href="{{ block.settings.link_2_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_2_url }}" 
+           class="ai-nav-menu__link-{{ ai_gen_id }}"
+           data-preview-image="{% if block.settings.link_2_image != blank %}{{ block.settings.link_2_image | img_url: 'master' }}{% endif %}"
+           data-preview-text="{{ block.settings.link_2_text }}">
           {{ block.settings.link_2_text }}
         </a>
-        {% if block.settings.link_2_image != blank %}
-          <img src="{{ block.settings.link_2_image | img_url: 'master' }}" 
-               alt="{{ block.settings.link_2_text }}" 
-               class="ai-nav-menu__image-{{ ai_gen_id }}"
-               loading="lazy">
-        {% endif %}
       </li>
     {% endif %}
 
     {% if block.settings.link_3_text != blank %}
       <li class="ai-nav-menu__item-{{ ai_gen_id }}">
         <span class="ai-nav-menu__number-{{ ai_gen_id }}">3</span>
-        <a href="{{ block.settings.link_3_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_3_url }}" 
+           class="ai-nav-menu__link-{{ ai_gen_id }}"
+           data-preview-image="{% if block.settings.link_3_image != blank %}{{ block.settings.link_3_image | img_url: 'master' }}{% endif %}"
+           data-preview-text="{{ block.settings.link_3_text }}">
           {{ block.settings.link_3_text }}
         </a>
-        {% if block.settings.link_3_image != blank %}
-          <img src="{{ block.settings.link_3_image | img_url: 'master' }}" 
-               alt="{{ block.settings.link_3_text }}" 
-               class="ai-nav-menu__image-{{ ai_gen_id }}"
-               loading="lazy">
-        {% endif %}
       </li>
     {% endif %}
 
     {% if block.settings.link_4_text != blank %}
       <li class="ai-nav-menu__item-{{ ai_gen_id }}">
         <span class="ai-nav-menu__number-{{ ai_gen_id }}">4</span>
-        <a href="{{ block.settings.link_4_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_4_url }}" 
+           class="ai-nav-menu__link-{{ ai_gen_id }}"
+           data-preview-image="{% if block.settings.link_4_image != blank %}{{ block.settings.link_4_image | img_url: 'master' }}{% endif %}"
+           data-preview-text="{{ block.settings.link_4_text }}">
           {{ block.settings.link_4_text }}
         </a>
-        {% if block.settings.link_4_image != blank %}
-          <img src="{{ block.settings.link_4_image | img_url: 'master' }}" 
-               alt="{{ block.settings.link_4_text }}" 
-               class="ai-nav-menu__image-{{ ai_gen_id }}"
-               loading="lazy">
-        {% endif %}
       </li>
     {% endif %}
 
     {% if block.settings.link_5_text != blank %}
       <li class="ai-nav-menu__item-{{ ai_gen_id }}">
         <span class="ai-nav-menu__number-{{ ai_gen_id }}">5</span>
-        <a href="{{ block.settings.link_5_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_5_url }}" 
+           class="ai-nav-menu__link-{{ ai_gen_id }}"
+           data-preview-image="{% if block.settings.link_5_image != blank %}{{ block.settings.link_5_image | img_url: 'master' }}{% endif %}"
+           data-preview-text="{{ block.settings.link_5_text }}">
           {{ block.settings.link_5_text }}
         </a>
-        {% if block.settings.link_5_image != blank %}
-          <img src="{{ block.settings.link_5_image | img_url: 'master' }}" 
-               alt="{{ block.settings.link_5_text }}" 
-               class="ai-nav-menu__image-{{ ai_gen_id }}"
-               loading="lazy">
-        {% endif %}
       </li>
     {% endif %}
 
     {% if block.settings.link_6_text != blank %}
       <li class="ai-nav-menu__item-{{ ai_gen_id }}">
         <span class="ai-nav-menu__number-{{ ai_gen_id }}">6</span>
-        <a href="{{ block.settings.link_6_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_6_url }}" 
+           class="ai-nav-menu__link-{{ ai_gen_id }}"
+           data-preview-image="{% if block.settings.link_6_image != blank %}{{ block.settings.link_6_image | img_url: 'master' }}{% endif %}"
+           data-preview-text="{{ block.settings.link_6_text }}">
           {{ block.settings.link_6_text }}
         </a>
-        {% if block.settings.link_6_image != blank %}
-          <img src="{{ block.settings.link_6_image | img_url: 'master' }}" 
-               alt="{{ block.settings.link_6_text }}" 
-               class="ai-nav-menu__image-{{ ai_gen_id }}"
-               loading="lazy">
-        {% endif %}
       </li>
     {% endif %}
 
     {% if block.settings.link_7_text != blank %}
       <li class="ai-nav-menu__item-{{ ai_gen_id }}">
         <span class="ai-nav-menu__number-{{ ai_gen_id }}">7</span>
-        <a href="{{ block.settings.link_7_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_7_url }}" 
+           class="ai-nav-menu__link-{{ ai_gen_id }}"
+           data-preview-image="{% if block.settings.link_7_image != blank %}{{ block.settings.link_7_image | img_url: 'master' }}{% endif %}"
+           data-preview-text="{{ block.settings.link_7_text }}">
           {{ block.settings.link_7_text }}
         </a>
-        {% if block.settings.link_7_image != blank %}
-          <img src="{{ block.settings.link_7_image | img_url: 'master' }}" 
-               alt="{{ block.settings.link_7_text }}" 
-               class="ai-nav-menu__image-{{ ai_gen_id }}"
-               loading="lazy">
-        {% endif %}
       </li>
     {% endif %}
 
     {% if block.settings.link_8_text != blank %}
       <li class="ai-nav-menu__item-{{ ai_gen_id }}">
         <span class="ai-nav-menu__number-{{ ai_gen_id }}">8</span>
-        <a href="{{ block.settings.link_8_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_8_url }}" 
+           class="ai-nav-menu__link-{{ ai_gen_id }}"
+           data-preview-image="{% if block.settings.link_8_image != blank %}{{ block.settings.link_8_image | img_url: 'master' }}{% endif %}"
+           data-preview-text="{{ block.settings.link_8_text }}">
           {{ block.settings.link_8_text }}
         </a>
-        {% if block.settings.link_8_image != blank %}
-          <img src="{{ block.settings.link_8_image | img_url: 'master' }}" 
-               alt="{{ block.settings.link_8_text }}" 
-               class="ai-nav-menu__image-{{ ai_gen_id }}"
-               loading="lazy">
-        {% endif %}
       </li>
     {% endif %}
 
     {% if block.settings.link_9_text != blank %}
       <li class="ai-nav-menu__item-{{ ai_gen_id }}">
         <span class="ai-nav-menu__number-{{ ai_gen_id }}">9</span>
-        <a href="{{ block.settings.link_9_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_9_url }}" 
+           class="ai-nav-menu__link-{{ ai_gen_id }}"
+           data-preview-image="{% if block.settings.link_9_image != blank %}{{ block.settings.link_9_image | img_url: 'master' }}{% endif %}"
+           data-preview-text="{{ block.settings.link_9_text }}">
           {{ block.settings.link_9_text }}
         </a>
-        {% if block.settings.link_9_image != blank %}
-          <img src="{{ block.settings.link_9_image | img_url: 'master' }}" 
-               alt="{{ block.settings.link_9_text }}" 
-               class="ai-nav-menu__image-{{ ai_gen_id }}"
-               loading="lazy">
-        {% endif %}
       </li>
     {% endif %}
 
     {% if block.settings.link_10_text != blank %}
       <li class="ai-nav-menu__item-{{ ai_gen_id }}">
         <span class="ai-nav-menu__number-{{ ai_gen_id }}">10</span>
-        <a href="{{ block.settings.link_10_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_10_url }}" 
+           class="ai-nav-menu__link-{{ ai_gen_id }}"
+           data-preview-image="{% if block.settings.link_10_image != blank %}{{ block.settings.link_10_image | img_url: 'master' }}{% endif %}"
+           data-preview-text="{{ block.settings.link_10_text }}">
           {{ block.settings.link_10_text }}
         </a>
-        {% if block.settings.link_10_image != blank %}
-          <img src="{{ block.settings.link_10_image | img_url: 'master' }}" 
-               alt="{{ block.settings.link_10_text }}" 
-               class="ai-nav-menu__image-{{ ai_gen_id }}"
-               loading="lazy">
-        {% endif %}
       </li>
     {% endif %}
   </ul>
+  
+  <!-- Preview Card -->
+  <div class="ai-nav-menu__preview-{{ ai_gen_id }}" id="preview-card-{{ ai_gen_id }}">
+    <div class="ai-nav-menu__preview-inner-{{ ai_gen_id }}">
+      <img class="ai-nav-menu__preview-image-{{ ai_gen_id }}" id="preview-image-{{ ai_gen_id }}" alt="">
+    </div>
+  </div>
 </nav>
+
+<script>
+(function() {
+  const navId = '{{ ai_gen_id }}';
+  const links = document.querySelectorAll('.ai-nav-menu__link-' + navId);
+  const previewCard = document.getElementById('preview-card-' + navId);
+  const previewImage = document.getElementById('preview-image-' + navId);
+  
+  if (!previewCard || !previewImage) return;
+  
+  const cardWidth = {{ block.settings.image_width }} + ({{ block.settings.image_padding }} * 2);
+  const cardHeight = {{ block.settings.image_height }} + ({{ block.settings.image_padding }} * 2);
+  const offsetY = 20;
+  
+  function updatePosition(e) {
+    let x = e.clientX - cardWidth / 2;
+    let y = e.clientY - cardHeight - offsetY;
+    
+    if (x + cardWidth > window.innerWidth - 20) {
+      x = window.innerWidth - cardWidth - 20;
+    }
+    if (x < 20) {
+      x = 20;
+    }
+    
+    if (y < 20) {
+      y = e.clientY + offsetY;
+    }
+    
+    previewCard.style.left = x + 'px';
+    previewCard.style.top = y + 'px';
+  }
+  
+  links.forEach(function(link) {
+    link.addEventListener('mouseenter', function(e) {
+      const imageUrl = this.getAttribute('data-preview-image');
+      const text = this.getAttribute('data-preview-text');
+      
+      if (imageUrl && imageUrl !== '') {
+        previewImage.src = imageUrl;
+        previewImage.alt = text || '';
+        previewCard.classList.add('visible');
+        updatePosition(e);
+      }
+    });
+    
+    link.addEventListener('mousemove', function(e) {
+      if (previewCard.classList.contains('visible')) {
+        updatePosition(e);
+      }
+    });
+    
+    link.addEventListener('mouseleave', function() {
+      previewCard.classList.remove('visible');
+    });
+  });
+})();
+</script>
 
 {% schema %}
 {
@@ -367,7 +413,7 @@
       "step": 10,
       "unit": "px",
       "label": "Image width",
-      "default": 200
+      "default": 280
     },
     {
       "type": "range",
@@ -381,13 +427,19 @@
     },
     {
       "type": "range",
-      "id": "image_offset",
-      "min": 10,
-      "max": 100,
-      "step": 5,
+      "id": "image_padding",
+      "min": 0,
+      "max": 20,
+      "step": 2,
       "unit": "px",
-      "label": "Image offset from link",
-      "default": 30
+      "label": "Card padding",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "image_background",
+      "label": "Card background",
+      "default": "#1a1a1a"
     },
     {
       "type": "range",
@@ -396,8 +448,8 @@
       "max": 50,
       "step": 2,
       "unit": "px",
-      "label": "Image border radius",
-      "default": 8
+      "label": "Border radius",
+      "default": 16
     },
     {
       "type": "range",
@@ -406,24 +458,24 @@
       "max": 5,
       "step": 1,
       "unit": "px",
-      "label": "Image border width",
-      "default": 0
+      "label": "Border width",
+      "default": 1
     },
     {
       "type": "color",
       "id": "image_border_color",
-      "label": "Image border color",
-      "default": "#000000"
+      "label": "Border color",
+      "default": "rgba(255, 255, 255, 0.1)"
     },
     {
       "type": "range",
       "id": "image_shadow_blur",
       "min": 0,
-      "max": 30,
+      "max": 50,
       "step": 2,
       "unit": "px",
       "label": "Shadow blur",
-      "default": 12
+      "default": 24
     },
     {
       "type": "range",
@@ -433,7 +485,7 @@
       "step": 2,
       "unit": "px",
       "label": "Shadow spread",
-      "default": 4
+      "default": 12
     },
     {
       "type": "range",
@@ -442,7 +494,7 @@
       "max": 1,
       "step": 0.1,
       "label": "Shadow opacity",
-      "default": 0.2
+      "default": 0.8
     },
     {
       "type": "range",
@@ -453,15 +505,6 @@
       "unit": "s",
       "label": "Transition speed",
       "default": 0.3
-    },
-    {
-      "type": "range",
-      "id": "image_hover_scale",
-      "min": 1,
-      "max": 1.2,
-      "step": 0.1,
-      "label": "Hover scale",
-      "default": 1.0
     },
     {
       "type": "header",
