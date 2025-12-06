@@ -1,14 +1,8 @@
-{% doc %}
-  @prompt
-    Create a clean, minimalist navigation menu section with white background and thin black border. Center-aligned vertical list of 10 navigation links, each prefixed with numbers (1-10) in smaller font size (20px).
-    Typography: Elegant serif font (similar to Playfair Display or Georgia). Link text varies in size: larger items like "Shop All" (48-52px), "New" (46-50px), "Bubbles" (52-56px), "Non-Alcoholic" (42-46px); medium items like "Sale," "Reds," "White," "Beer," "Spirits" (38-44px); "Pink/Orange" slightly smaller (36-40px). All in black.
-    Layout: Tight vertical spacing (8-12px between items). Numbers left-aligned, creating stepped effect. Text follows numbers inline. Sophisticated, editorial magazine-style aesthetic. Clean hierarchy with varying text sizes creating visual rhythm. Minimal padding (40px top/bottom, 20px sides). High contrast, typographic focus, no decorative elements. Professional wine/beverage store aesthetic., All link text should be same size and also the numbers (1-10) in should be not in the bottom it should be in the top of each link text, The design uses a staggered, stepped alignment where:
-    Number Positioning:
-    
-    Numbers (1-10) are placed at the left edge of each line
-    Each number acts as a visual anchor/index
-    Numbers are in smaller, lighter weight compared to link text, Each link has a small superscript number positioned top-left , when i hover on a link text there should be a hover color 
-{% enddoc %}
+{% comment %}
+  Editorial navigation menu with hover images
+  Clean, minimalist design with numbered links and image previews on hover
+{% endcomment %}
+
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -61,6 +55,28 @@
     color: {{ block.settings.hover_color }};
   }
 
+  .ai-nav-menu__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate({{ block.settings.image_offset }}px, -50%);
+    width: {{ block.settings.image_width }}px;
+    height: {{ block.settings.image_height }}px;
+    object-fit: cover;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    box-shadow: 0 {{ block.settings.image_shadow_blur }}px {{ block.settings.image_shadow_spread }}px rgba(0, 0, 0, {{ block.settings.image_shadow_opacity }});
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity {{ block.settings.image_transition_speed }}s ease, transform {{ block.settings.image_transition_speed }}s ease;
+    z-index: 100;
+    border: {{ block.settings.image_border_width }}px solid {{ block.settings.image_border_color }};
+  }
+
+  .ai-nav-menu__item-{{ ai_gen_id }}:hover .ai-nav-menu__image-{{ ai_gen_id }} {
+    opacity: 1;
+    transform: translate({{ block.settings.image_offset }}px, -50%) scale({{ block.settings.image_hover_scale }});
+  }
+
   @media screen and (max-width: 749px) {
     .ai-nav-menu__number-{{ ai_gen_id }} {
       font-size: calc({{ block.settings.number_size }}px * 0.7);
@@ -69,6 +85,10 @@
 
     .ai-nav-menu__link-{{ ai_gen_id }} {
       font-size: calc({{ block.settings.link_size }}px * 0.6);
+    }
+
+    .ai-nav-menu__image-{{ ai_gen_id }} {
+      display: none;
     }
   }
 {% endstyle %}
@@ -81,6 +101,12 @@
         <a href="{{ block.settings.link_1_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
           {{ block.settings.link_1_text }}
         </a>
+        {% if block.settings.link_1_image != blank %}
+          <img src="{{ block.settings.link_1_image | img_url: 'master' }}" 
+               alt="{{ block.settings.link_1_text }}" 
+               class="ai-nav-menu__image-{{ ai_gen_id }}"
+               loading="lazy">
+        {% endif %}
       </li>
     {% endif %}
 
@@ -90,6 +116,12 @@
         <a href="{{ block.settings.link_2_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
           {{ block.settings.link_2_text }}
         </a>
+        {% if block.settings.link_2_image != blank %}
+          <img src="{{ block.settings.link_2_image | img_url: 'master' }}" 
+               alt="{{ block.settings.link_2_text }}" 
+               class="ai-nav-menu__image-{{ ai_gen_id }}"
+               loading="lazy">
+        {% endif %}
       </li>
     {% endif %}
 
@@ -99,6 +131,12 @@
         <a href="{{ block.settings.link_3_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
           {{ block.settings.link_3_text }}
         </a>
+        {% if block.settings.link_3_image != blank %}
+          <img src="{{ block.settings.link_3_image | img_url: 'master' }}" 
+               alt="{{ block.settings.link_3_text }}" 
+               class="ai-nav-menu__image-{{ ai_gen_id }}"
+               loading="lazy">
+        {% endif %}
       </li>
     {% endif %}
 
@@ -108,6 +146,12 @@
         <a href="{{ block.settings.link_4_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
           {{ block.settings.link_4_text }}
         </a>
+        {% if block.settings.link_4_image != blank %}
+          <img src="{{ block.settings.link_4_image | img_url: 'master' }}" 
+               alt="{{ block.settings.link_4_text }}" 
+               class="ai-nav-menu__image-{{ ai_gen_id }}"
+               loading="lazy">
+        {% endif %}
       </li>
     {% endif %}
 
@@ -117,6 +161,12 @@
         <a href="{{ block.settings.link_5_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
           {{ block.settings.link_5_text }}
         </a>
+        {% if block.settings.link_5_image != blank %}
+          <img src="{{ block.settings.link_5_image | img_url: 'master' }}" 
+               alt="{{ block.settings.link_5_text }}" 
+               class="ai-nav-menu__image-{{ ai_gen_id }}"
+               loading="lazy">
+        {% endif %}
       </li>
     {% endif %}
 
@@ -126,6 +176,12 @@
         <a href="{{ block.settings.link_6_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
           {{ block.settings.link_6_text }}
         </a>
+        {% if block.settings.link_6_image != blank %}
+          <img src="{{ block.settings.link_6_image | img_url: 'master' }}" 
+               alt="{{ block.settings.link_6_text }}" 
+               class="ai-nav-menu__image-{{ ai_gen_id }}"
+               loading="lazy">
+        {% endif %}
       </li>
     {% endif %}
 
@@ -135,6 +191,12 @@
         <a href="{{ block.settings.link_7_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
           {{ block.settings.link_7_text }}
         </a>
+        {% if block.settings.link_7_image != blank %}
+          <img src="{{ block.settings.link_7_image | img_url: 'master' }}" 
+               alt="{{ block.settings.link_7_text }}" 
+               class="ai-nav-menu__image-{{ ai_gen_id }}"
+               loading="lazy">
+        {% endif %}
       </li>
     {% endif %}
 
@@ -144,6 +206,12 @@
         <a href="{{ block.settings.link_8_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
           {{ block.settings.link_8_text }}
         </a>
+        {% if block.settings.link_8_image != blank %}
+          <img src="{{ block.settings.link_8_image | img_url: 'master' }}" 
+               alt="{{ block.settings.link_8_text }}" 
+               class="ai-nav-menu__image-{{ ai_gen_id }}"
+               loading="lazy">
+        {% endif %}
       </li>
     {% endif %}
 
@@ -153,6 +221,12 @@
         <a href="{{ block.settings.link_9_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
           {{ block.settings.link_9_text }}
         </a>
+        {% if block.settings.link_9_image != blank %}
+          <img src="{{ block.settings.link_9_image | img_url: 'master' }}" 
+               alt="{{ block.settings.link_9_text }}" 
+               class="ai-nav-menu__image-{{ ai_gen_id }}"
+               loading="lazy">
+        {% endif %}
       </li>
     {% endif %}
 
@@ -162,6 +236,12 @@
         <a href="{{ block.settings.link_10_url }}" class="ai-nav-menu__link-{{ ai_gen_id }}">
           {{ block.settings.link_10_text }}
         </a>
+        {% if block.settings.link_10_image != blank %}
+          <img src="{{ block.settings.link_10_image | img_url: 'master' }}" 
+               alt="{{ block.settings.link_10_text }}" 
+               class="ai-nav-menu__image-{{ ai_gen_id }}"
+               loading="lazy">
+        {% endif %}
       </li>
     {% endif %}
   </ul>
@@ -275,6 +355,114 @@
     },
     {
       "type": "header",
+      "content": "Hover image settings"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 100,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Image width",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 100,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Image height",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "image_offset",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Image offset from link",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "image_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Image border width",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "image_border_color",
+      "label": "Image border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "image_shadow_blur",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow blur",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "image_shadow_spread",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow spread",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "image_shadow_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0.2
+    },
+    {
+      "type": "range",
+      "id": "image_transition_speed",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Transition speed",
+      "default": 0.3
+    },
+    {
+      "type": "range",
+      "id": "image_hover_scale",
+      "min": 1,
+      "max": 1.2,
+      "step": 0.1,
+      "label": "Hover scale",
+      "default": 1.0
+    },
+    {
+      "type": "header",
       "content": "Link 1"
     },
     {
@@ -287,6 +475,11 @@
       "type": "url",
       "id": "link_1_url",
       "label": "URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "link_1_image",
+      "label": "Hover image"
     },
     {
       "type": "header",
@@ -304,6 +497,11 @@
       "label": "URL"
     },
     {
+      "type": "image_picker",
+      "id": "link_2_image",
+      "label": "Hover image"
+    },
+    {
       "type": "header",
       "content": "Link 3"
     },
@@ -317,6 +515,11 @@
       "type": "url",
       "id": "link_3_url",
       "label": "URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "link_3_image",
+      "label": "Hover image"
     },
     {
       "type": "header",
@@ -334,6 +537,11 @@
       "label": "URL"
     },
     {
+      "type": "image_picker",
+      "id": "link_4_image",
+      "label": "Hover image"
+    },
+    {
       "type": "header",
       "content": "Link 5"
     },
@@ -347,6 +555,11 @@
       "type": "url",
       "id": "link_5_url",
       "label": "URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "link_5_image",
+      "label": "Hover image"
     },
     {
       "type": "header",
@@ -364,6 +577,11 @@
       "label": "URL"
     },
     {
+      "type": "image_picker",
+      "id": "link_6_image",
+      "label": "Hover image"
+    },
+    {
       "type": "header",
       "content": "Link 7"
     },
@@ -377,6 +595,11 @@
       "type": "url",
       "id": "link_7_url",
       "label": "URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "link_7_image",
+      "label": "Hover image"
     },
     {
       "type": "header",
@@ -394,6 +617,11 @@
       "label": "URL"
     },
     {
+      "type": "image_picker",
+      "id": "link_8_image",
+      "label": "Hover image"
+    },
+    {
       "type": "header",
       "content": "Link 9"
     },
@@ -409,6 +637,11 @@
       "label": "URL"
     },
     {
+      "type": "image_picker",
+      "id": "link_9_image",
+      "label": "Hover image"
+    },
+    {
       "type": "header",
       "content": "Link 10"
     },
@@ -422,6 +655,11 @@
       "type": "url",
       "id": "link_10_url",
       "label": "URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "link_10_image",
+      "label": "Hover image"
     }
   ],
   "presets": [
