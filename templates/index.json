@@ -1136,7 +1136,7 @@
             "subtitle_size_mobile": 14,
             "subtitle_color": "#666666",
             "max_width": 1200,
-            "columns_desktop": 4,
+            "columns_desktop": 6,
             "columns_mobile": "2",
             "grid_gap": 16,
             "grid_gap_mobile": 8,
