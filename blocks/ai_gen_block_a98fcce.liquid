@@ -23,22 +23,12 @@
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: {{ block.settings.scrollbar_color }} transparent;
+    scrollbar-width: none;
     margin-bottom: 40px;
   }
 
   .ai-collection-tabs__header-{{ ai_gen_id }}::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  .ai-collection-tabs__header-{{ ai_gen_id }}::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .ai-collection-tabs__header-{{ ai_gen_id }}::-webkit-scrollbar-thumb {
-    background-color: {{ block.settings.scrollbar_color }};
-    border-radius: 3px;
+    display: none;
   }
 
   .ai-collection-tabs__nav-{{ ai_gen_id }} {
