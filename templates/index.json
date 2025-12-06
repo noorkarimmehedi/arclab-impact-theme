@@ -805,7 +805,7 @@
           "type": "item",
           "settings": {
             "title": "100%",
-            "subheading": "AUTHENTIC HOME & KITCHEN PRODUCT",
+            "subheading": "AUTHENTIC HOME-GROWN COFFEE BRAND",
             "content": "",
             "button_text": "",
             "button_url": "",
@@ -865,10 +865,11 @@
         "1664424230c4756b0e-2"
       ],
       "settings": {
-        "full_width": true,
+        "full_width": false,
         "allow_transparent_header": false,
         "enable_parallax": false,
         "image_size": "auto",
+        "image": "shopify://shop_images/imgi_228_Home_Homepage-carousel-banner_01_mobile_jpg.jpg",
         "mobile_text_position": "place-self-center text-center",
         "desktop_text_position": "sm:place-self-center sm:text-center",
         "text_color": "#ffffff",
