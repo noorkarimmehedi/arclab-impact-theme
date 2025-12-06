@@ -34,142 +34,292 @@
     margin: 0 auto;
   }
 
-  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }} {
-    cursor: pointer;
-    width: 17.5em;
-    height: 5em;
-    border-radius: 1.5em;
+  .ultra-button-{{ ai_gen_id }} {
+    position: relative;
+    appearance: none;
     border: none;
+    background: none;
+    padding: 60px;
+    cursor: pointer;
+    outline: none;
     display: flex;
-    justify-content: right;
+    justify-content: center;
     align-items: center;
-    box-shadow: 0em 0em 0.25em 0em rgba(0, 0, 0, 0.25);
-    position: relative;
-    overflow: hidden;
-    background-color: #fafafa;
-    transition: all 0.25s ease-in-out;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .ai-instagram-grid__subtitle-text-{{ ai_gen_id }} {
+  .quadrant-{{ ai_gen_id }} {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    z-index: 50;
+  }
+
+  .q-tl-{{ ai_gen_id }} {
+    top: 0;
+    left: 0;
+  }
+
+  .q-tr-{{ ai_gen_id }} {
+    top: 0;
+    right: 0;
+  }
+
+  .q-bl-{{ ai_gen_id }} {
+    bottom: 0;
+    left: 0;
+  }
+
+  .q-br-{{ ai_gen_id }} {
+    bottom: 0;
+    right: 0;
+  }
+
+  .ultra-body-{{ ai_gen_id }} {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 18px 40px;
+    border-radius: 0px;
+    background: #ffffff;
+    border: {{ block.settings.subtitle_border_width }}px solid {{ block.settings.subtitle_border_color }};
+    box-shadow: {{ block.settings.subtitle_shadow_x }}px {{ block.settings.subtitle_shadow_y }}px {{ block.settings.subtitle_shadow_blur }}px rgba(0, 0, 0, {{ block.settings.subtitle_shadow_opacity | divided_by: 100.0 }});
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    z-index: 10;
+  }
+
+  .ultra-button-{{ ai_gen_id }}:has(.q-tl-{{ ai_gen_id }}:hover) .ultra-body-{{ ai_gen_id }} {
+    transform: translate(-6px, -6px);
+  }
+
+  .ultra-button-{{ ai_gen_id }}:has(.q-tr-{{ ai_gen_id }}:hover) .ultra-body-{{ ai_gen_id }} {
+    transform: translate(6px, -6px);
+  }
+
+  .ultra-button-{{ ai_gen_id }}:has(.q-bl-{{ ai_gen_id }}:hover) .ultra-body-{{ ai_gen_id }} {
+    transform: translate(-6px, 6px);
+  }
+
+  .ultra-button-{{ ai_gen_id }}:has(.q-br-{{ ai_gen_id }}:hover) .ultra-body-{{ ai_gen_id }} {
+    transform: translate(6px, 6px);
+  }
+
+  .ultra-button-{{ ai_gen_id }}:hover .ultra-body-{{ ai_gen_id }} {
+    border-color: {{ block.settings.subtitle_border_color_hover }};
+  }
+
+  .label-text-{{ ai_gen_id }} {
+    display: flex;
+    overflow: hidden;
+    height: 40px;
+    align-items: center;
     font-family: {{ block.settings.subtitle_font.family }}, {{ block.settings.subtitle_font.fallback_families }};
-    font-weight: {{ block.settings.subtitle_font.weight }};
-    font-style: {{ block.settings.subtitle_font.style }};
     font-size: {{ block.settings.subtitle_size }}px;
+    font-weight: {{ block.settings.subtitle_font.weight }};
     color: {{ block.settings.subtitle_color }};
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 0.75em;
-    transform: translateY(-50%);
-    transition: all 0.5s ease-in-out;
   }
 
-  .ai-instagram-grid__subtitle-glow-{{ ai_gen_id }} {
-    width: 4em;
-    height: 3.5em;
-    background-color: #77ff9f;
-    border-radius: 1em;
+  .ultra-button-{{ ai_gen_id }}:has(.q-tl-{{ ai_gen_id }}:hover) .label-text-{{ ai_gen_id }} {
+    transform: translate(-2px, -2px);
+  }
+
+  .ultra-button-{{ ai_gen_id }}:has(.q-tr-{{ ai_gen_id }}:hover) .label-text-{{ ai_gen_id }} {
+    transform: translate(2px, -2px);
+  }
+
+  .ultra-button-{{ ai_gen_id }}:has(.q-bl-{{ ai_gen_id }}:hover) .label-text-{{ ai_gen_id }} {
+    transform: translate(-2px, 2px);
+  }
+
+  .ultra-button-{{ ai_gen_id }}:has(.q-br-{{ ai_gen_id }}:hover) .label-text-{{ ai_gen_id }} {
+    transform: translate(2px, 2px);
+  }
+
+  .l-{{ ai_gen_id }} {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s;
+    transform-origin: center center;
+  }
+
+  .ultra-button-{{ ai_gen_id }}:hover .l-{{ ai_gen_id }} {
+    transform: rotateX(360deg);
+    color: #353535;
+    transition-delay: calc(var(--i) * 0.03s);
+  }
+
+  .chip-container-{{ ai_gen_id }} {
+    margin-left: 32px;
     position: relative;
-    box-shadow: 0em 0em 0.5em 0em rgba(0, 0, 0, 0.25), inset 0.25em 0em 0.25em rgb(195, 255, 0);
+  }
+
+  .border-chip-{{ ai_gen_id }} {
+    width: 62px;
+    height: 60px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
     overflow: hidden;
-    margin-right: 0.75em;
-    transition: all 0.5s ease-in-out;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    isolation: isolate;
   }
 
-  .ai-instagram-grid__subtitle-icon-{{ ai_gen_id }} {
+  .border-chip-{{ ai_gen_id }}::before {
+    content: "";
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 0deg,
+      #ff000090,
+      #ff8a0090,
+      #ffff0090,
+      #00ff0090,
+      #0099ff90,
+      #0000ff90,
+      #8b00ff90,
+      #ff000090
+    );
+    animation: spinBorder-{{ ai_gen_id }} 4s linear infinite;
+    z-index: 1;
+  }
+
+  .inner-chip-{{ ai_gen_id }} {
+    position: absolute;
+    inset: 3px;
+    background: conic-gradient(
+      from 0deg,
+      #ff5d5d,
+      #ffb663,
+      #ffff67,
+      #66ff66,
+      #64c1ff,
+      #6767ff,
+      #b964ff,
+      #ff6666
+    );
+    border-radius: 14px;
     z-index: 2;
-    width: 30px;
-    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .ai-instagram-grid__subtitle-white-{{ ai_gen_id }} {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    height: 2.5em;
-    position: absolute;
-    top: 0em;
-    filter: blur(0.5em);
+  .nav-icon-{{ ai_gen_id }} {
+    width: 28px;
+    height: 28px;
+    stroke: #ffffff;
+    z-index: 3;
+    transform: translateX(-4px);
+    animation: arrowMove-{{ ai_gen_id }} 2s ease-in-out infinite;
+    transition: stroke 0.3s;
   }
 
-  .ai-instagram-grid__subtitle-red-{{ ai_gen_id }} {
+  .ultra-button-{{ ai_gen_id }}:hover .border-chip-{{ ai_gen_id }} {
+    transform: scale(1.1);
+  }
+
+  .ultra-button-{{ ai_gen_id }}:hover .border-chip-{{ ai_gen_id }}::before {
+    background: conic-gradient(
+      from 0deg,
+      #ff0000,
+      #ff8a00,
+      #ffff00,
+      #00ff00,
+      #0099ff,
+      #0000ff,
+      #8b00ff,
+      #ff0000
+    );
+    animation: spinBorder-{{ ai_gen_id }} 1.5s linear infinite;
+  }
+
+  .ultra-button-{{ ai_gen_id }}:hover .inner-chip-{{ ai_gen_id }} {
+    background: conic-gradient(
+      from 0deg,
+      #ff4646,
+      #ffaa49,
+      #ffff44,
+      #54ff54,
+      #54bbff,
+      #4d4dff,
+      #af4eff,
+      #ff4848
+    );
+  }
+
+  .ultra-button-{{ ai_gen_id }}:hover .nav-icon-{{ ai_gen_id }} {
+    animation: none;
+    transform: translateX(1px);
+  }
+
+  .aura-glow-{{ ai_gen_id }} {
     position: absolute;
+    right: -25px;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(4);
-    animation: rotar-{{ ai_gen_id }} 5s linear infinite;
-    filter: blur(0.2em);
-    transition: all 0.5s ease-in-out;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      #ff0000,
+      #ff8a00,
+      #ffff00,
+      #00ff00,
+      #0099ff,
+      #0000ff,
+      #8b00ff,
+      #ff0000
+    );
+    filter: blur(30px);
+    opacity: 0.6;
+    transform: translateY(-50%) translateZ(-10px);
+    z-index: -1;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation: glowActive-{{ ai_gen_id }} 4s linear infinite;
   }
 
-  .ai-instagram-grid__subtitle-blue-{{ ai_gen_id }} {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-5%, -5%) scale(2);
-    animation: rotar-{{ ai_gen_id }} 5s linear infinite;
-    filter: blur(0.4em);
-    transition: all 0.5s ease-in-out;
+  .ultra-button-{{ ai_gen_id }}:hover .aura-glow-{{ ai_gen_id }} {
+    opacity: 0.8;
+    width: 130px;
+    height: 130px;
+    right: -35px;
+    filter: blur(35px);
   }
 
-  .ai-instagram-grid__subtitle-cian-{{ ai_gen_id }} {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-75%, -5%) scale(2);
-    animation: rotar-{{ ai_gen_id }} 5s linear infinite;
-    filter: blur(0.25em);
-    transition: all 0.5s ease-in-out;
+  .ultra-button-{{ ai_gen_id }}:active .ultra-body-{{ ai_gen_id }} {
+    transform: scale(0.96) !important;
   }
 
-  .ai-instagram-grid__subtitle-yellow-{{ ai_gen_id }} {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-95%, -55%) scale(2.5);
-    animation: rotar-{{ ai_gen_id }} 5s linear infinite;
-    filter: blur(0.25em);
-    transition: all 0.5s ease-in-out;
+  @keyframes spinBorder-{{ ai_gen_id }} {
+    to {
+      transform: rotate(360deg);
+    }
   }
 
-  @keyframes rotar-{{ ai_gen_id }} {
+  @keyframes arrowMove-{{ ai_gen_id }} {
     0% {
-      rotate: 0deg;
+      transform: translateX(-4px);
+    }
+    50% {
+      transform: translateX(5px);
     }
     100% {
-      rotate: 360deg;
+      transform: translateX(-4px);
     }
   }
 
-  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-text-{{ ai_gen_id }} {
-    left: -25%;
-    color: white;
-  }
-
-  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-glow-{{ ai_gen_id }} {
-    width: 16em;
-    box-shadow: 0em 0em 0.5em 0em rgba(0, 0, 0, 0.25), inset 0.5em 0em 0.5em rgb(195, 255, 0);
-  }
-
-  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-red-{{ ai_gen_id }},
-  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-blue-{{ ai_gen_id }},
-  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-cian-{{ ai_gen_id }},
-  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:hover .ai-instagram-grid__subtitle-yellow-{{ ai_gen_id }} {
-    filter: blur(0.75em);
-    top: 50%;
-    left: 50%;
-  }
-
-  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:active {
-    transform: scale(0.95);
-  }
-
-  .ai-instagram-grid__subtitle-button-{{ ai_gen_id }}:active .ai-instagram-grid__subtitle-glow-{{ ai_gen_id }} {
-    opacity: 0.75;
-    filter: brightness(0.75);
+  @keyframes glowActive-{{ ai_gen_id }} {
+    0% {
+      transform: translateY(-50%) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-50%) rotate(360deg);
+    }
   }
 
   .ai-instagram-grid__grid-{{ ai_gen_id }} {
@@ -239,13 +389,26 @@
       padding: {{ block.settings.section_padding_top_mobile }}px {{ block.settings.section_padding_horizontal_mobile }}px {{ block.settings.section_padding_bottom_mobile }}px;
     }
 
-    .ai-instagram-grid__subtitle-button-{{ ai_gen_id }} {
-      width: 14em;
-      height: 4em;
+    .ultra-button-{{ ai_gen_id }} {
+      padding: 40px 20px;
     }
 
-    .ai-instagram-grid__subtitle-text-{{ ai_gen_id }} {
+    .ultra-body-{{ ai_gen_id }} {
+      padding: 14px 16px 14px 24px;
+    }
+
+    .label-text-{{ ai_gen_id }} {
       font-size: {{ block.settings.subtitle_size_mobile }}px;
+      height: 32px;
+    }
+
+    .chip-container-{{ ai_gen_id }} {
+      margin-left: 16px;
+    }
+
+    .border-chip-{{ ai_gen_id }} {
+      width: 50px;
+      height: 48px;
     }
 
     .ai-instagram-grid__grid-{{ ai_gen_id }} {
@@ -269,70 +432,37 @@
         {% endif %}
         {% if block.settings.subtitle != blank %}
           <div class="ai-instagram-grid__subtitle-wrapper-{{ ai_gen_id }}">
-            <div class="ai-instagram-grid__subtitle-button-{{ ai_gen_id }}">
-              <p class="ai-instagram-grid__subtitle-text-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
-              <div class="ai-instagram-grid__subtitle-glow-{{ ai_gen_id }}">
-                <svg
-                  class="ai-instagram-grid__subtitle-icon-{{ ai_gen_id }}"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#fafafa"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-                <svg
-                  class="ai-instagram-grid__subtitle-red-{{ ai_gen_id }}"
-                  viewBox="0 0 200 200"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="#ff8b80"
-                    d="M50.1,-30.7C54.6,-21.2,40.8,-2.8,29.4,11.7C18,26.1,9,36.7,0.5,36.4C-8,36.1,-15.9,24.9,-26.5,10.9C-37.1,-3.1,-50.4,-19.9,-46.5,-29.1C-42.5,-38.3,-21.2,-39.9,0.8,-40.3C22.8,-40.8,45.6,-40.1,50.1,-30.7Z"
-                    transform="translate(100 100)"
-                  ></path>
-                </svg>
-                <svg
-                  class="ai-instagram-grid__subtitle-yellow-{{ ai_gen_id }}"
-                  viewBox="0 0 200 200"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="#F8D32C"
-                    d="M42.3,-26.7C50.5,-10.4,49.6,8.9,41.1,23.3C32.5,37.7,16.3,47.3,-2,48.4C-20.2,49.5,-40.3,42.2,-45.8,29.6C-51.2,17,-41.9,-0.9,-31.8,-18.4C-21.8,-35.9,-10.9,-52.9,3.1,-54.7C17.1,-56.5,34.2,-43.1,42.3,-26.7Z"
-                    transform="translate(100 100)"
-                  ></path>
-                </svg>
-                <svg
-                  class="ai-instagram-grid__subtitle-cian-{{ ai_gen_id }}"
-                  viewBox="0 0 200 200"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="#5CFBF8"
-                    d="M33.1,-23.8C40.7,-5.9,43.3,10.3,36.9,30.2C30.6,50.1,15.3,73.7,0.7,73.3C-14,72.9,-28,48.6,-36.1,27.7C-44.2,6.8,-46.4,-10.7,-39.4,-28.2C-32.5,-45.8,-16.2,-63.4,-1.8,-62.4C12.7,-61.4,25.4,-41.7,33.1,-23.8Z"
-                    transform="translate(100 100)"
-                  ></path>
-                </svg>
-                <svg
-                  class="ai-instagram-grid__subtitle-blue-{{ ai_gen_id }}"
-                  viewBox="0 0 200 200"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="#AE9BFD"
-                    d="M37.9,-16.5C44.5,-10.5,42.1,6.2,34.3,26.2C26.4,46.2,13.2,69.6,-3.7,71.7C-20.6,73.9,-41.2,54.8,-49,34.7C-56.8,14.7,-51.9,-6.2,-41.6,-14.3C-31.3,-22.5,-15.7,-17.8,0,-17.8C15.7,-17.8,31.3,-22.5,37.9,-16.5Z"
-                    transform="translate(100 100)"
-                  ></path>
-                </svg>
-                <div class="ai-instagram-grid__subtitle-white-{{ ai_gen_id }}"></div>
+            <button class="ultra-button-{{ ai_gen_id }}" aria-label="{{ block.settings.subtitle }}">
+              <div class="quadrant-{{ ai_gen_id }} q-tl-{{ ai_gen_id }}"></div>
+              <div class="quadrant-{{ ai_gen_id }} q-tr-{{ ai_gen_id }}"></div>
+              <div class="quadrant-{{ ai_gen_id }} q-bl-{{ ai_gen_id }}"></div>
+              <div class="quadrant-{{ ai_gen_id }} q-br-{{ ai_gen_id }}"></div>
+              <div class="ultra-body-{{ ai_gen_id }}">
+                <div class="label-text-{{ ai_gen_id }}">
+                  {% assign subtitle_chars = block.settings.subtitle | split: '' %}
+                  {% for char in subtitle_chars %}
+                    <span class="l-{{ ai_gen_id }}" style="--i:{{ forloop.index0 }}">{{ char }}</span>
+                  {% endfor %}
+                </div>
+                <div class="chip-container-{{ ai_gen_id }}">
+                  <div class="border-chip-{{ ai_gen_id }}">
+                    <div class="inner-chip-{{ ai_gen_id }}">
+                      <svg
+                        class="nav-icon-{{ ai_gen_id }}"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"></line>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="aura-glow-{{ ai_gen_id }}"></div>
               </div>
-            </div>
+            </button>
           </div>
         {% endif %}
       </div>
@@ -548,7 +678,7 @@
       "type": "font_picker",
       "id": "subtitle_font",
       "label": "Font",
-      "default": "helvetica_n4"
+      "default": "helvetica_n7"
     },
     {
       "type": "range",
@@ -558,7 +688,7 @@
       "step": 2,
       "unit": "px",
       "label": "Size (desktop)",
-      "default": 18
+      "default": 24
     },
     {
       "type": "range",
@@ -568,13 +698,79 @@
       "step": 2,
       "unit": "px",
       "label": "Size (mobile)",
-      "default": 14
+      "default": 18
     },
     {
       "type": "color",
       "id": "subtitle_color",
       "label": "Color",
-      "default": "#666666"
+      "default": "#1e293b"
+    },
+    {
+      "type": "header",
+      "content": "Subtitle border & shadow"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "subtitle_border_color",
+      "label": "Border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_border_color_hover",
+      "label": "Hover border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_shadow_x",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Shadow horizontal offset",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "subtitle_shadow_y",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Shadow vertical offset",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "subtitle_shadow_blur",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow blur radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "subtitle_shadow_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Shadow opacity",
+      "default": 0
     },
     {
       "type": "header",
@@ -854,14 +1050,8 @@
       "id": "item_1_type",
       "label": "Type",
       "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video" }
       ],
       "default": "image"
     },
@@ -880,463 +1070,73 @@
       "id": "item_1_link",
       "label": "Link"
     },
-    {
-      "type": "header",
-      "content": "Item 2"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_2_enabled",
-      "label": "Enable item 2",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "item_2_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_2_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_2_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_2_link",
-      "label": "Link"
-    },
-    {
-      "type": "header",
-      "content": "Item 3"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_3_enabled",
-      "label": "Enable item 3",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "item_3_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_3_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_3_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_3_link",
-      "label": "Link"
-    },
-    {
-      "type": "header",
-      "content": "Item 4"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_4_enabled",
-      "label": "Enable item 4",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "item_4_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_4_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_4_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_4_link",
-      "label": "Link"
-    },
-    {
-      "type": "header",
-      "content": "Item 5"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_5_enabled",
-      "label": "Enable item 5",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "item_5_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_5_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_5_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_5_link",
-      "label": "Link"
-    },
-    {
-      "type": "header",
-      "content": "Item 6"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_6_enabled",
-      "label": "Enable item 6",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "item_6_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_6_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_6_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_6_link",
-      "label": "Link"
-    },
-    {
-      "type": "header",
-      "content": "Item 7"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_7_enabled",
-      "label": "Enable item 7",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "item_7_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_7_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_7_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_7_link",
-      "label": "Link"
-    },
-    {
-      "type": "header",
-      "content": "Item 8"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_8_enabled",
-      "label": "Enable item 8",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "item_8_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_8_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_8_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_8_link",
-      "label": "Link"
-    },
-    {
-      "type": "header",
-      "content": "Item 9"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_9_enabled",
-      "label": "Enable item 9",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "item_9_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_9_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_9_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_9_link",
-      "label": "Link"
-    },
-    {
-      "type": "header",
-      "content": "Item 10"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_10_enabled",
-      "label": "Enable item 10",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "item_10_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_10_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_10_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_10_link",
-      "label": "Link"
-    },
-    {
-      "type": "header",
-      "content": "Item 11"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_11_enabled",
-      "label": "Enable item 11",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "item_11_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_11_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_11_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_11_link",
-      "label": "Link"
-    },
-    {
-      "type": "header",
-      "content": "Item 12"
-    },
-    {
-      "type": "checkbox",
-      "id": "item_12_enabled",
-      "label": "Enable item 12",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "item_12_type",
-      "label": "Type",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        },
-        {
-          "value": "video",
-          "label": "Video"
-        }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "item_12_image",
-      "label": "Image"
-    },
-    {
-      "type": "url",
-      "id": "item_12_video",
-      "label": "Video URL"
-    },
-    {
-      "type": "url",
-      "id": "item_12_link",
-      "label": "Link"
-    }
+    { "type": "header", "content": "Item 2" },
+    { "type": "checkbox", "id": "item_2_enabled", "label": "Enable item 2", "default": true },
+    { "type": "select", "id": "item_2_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_2_image", "label": "Image" },
+    { "type": "url", "id": "item_2_video", "label": "Video URL" },
+    { "type": "url", "id": "item_2_link", "label": "Link" },
+    { "type": "header", "content": "Item 3" },
+    { "type": "checkbox", "id": "item_3_enabled", "label": "Enable item 3", "default": true },
+    { "type": "select", "id": "item_3_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_3_image", "label": "Image" },
+    { "type": "url", "id": "item_3_video", "label": "Video URL" },
+    { "type": "url", "id": "item_3_link", "label": "Link" },
+    { "type": "header", "content": "Item 4" },
+    { "type": "checkbox", "id": "item_4_enabled", "label": "Enable item 4", "default": true },
+    { "type": "select", "id": "item_4_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_4_image", "label": "Image" },
+    { "type": "url", "id": "item_4_video", "label": "Video URL" },
+    { "type": "url", "id": "item_4_link", "label": "Link" },
+    { "type": "header", "content": "Item 5" },
+    { "type": "checkbox", "id": "item_5_enabled", "label": "Enable item 5", "default": true },
+    { "type": "select", "id": "item_5_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_5_image", "label": "Image" },
+    { "type": "url", "id": "item_5_video", "label": "Video URL" },
+    { "type": "url", "id": "item_5_link", "label": "Link" },
+    { "type": "header", "content": "Item 6" },
+    { "type": "checkbox", "id": "item_6_enabled", "label": "Enable item 6", "default": true },
+    { "type": "select", "id": "item_6_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_6_image", "label": "Image" },
+    { "type": "url", "id": "item_6_video", "label": "Video URL" },
+    { "type": "url", "id": "item_6_link", "label": "Link" },
+    { "type": "header", "content": "Item 7" },
+    { "type": "checkbox", "id": "item_7_enabled", "label": "Enable item 7", "default": true },
+    { "type": "select", "id": "item_7_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_7_image", "label": "Image" },
+    { "type": "url", "id": "item_7_video", "label": "Video URL" },
+    { "type": "url", "id": "item_7_link", "label": "Link" },
+    { "type": "header", "content": "Item 8" },
+    { "type": "checkbox", "id": "item_8_enabled", "label": "Enable item 8", "default": true },
+    { "type": "select", "id": "item_8_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_8_image", "label": "Image" },
+    { "type": "url", "id": "item_8_video", "label": "Video URL" },
+    { "type": "url", "id": "item_8_link", "label": "Link" },
+    { "type": "header", "content": "Item 9" },
+    { "type": "checkbox", "id": "item_9_enabled", "label": "Enable item 9", "default": false },
+    { "type": "select", "id": "item_9_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_9_image", "label": "Image" },
+    { "type": "url", "id": "item_9_video", "label": "Video URL" },
+    { "type": "url", "id": "item_9_link", "label": "Link" },
+    { "type": "header", "content": "Item 10" },
+    { "type": "checkbox", "id": "item_10_enabled", "label": "Enable item 10", "default": false },
+    { "type": "select", "id": "item_10_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_10_image", "label": "Image" },
+    { "type": "url", "id": "item_10_video", "label": "Video URL" },
+    { "type": "url", "id": "item_10_link", "label": "Link" },
+    { "type": "header", "content": "Item 11" },
+    { "type": "checkbox", "id": "item_11_enabled", "label": "Enable item 11", "default": false },
+    { "type": "select", "id": "item_11_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_11_image", "label": "Image" },
+    { "type": "url", "id": "item_11_video", "label": "Video URL" },
+    { "type": "url", "id": "item_11_link", "label": "Link" },
+    { "type": "header", "content": "Item 12" },
+    { "type": "checkbox", "id": "item_12_enabled", "label": "Enable item 12", "default": false },
+    { "type": "select", "id": "item_12_type", "label": "Type", "options": [{ "value": "image", "label": "Image" }, { "value": "video", "label": "Video" }], "default": "image" },
+    { "type": "image_picker", "id": "item_12_image", "label": "Image" },
+    { "type": "url", "id": "item_12_video", "label": "Video URL" },
+    { "type": "url", "id": "item_12_link", "label": "Link" }
   ],
-  "presets": [
-    {
-      "name": "Instagram grid"
-    }
-  ]
+  "presets": [{ "name": "Instagram grid" }]
 }
 {% endschema %}
-
