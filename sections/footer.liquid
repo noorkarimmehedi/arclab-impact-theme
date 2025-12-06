@@ -55,6 +55,9 @@
   #shopify-section-{{ section.id }} .premium-footer__logo {
     text-align: center;
     margin-bottom: 40px;
+    {% unless section.settings.show_brand_logo %}
+    display: none;
+    {% endunless %}
   }
 
   #shopify-section-{{ section.id }} .premium-footer__logo-image {
@@ -442,6 +445,12 @@
       "content": "Brand Logo"
     },
     {
+      "type": "checkbox",
+      "id": "show_brand_logo",
+      "label": "Show brand logo",
+      "default": true
+    },
+    {
       "type": "image_picker",
       "id": "logo_image",
       "label": "Logo image"
@@ -547,55 +556,6 @@
     },
     {
       "type": "header",
-      "content": "Bottom Social Bar"
-    },
-    {
-      "type": "color",
-      "id": "bottom_bar_bg_color",
-      "label": "Background color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "social_link_color",
-      "label": "Link color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "social_link_1_text",
-      "label": "Connect link text",
-      "default": "CONNECT"
-    },
-    {
-      "type": "url",
-      "id": "social_link_1_url",
-      "label": "Connect link URL"
-    },
-    {
-      "type": "text",
-      "id": "social_link_2_text",
-      "label": "Facebook link text",
-      "default": "FACEBOOK"
-    },
-    {
-      "type": "url",
-      "id": "social_link_2_url",
-      "label": "Facebook link URL"
-    },
-    {
-      "type": "text",
-      "id": "social_link_3_text",
-      "label": "Instagram link text",
-      "default": "INSTAGRAM"
-    },
-    {
-      "type": "url",
-      "id": "social_link_3_url",
-      "label": "Instagram link URL"
-    },
-    {
-      "type": "header",
       "content": "Bottom Large Logo"
     },
     {
@@ -653,6 +613,55 @@
       "label": "Text logo color",
       "default": "#000000",
       "info": "Only applies if no image is uploaded"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Social Bar"
+    },
+    {
+      "type": "color",
+      "id": "bottom_bar_bg_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "social_link_color",
+      "label": "Link color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "social_link_1_text",
+      "label": "Connect link text",
+      "default": "CONNECT"
+    },
+    {
+      "type": "url",
+      "id": "social_link_1_url",
+      "label": "Connect link URL"
+    },
+    {
+      "type": "text",
+      "id": "social_link_2_text",
+      "label": "Facebook link text",
+      "default": "FACEBOOK"
+    },
+    {
+      "type": "url",
+      "id": "social_link_2_url",
+      "label": "Facebook link URL"
+    },
+    {
+      "type": "text",
+      "id": "social_link_3_text",
+      "label": "Instagram link text",
+      "default": "INSTAGRAM"
+    },
+    {
+      "type": "url",
+      "id": "social_link_3_url",
+      "label": "Instagram link URL"
     }
   ],
   "blocks": [
