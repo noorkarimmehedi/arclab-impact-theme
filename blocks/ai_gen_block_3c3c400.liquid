@@ -25,6 +25,59 @@
   .ai-instagram-grid__header-{{ ai_gen_id }} {
     text-align: {{ block.settings.text_alignment }};
     margin-bottom: {{ block.settings.header_spacing }}px;
+    position: relative;
+  }
+
+  .ai-instagram-grid__header-content-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .ai-instagram-grid__header-left-{{ ai_gen_id }} {
+    flex: 1;
+  }
+
+  .ai-instagram-grid__badge-{{ ai_gen_id }} {
+    position: relative;
+    width: {{ block.settings.badge_width }}px;
+    height: {{ block.settings.badge_height }}px;
+    flex-shrink: 0;
+    border: {{ block.settings.badge_border_width }}px solid {{ block.settings.badge_border_color }};
+    background: {{ block.settings.badge_background }};
+    box-shadow: {{ block.settings.badge_shadow_x }}px {{ block.settings.badge_shadow_y }}px 0px {{ block.settings.badge_shadow_color }};
+    transition: all 0.2s ease;
+    overflow: hidden;
+  }
+
+  .ai-instagram-grid__badge-{{ ai_gen_id }}:hover {
+    transform: translate({{ block.settings.badge_shadow_x | times: -0.5 }}px, {{ block.settings.badge_shadow_y | times: -0.5 }}px);
+    box-shadow: {{ block.settings.badge_shadow_x | times: 1.5 }}px {{ block.settings.badge_shadow_y | times: 1.5 }}px 0px {{ block.settings.badge_shadow_color }};
+  }
+
+  .ai-instagram-grid__badge-{{ ai_gen_id }}:active {
+    transform: translate({{ block.settings.badge_shadow_x }}px, {{ block.settings.badge_shadow_y }}px);
+    box-shadow: 0px 0px 0px {{ block.settings.badge_shadow_color }};
+  }
+
+  .ai-instagram-grid__badge-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-instagram-grid__badge-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: {{ block.settings.badge_placeholder_bg }};
+    color: {{ block.settings.badge_placeholder_color }};
+    font-size: 40px;
+    font-weight: bold;
   }
 
   .ai-instagram-grid__title-{{ ai_gen_id }} {
@@ -442,44 +495,65 @@
   <div class="ai-instagram-grid__container-{{ ai_gen_id }}">
     {% if block.settings.show_header %}
       <div class="ai-instagram-grid__header-{{ ai_gen_id }}">
-        {% if block.settings.title != blank %}
-          <h2 class="ai-instagram-grid__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
-        {% endif %}
-        {% if block.settings.subtitle != blank %}
-          <div class="ai-instagram-grid__subtitle-wrapper-{{ ai_gen_id }}">
-            <button class="ultra-button-{{ ai_gen_id }}" aria-label="{{ block.settings.subtitle }}">
-              <div class="quadrant-{{ ai_gen_id }} q-tl-{{ ai_gen_id }}"></div>
-              <div class="quadrant-{{ ai_gen_id }} q-tr-{{ ai_gen_id }}"></div>
-              <div class="quadrant-{{ ai_gen_id }} q-bl-{{ ai_gen_id }}"></div>
-              <div class="quadrant-{{ ai_gen_id }} q-br-{{ ai_gen_id }}"></div>
-              <div class="ultra-body-{{ ai_gen_id }}">
-                <div class="label-text-{{ ai_gen_id }}">
-                  {% assign subtitle_chars = block.settings.subtitle | split: '' %}
-                  {% for char in subtitle_chars %}
-                    <span class="l-{{ ai_gen_id }}" style="--i:{{ forloop.index0 }}">{{ char }}</span>
-                  {% endfor %}
-                </div>
-                <div class="chip-container-{{ ai_gen_id }}">
-                  <div class="border-chip-{{ ai_gen_id }}">
-                    <div class="inner-chip-{{ ai_gen_id }}">
-                      <svg
-                        class="nav-icon-{{ ai_gen_id }}"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"></line>
-                      </svg>
+        <div class="ai-instagram-grid__header-content-{{ ai_gen_id }}">
+          <div class="ai-instagram-grid__header-left-{{ ai_gen_id }}">
+            {% if block.settings.title != blank %}
+              <h2 class="ai-instagram-grid__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+            {% endif %}
+            {% if block.settings.subtitle != blank %}
+              <div class="ai-instagram-grid__subtitle-wrapper-{{ ai_gen_id }}">
+                <button class="ultra-button-{{ ai_gen_id }}" aria-label="{{ block.settings.subtitle }}">
+                  <div class="quadrant-{{ ai_gen_id }} q-tl-{{ ai_gen_id }}"></div>
+                  <div class="quadrant-{{ ai_gen_id }} q-tr-{{ ai_gen_id }}"></div>
+                  <div class="quadrant-{{ ai_gen_id }} q-bl-{{ ai_gen_id }}"></div>
+                  <div class="quadrant-{{ ai_gen_id }} q-br-{{ ai_gen_id }}"></div>
+                  <div class="ultra-body-{{ ai_gen_id }}">
+                    <div class="label-text-{{ ai_gen_id }}">
+                      {% assign subtitle_chars = block.settings.subtitle | split: '' %}
+                      {% for char in subtitle_chars %}
+                        <span class="l-{{ ai_gen_id }}" style="--i:{{ forloop.index0 }}">{{ char }}</span>
+                      {% endfor %}
                     </div>
+                    <div class="chip-container-{{ ai_gen_id }}">
+                      <div class="border-chip-{{ ai_gen_id }}">
+                        <div class="inner-chip-{{ ai_gen_id }}">
+                          <svg
+                            class="nav-icon-{{ ai_gen_id }}"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"></line>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="aura-glow-{{ ai_gen_id }}"></div>
                   </div>
-                </div>
-                <div class="aura-glow-{{ ai_gen_id }}"></div>
+                </button>
               </div>
-            </button>
+            {% endif %}
           </div>
-        {% endif %}
+
+          {% if block.settings.show_badge %}
+            <div class="ai-instagram-grid__badge-{{ ai_gen_id }}">
+              {% if block.settings.badge_image != blank %}
+                <img
+                  src="{{ block.settings.badge_image | image_url: width: 400 }}"
+                  alt="{{ block.settings.badge_image.alt | escape }}"
+                  class="ai-instagram-grid__badge-image-{{ ai_gen_id }}"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="ai-instagram-grid__badge-placeholder-{{ ai_gen_id }}">
+                  ?
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
       </div>
     {% endif %}
 
@@ -604,6 +678,121 @@
         }
       ],
       "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Top right badge (Neubrutalism)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_image",
+      "label": "Badge image"
+    },
+    {
+      "type": "range",
+      "id": "badge_width",
+      "min": 60,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Width (desktop)",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "badge_height",
+      "min": 60,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Height (desktop)",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "badge_width_mobile",
+      "min": 50,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Width (mobile)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "badge_height_mobile",
+      "min": 50,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Height (mobile)",
+      "default": 80
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Background color",
+      "default": "#FFE066"
+    },
+    {
+      "type": "range",
+      "id": "badge_border_width",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 3
+    },
+    {
+      "type": "color",
+      "id": "badge_border_color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "badge_shadow_x",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow X offset",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "badge_shadow_y",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow Y offset",
+      "default": 6
+    },
+    {
+      "type": "color",
+      "id": "badge_shadow_color",
+      "label": "Shadow color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "badge_placeholder_bg",
+      "label": "Placeholder background",
+      "default": "#FFE066"
+    },
+    {
+      "type": "color",
+      "id": "badge_placeholder_color",
+      "label": "Placeholder text color",
+      "default": "#000000"
     },
     {
       "type": "header",
