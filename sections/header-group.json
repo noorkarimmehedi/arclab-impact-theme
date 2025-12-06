@@ -13,7 +13,6 @@
   "sections": {
     "announce_rGdPiY": {
       "type": "announce",
-      "disabled": true,
       "name": "Announcement Bar - V2",
       "settings": {
         "announcement": true,
