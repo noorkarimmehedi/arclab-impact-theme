@@ -437,7 +437,8 @@
             "arrow_color": "#ffffff",
             "arrow_border_width": 4,
             "arrow_border_color": "#000000",
-            "arrow_shadow_x": 6,
+            "arrow_border_radius": 50,
+            "arrow_shadow_x": 4,
             "arrow_shadow_y": 6,
             "arrow_shadow_color": "#000000"
           },
