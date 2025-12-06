@@ -1,6 +1,716 @@
+{% doc %}
+  @prompt
+    Create a clean, minimalist navigation menu section with white background and thin black border. Center-aligned vertical list of 10 navigation links, each prefixed with numbers (1-10) in smaller font size (20px).
+    Typography: Elegant serif font (similar to Playfair Display or Georgia). Link text varies in size: larger items like "Shop All" (48-52px), "New" (46-50px), "Bubbles" (52-56px), "Non-Alcoholic" (42-46px); medium items like "Sale," "Reds," "White," "Beer," "Spirits" (38-44px); "Pink/Orange" slightly smaller (36-40px). All in black.
+    Layout: Tight vertical spacing (8-12px between items). Numbers left-aligned, creating stepped effect. Text follows numbers inline. Sophisticated, editorial magazine-style aesthetic. Clean hierarchy with varying text sizes creating visual rhythm. Minimal padding (40px top/bottom, 20px sides). High contrast, typographic focus, no decorative elements. Professional wine/beverage store aesthetic.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-nav-menu-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    padding: {{ block.settings.padding_vertical }}px {{ block.settings.padding_horizontal }}px;
+    max-width: 100%;
+  }
+
+  .ai-nav-menu__list-{{ ai_gen_id }} {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: {{ block.settings.item_spacing }}px;
+  }
+
+  .ai-nav-menu__item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .ai-nav-menu__number-{{ ai_gen_id }} {
+    font-family: {{ block.settings.font_family.family }}, {{ block.settings.font_family.fallback_families }};
+    font-size: {{ block.settings.number_size }}px;
+    color: {{ block.settings.text_color }};
+    font-weight: {{ block.settings.font_family.weight }};
+    font-style: {{ block.settings.font_family.style }};
+    line-height: 1;
+  }
+
+  .ai-nav-menu__link-{{ ai_gen_id }} {
+    font-family: {{ block.settings.font_family.family }}, {{ block.settings.font_family.fallback_families }};
+    color: {{ block.settings.text_color }};
+    text-decoration: none;
+    font-weight: {{ block.settings.font_family.weight }};
+    font-style: {{ block.settings.font_family.style }};
+    line-height: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .ai-nav-menu__link-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  .ai-nav-menu__link-{{ ai_gen_id }}--size-1 {
+    font-size: {{ block.settings.size_large }}px;
+  }
+
+  .ai-nav-menu__link-{{ ai_gen_id }}--size-2 {
+    font-size: {{ block.settings.size_medium_large }}px;
+  }
+
+  .ai-nav-menu__link-{{ ai_gen_id }}--size-3 {
+    font-size: {{ block.settings.size_medium }}px;
+  }
+
+  .ai-nav-menu__link-{{ ai_gen_id }}--size-4 {
+    font-size: {{ block.settings.size_small }}px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-nav-menu__number-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.number_size }}px * 0.7);
+    }
+
+    .ai-nav-menu__link-{{ ai_gen_id }}--size-1 {
+      font-size: calc({{ block.settings.size_large }}px * 0.6);
+    }
+
+    .ai-nav-menu__link-{{ ai_gen_id }}--size-2 {
+      font-size: calc({{ block.settings.size_medium_large }}px * 0.6);
+    }
+
+    .ai-nav-menu__link-{{ ai_gen_id }}--size-3 {
+      font-size: calc({{ block.settings.size_medium }}px * 0.6);
+    }
+
+    .ai-nav-menu__link-{{ ai_gen_id }}--size-4 {
+      font-size: calc({{ block.settings.size_small }}px * 0.6);
+    }
+  }
+{% endstyle %}
+
+<nav class="ai-nav-menu-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <ul class="ai-nav-menu__list-{{ ai_gen_id }}">
+    {% if block.settings.link_1_text != blank %}
+      <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+        <span class="ai-nav-menu__number-{{ ai_gen_id }}">1</span>
+        <a href="{{ block.settings.link_1_url }}" class="ai-nav-menu__link-{{ ai_gen_id }} ai-nav-menu__link-{{ ai_gen_id }}--size-{{ block.settings.link_1_size }}">
+          {{ block.settings.link_1_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_2_text != blank %}
+      <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+        <span class="ai-nav-menu__number-{{ ai_gen_id }}">2</span>
+        <a href="{{ block.settings.link_2_url }}" class="ai-nav-menu__link-{{ ai_gen_id }} ai-nav-menu__link-{{ ai_gen_id }}--size-{{ block.settings.link_2_size }}">
+          {{ block.settings.link_2_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_3_text != blank %}
+      <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+        <span class="ai-nav-menu__number-{{ ai_gen_id }}">3</span>
+        <a href="{{ block.settings.link_3_url }}" class="ai-nav-menu__link-{{ ai_gen_id }} ai-nav-menu__link-{{ ai_gen_id }}--size-{{ block.settings.link_3_size }}">
+          {{ block.settings.link_3_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_4_text != blank %}
+      <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+        <span class="ai-nav-menu__number-{{ ai_gen_id }}">4</span>
+        <a href="{{ block.settings.link_4_url }}" class="ai-nav-menu__link-{{ ai_gen_id }} ai-nav-menu__link-{{ ai_gen_id }}--size-{{ block.settings.link_4_size }}">
+          {{ block.settings.link_4_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_5_text != blank %}
+      <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+        <span class="ai-nav-menu__number-{{ ai_gen_id }}">5</span>
+        <a href="{{ block.settings.link_5_url }}" class="ai-nav-menu__link-{{ ai_gen_id }} ai-nav-menu__link-{{ ai_gen_id }}--size-{{ block.settings.link_5_size }}">
+          {{ block.settings.link_5_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_6_text != blank %}
+      <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+        <span class="ai-nav-menu__number-{{ ai_gen_id }}">6</span>
+        <a href="{{ block.settings.link_6_url }}" class="ai-nav-menu__link-{{ ai_gen_id }} ai-nav-menu__link-{{ ai_gen_id }}--size-{{ block.settings.link_6_size }}">
+          {{ block.settings.link_6_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_7_text != blank %}
+      <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+        <span class="ai-nav-menu__number-{{ ai_gen_id }}">7</span>
+        <a href="{{ block.settings.link_7_url }}" class="ai-nav-menu__link-{{ ai_gen_id }} ai-nav-menu__link-{{ ai_gen_id }}--size-{{ block.settings.link_7_size }}">
+          {{ block.settings.link_7_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_8_text != blank %}
+      <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+        <span class="ai-nav-menu__number-{{ ai_gen_id }}">8</span>
+        <a href="{{ block.settings.link_8_url }}" class="ai-nav-menu__link-{{ ai_gen_id }} ai-nav-menu__link-{{ ai_gen_id }}--size-{{ block.settings.link_8_size }}">
+          {{ block.settings.link_8_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_9_text != blank %}
+      <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+        <span class="ai-nav-menu__number-{{ ai_gen_id }}">9</span>
+        <a href="{{ block.settings.link_9_url }}" class="ai-nav-menu__link-{{ ai_gen_id }} ai-nav-menu__link-{{ ai_gen_id }}--size-{{ block.settings.link_9_size }}">
+          {{ block.settings.link_9_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_10_text != blank %}
+      <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+        <span class="ai-nav-menu__number-{{ ai_gen_id }}">10</span>
+        <a href="{{ block.settings.link_10_url }}" class="ai-nav-menu__link-{{ ai_gen_id }} ai-nav-menu__link-{{ ai_gen_id }}--size-{{ block.settings.link_10_size }}">
+          {{ block.settings.link_10_text }}
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Editorial navigation menu",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "font_picker",
+      "id": "font_family",
+      "label": "Font",
+      "default": "serif"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "min": 4,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between items",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Typography sizes"
+    },
+    {
+      "type": "range",
+      "id": "number_size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Number size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "size_large",
+      "min": 30,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Large text size",
+      "default": 54
+    },
+    {
+      "type": "range",
+      "id": "size_medium_large",
+      "min": 30,
+      "max": 70,
+      "step": 2,
+      "unit": "px",
+      "label": "Medium-large text size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "size_medium",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Medium text size",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "size_small",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Small text size",
+      "default": 38
+    },
+    {
+      "type": "header",
+      "content": "Link 1"
+    },
+    {
+      "type": "text",
+      "id": "link_1_text",
+      "label": "Text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "link_1_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Large"
+        },
+        {
+          "value": "2",
+          "label": "Medium-large"
+        },
+        {
+          "value": "3",
+          "label": "Medium"
+        },
+        {
+          "value": "4",
+          "label": "Small"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Link 2"
+    },
+    {
+      "type": "text",
+      "id": "link_2_text",
+      "label": "Text",
+      "default": "New"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "link_2_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Large"
+        },
+        {
+          "value": "2",
+          "label": "Medium-large"
+        },
+        {
+          "value": "3",
+          "label": "Medium"
+        },
+        {
+          "value": "4",
+          "label": "Small"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Link 3"
+    },
+    {
+      "type": "text",
+      "id": "link_3_text",
+      "label": "Text",
+      "default": "Bubbles"
+    },
+    {
+      "type": "url",
+      "id": "link_3_url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "link_3_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Large"
+        },
+        {
+          "value": "2",
+          "label": "Medium-large"
+        },
+        {
+          "value": "3",
+          "label": "Medium"
+        },
+        {
+          "value": "4",
+          "label": "Small"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Link 4"
+    },
+    {
+      "type": "text",
+      "id": "link_4_text",
+      "label": "Text",
+      "default": "Non-Alcoholic"
+    },
+    {
+      "type": "url",
+      "id": "link_4_url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "link_4_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Large"
+        },
+        {
+          "value": "2",
+          "label": "Medium-large"
+        },
+        {
+          "value": "3",
+          "label": "Medium"
+        },
+        {
+          "value": "4",
+          "label": "Small"
+        }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "header",
+      "content": "Link 5"
+    },
+    {
+      "type": "text",
+      "id": "link_5_text",
+      "label": "Text",
+      "default": "Sale"
+    },
+    {
+      "type": "url",
+      "id": "link_5_url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "link_5_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Large"
+        },
+        {
+          "value": "2",
+          "label": "Medium-large"
+        },
+        {
+          "value": "3",
+          "label": "Medium"
+        },
+        {
+          "value": "4",
+          "label": "Small"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Link 6"
+    },
+    {
+      "type": "text",
+      "id": "link_6_text",
+      "label": "Text",
+      "default": "Reds"
+    },
+    {
+      "type": "url",
+      "id": "link_6_url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "link_6_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Large"
+        },
+        {
+          "value": "2",
+          "label": "Medium-large"
+        },
+        {
+          "value": "3",
+          "label": "Medium"
+        },
+        {
+          "value": "4",
+          "label": "Small"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Link 7"
+    },
+    {
+      "type": "text",
+      "id": "link_7_text",
+      "label": "Text",
+      "default": "White"
+    },
+    {
+      "type": "url",
+      "id": "link_7_url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "link_7_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Large"
+        },
+        {
+          "value": "2",
+          "label": "Medium-large"
+        },
+        {
+          "value": "3",
+          "label": "Medium"
+        },
+        {
+          "value": "4",
+          "label": "Small"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Link 8"
+    },
+    {
+      "type": "text",
+      "id": "link_8_text",
+      "label": "Text",
+      "default": "Pink/Orange"
+    },
+    {
+      "type": "url",
+      "id": "link_8_url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "link_8_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Large"
+        },
+        {
+          "value": "2",
+          "label": "Medium-large"
+        },
+        {
+          "value": "3",
+          "label": "Medium"
+        },
+        {
+          "value": "4",
+          "label": "Small"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Link 9"
+    },
+    {
+      "type": "text",
+      "id": "link_9_text",
+      "label": "Text",
+      "default": "Beer"
+    },
+    {
+      "type": "url",
+      "id": "link_9_url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "link_9_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Large"
+        },
+        {
+          "value": "2",
+          "label": "Medium-large"
+        },
+        {
+          "value": "3",
+          "label": "Medium"
+        },
+        {
+          "value": "4",
+          "label": "Small"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Link 10"
+    },
+    {
+      "type": "text",
+      "id": "link_10_text",
+      "label": "Text",
+      "default": "Spirits"
+    },
+    {
+      "type": "url",
+      "id": "link_10_url",
+      "label": "URL"
+    },
+    {
+      "type": "select",
+      "id": "link_10_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Large"
+        },
+        {
+          "value": "2",
+          "label": "Medium-large"
+        },
+        {
+          "value": "3",
+          "label": "Medium"
+        },
+        {
+          "value": "4",
+          "label": "Small"
+        }
+      ],
+      "default": "4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial navigation menu"
+    }
+  ]
+}
 {% endschema %}
