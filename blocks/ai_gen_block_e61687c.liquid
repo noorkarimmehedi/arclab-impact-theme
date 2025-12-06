@@ -56,25 +56,27 @@
   }
 
   .ai-nav-menu__image-{{ ai_gen_id }} {
-    position: absolute;
+    position: fixed;
     top: 50%;
-    left: 100%;
-    transform: translate({{ block.settings.image_offset }}px, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: {{ block.settings.image_width }}px;
     height: {{ block.settings.image_height }}px;
     object-fit: cover;
     border-radius: {{ block.settings.image_border_radius }}px;
     box-shadow: 0 {{ block.settings.image_shadow_blur }}px {{ block.settings.image_shadow_spread }}px rgba(0, 0, 0, {{ block.settings.image_shadow_opacity }});
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity {{ block.settings.image_transition_speed }}s ease, transform {{ block.settings.image_transition_speed }}s ease;
-    z-index: 100;
+    transition: opacity {{ block.settings.image_transition_speed }}s ease, visibility {{ block.settings.image_transition_speed }}s ease, transform {{ block.settings.image_transition_speed }}s ease;
+    z-index: 9999;
     border: {{ block.settings.image_border_width }}px solid {{ block.settings.image_border_color }};
   }
 
   .ai-nav-menu__item-{{ ai_gen_id }}:hover .ai-nav-menu__image-{{ ai_gen_id }} {
     opacity: 1;
-    transform: translate({{ block.settings.image_offset }}px, -50%) scale({{ block.settings.image_hover_scale }});
+    visibility: visible;
+    transform: translate(-50%, -50%) scale({{ block.settings.image_hover_scale }});
   }
 
   @media screen and (max-width: 749px) {
