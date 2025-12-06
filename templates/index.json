@@ -9,40 +9,6 @@
  */
 {
   "sections": {
-    "17650149705e0d2fbe": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_f139fd5_MUmmfL": {
-          "type": "ai_gen_block_f139fd5",
-          "settings": {
-            "heading": "Find Beanly",
-            "search_placeholder": "Enter your city or zip code",
-            "button_text": "Find Store",
-            "maps_link": "",
-            "padding_top": 0,
-            "padding_bottom": 60,
-            "heading_font": "serif",
-            "body_font": "sans_serif_n4",
-            "heading_size": 30,
-            "background_color": "#f5ece1",
-            "heading_color": "#0000ff",
-            "text_color": "#000000",
-            "input_background": "#ffffff",
-            "button_color": "#0000ff",
-            "button_text_color": "#ffffff",
-            "border_color": "#000000",
-            "shadow_color": "#000000",
-            "border_width": 3,
-            "shadow_offset": 4
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_f139fd5_MUmmfL"
-      ],
-      "settings": {}
-    },
     "slideshow": {
       "type": "slideshow",
       "blocks": {
@@ -156,6 +122,40 @@
       },
       "block_order": [
         "ai_gen_block_f031582_LFGh7x"
+      ],
+      "settings": {}
+    },
+    "17650149705e0d2fbe": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f139fd5_MUmmfL": {
+          "type": "ai_gen_block_f139fd5",
+          "settings": {
+            "heading": "Find Beanly",
+            "search_placeholder": "Enter your city or zip code",
+            "button_text": "Find Store",
+            "maps_link": "",
+            "padding_top": 0,
+            "padding_bottom": 60,
+            "heading_font": "serif",
+            "body_font": "sans_serif_n4",
+            "heading_size": 30,
+            "background_color": "#f5ece1",
+            "heading_color": "#0000ff",
+            "text_color": "#000000",
+            "input_background": "#ffffff",
+            "button_color": "#0000ff",
+            "button_text_color": "#ffffff",
+            "border_color": "#000000",
+            "shadow_color": "#000000",
+            "border_width": 3,
+            "shadow_offset": 4
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f139fd5_MUmmfL"
       ],
       "settings": {}
     },
@@ -1229,8 +1229,8 @@
   },
   "order": [
     "slideshow",
-    "17650149705e0d2fbe",
     "1762676303578b860e",
+    "17650149705e0d2fbe",
     "1765008928d2016f31",
     "image-link-blocks",
     "scrolling-text",
