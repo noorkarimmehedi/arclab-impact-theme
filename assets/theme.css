@@ -6141,27 +6141,6 @@ split-lines {
   width: var(--navigation-drawer-width);
 }
 
-/* Apply Gloock font specifically to mobile menu items */
-.navigation-drawer .panel-list__wrapper .panel .panel__scroller ul li,
-.navigation-drawer .panel-list__wrapper .panel .panel__scroller ul li a,
-.navigation-drawer .panel-list__wrapper .panel .panel__scroller ul li button {
-  font-family: 'Gloock', serif !important;
-  font-weight: 400;
-  letter-spacing: normal;
-  text-transform: none;
-}
-
-/* Reset any heading styles that might be affecting the menu */
-.navigation-drawer .h3,
-.navigation-drawer .h4,
-.navigation-drawer .h5,
-.navigation-drawer .h6 {
-  font-family: 'Gloock', serif !important;
-  font-weight: 400;
-  letter-spacing: normal;
-  text-transform: none;
-}
-
 .navigation-drawer::part(body) {
   gap: var(--spacing-6);
   grid-template-rows: minmax(0, 1fr);
