@@ -402,57 +402,6 @@
         "text_gradient": ""
       }
     },
-    "1763296371026b3ee6": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_29bc342_xFwrcc": {
-          "type": "ai_gen_block_29bc342",
-          "settings": {
-            "padding_top": 60,
-            "padding_bottom": 60,
-            "background_color": "#ffffff",
-            "heading": "Shop by Category",
-            "heading_size": 32,
-            "heading_color": "#1a1a1a",
-            "subheading": "Explore our kitchen and home essentials",
-            "subheading_size": 15,
-            "subheading_color": "#666666",
-            "image_shape": "circle",
-            "item_size": 120,
-            "gap": 15,
-            "text_spacing": 16,
-            "category_name_size": 14,
-            "category_name_color": "#1a1a1a",
-            "border_width": 1,
-            "border_color": "#e0e0e0",
-            "hover_border_color": "#cccccc",
-            "border_radius": 8,
-            "shadow_horizontal": 0,
-            "shadow_vertical": 4,
-            "shadow_blur": 8,
-            "shadow_opacity": 0,
-            "show_navigation": true,
-            "nav_button_color": "#ffffff",
-            "nav_button_hover_color": "#f5f5f5",
-            "nav_icon_color": "#1a1a1a",
-            "collection_1": "all-product",
-            "collection_2": "best-sellers",
-            "collection_3": "pre-booking",
-            "collection_4": "kitchen",
-            "collection_5": "home",
-            "collection_6": "",
-            "collection_7": "",
-            "collection_8": ""
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_29bc342_xFwrcc"
-      ],
-      "disabled": true,
-      "settings": {}
-    },
     "1764945958932561c6": {
       "type": "_blocks",
       "blocks": {
@@ -984,29 +933,6 @@
         "background_gradient": ""
       }
     },
-    "before-after-image": {
-      "type": "before-after-image",
-      "disabled": true,
-      "settings": {
-        "full_width": true,
-        "subheading": "",
-        "title": "Before/after",
-        "content": "<p>Showcase your product benefit by using before/after image comparison.</p>",
-        "expand_image": false,
-        "text_position": "center",
-        "before_after_text_position": "bottom",
-        "before_text": "Before",
-        "after_text": "After",
-        "drag_initial_position": 50,
-        "background": "",
-        "background_gradient": "",
-        "text_color": "",
-        "before_text_color": "#ffffff",
-        "after_text_color": "#ffffff",
-        "drag_cursor_background": "#ffffff",
-        "drag_cursor_color": "#000000"
-      }
-    },
     "press": {
       "type": "press",
       "blocks": {
@@ -1308,7 +1234,6 @@
     "1765008928d2016f31",
     "image-link-blocks",
     "scrolling-text",
-    "1763296371026b3ee6",
     "1764945958932561c6",
     "featured-collection",
     "blocks_dF4aQ8",
@@ -1320,7 +1245,6 @@
     "image-with-text-overlay",
     "176503862783039357",
     "media-grid",
-    "before-after-image",
     "press",
     "hot-spots",
     "17650418872641b7b2",
