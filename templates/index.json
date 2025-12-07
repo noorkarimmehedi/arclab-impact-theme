@@ -142,7 +142,7 @@
             "headline": "Welcome to our store",
             "subheading": "Discover amazing products",
             "text_alignment": "center",
-            "headline_font": "sans_serif_n7",
+            "headline_font": "bungee_n4",
             "headline_size_mobile": 28,
             "headline_size_desktop": 48,
             "headline_color": "#0000ff",
