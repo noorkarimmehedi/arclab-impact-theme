@@ -523,7 +523,7 @@
           "settings": {
             "heading": "OUR GOODS",
             "subheading": "Discover our best sellers",
-            "collection": "frontpage",
+            "collection": "all-products",
             "products_limit": 10,
             "button_text": "View product",
             "section_background": "#fef9c3",
