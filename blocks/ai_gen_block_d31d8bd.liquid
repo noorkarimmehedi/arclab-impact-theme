@@ -89,7 +89,6 @@
   .ai-hero-secondary-section-{{ ai_gen_id }} {
     width: 100%;
     position: relative;
-    min-height: 400px;
     background-color: {{ block.settings.grid_background_color }};
     background-image: 
       linear-gradient({{ block.settings.grid_line_color }} {{ block.settings.grid_line_width }}px, transparent {{ block.settings.grid_line_width }}px),
@@ -99,6 +98,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .ai-hero-secondary-section-{{ ai_gen_id }}.grid-natural {
+    min-height: 400px;
+  }
+
+  .ai-hero-secondary-section-{{ ai_gen_id }}.grid-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .ai-hero-secondary-section-{{ ai_gen_id }}.grid-portrait {
+    aspect-ratio: 2 / 3;
+  }
+
+  .ai-hero-secondary-section-{{ ai_gen_id }}.grid-landscape {
+    aspect-ratio: 4 / 3;
+  }
+
+  .ai-hero-secondary-section-{{ ai_gen_id }}.grid-widescreen {
+    aspect-ratio: 16 / 9;
   }
 
   .ai-hero-secondary-image-{{ ai_gen_id }} {
@@ -296,7 +315,7 @@
     {% endif %}
   </div>
 
-  <div class="ai-hero-secondary-section-{{ ai_gen_id }}">
+  <div class="ai-hero-secondary-section-{{ ai_gen_id }} grid-{{ block.settings.grid_section_size }}">
     <div class="ai-hero-secondary-image-{{ ai_gen_id }}">
       <div class="ai-hero-secondary-image-wrapper-{{ ai_gen_id }}">
         {% if block.settings.headline != blank or block.settings.subheading != blank or block.settings.button_primary_label != blank or block.settings.button_secondary_label != blank %}
@@ -542,6 +561,34 @@
     {
       "type": "header",
       "content": "Secondary section - Grid background"
+    },
+    {
+      "type": "select",
+      "id": "grid_section_size",
+      "label": "Section size",
+      "options": [
+        {
+          "value": "natural",
+          "label": "Natural (min 400px)"
+        },
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (2:3)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "widescreen",
+          "label": "Widescreen (16:9)"
+        }
+      ],
+      "default": "landscape"
     },
     {
       "type": "color",
