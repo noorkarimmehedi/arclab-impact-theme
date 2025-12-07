@@ -193,6 +193,7 @@
     color: {{ block.settings.compare_price_color }};
     text-decoration: line-through;
     opacity: 0.7;
+    white-space: nowrap;
   }
 
   /* Add to Cart Button - Glass Style */
@@ -514,31 +515,50 @@
         </svg>
       `;
 
-      // Update cart count
-      fetch('/cart.js', {
+      // Fetch updated cart data
+      return fetch('/cart.js', {
         method: 'GET',
         headers: { 'Accept': 'application/json' }
-      })
-      .then(res => res.json())
-      .then(cart => {
-        const cartCountElements = document.querySelectorAll('cart-count');
-        cartCountElements.forEach(el => {
-          el.textContent = cart.item_count;
-        });
-
-        const otherCartCounts = document.querySelectorAll('.header__cart-count, [data-cart-count], .cart-count-bubble span, .cart-count');
-        otherCartCounts.forEach(el => {
-          if (!el.tagName.toLowerCase().includes('cart-count')) {
-            el.textContent = cart.item_count;
-          }
-        });
-
-        document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
-          bubbles: true,
-          detail: { cart: cart }
-        }));
+      });
+    })
+    .then(response => response.json())
+    .then(cart => {
+      // Update Focal theme's cart-count component (in header)
+      const cartCountElements = document.querySelectorAll('cart-count');
+      cartCountElements.forEach(el => {
+        el.textContent = cart.item_count;
+        // Remove opacity-0 class to show the count bubble
+        if (cart.item_count > 0) {
+          el.classList.remove('opacity-0');
+        }
       });
 
+      // Update other cart count elements if they exist
+      const otherCartCounts = document.querySelectorAll('.header__cart-count, [data-cart-count], .cart-count-bubble, .cart-count');
+      otherCartCounts.forEach(el => {
+        if (!el.tagName || el.tagName.toLowerCase() !== 'cart-count') {
+          el.textContent = cart.item_count;
+        }
+      });
+
+      // Dispatch Shopify cart events for theme compatibility
+      document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+        bubbles: true,
+        detail: { cart: cart }
+      }));
+
+      document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
+        bubbles: true,
+        detail: { cart: cart }
+      }));
+
+      // Try to trigger Focal theme's cart drawer if it exists
+      const cartDrawer = document.querySelector('cart-drawer');
+      if (cartDrawer && typeof cartDrawer.open === 'function') {
+        cartDrawer.open();
+      }
+
+      // Reset button after 2 seconds
       setTimeout(() => {
         button.classList.remove('is-added');
         button.innerHTML = `
