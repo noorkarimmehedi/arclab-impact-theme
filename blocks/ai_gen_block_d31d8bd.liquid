@@ -89,62 +89,27 @@
   .ai-hero-secondary-section-{{ ai_gen_id }} {
     width: 100%;
     position: relative;
+    min-height: 400px;
+    background-color: {{ block.settings.grid_background_color }};
+    background-image: 
+      linear-gradient({{ block.settings.grid_line_color }} {{ block.settings.grid_line_width }}px, transparent {{ block.settings.grid_line_width }}px),
+      linear-gradient(90deg, {{ block.settings.grid_line_color }} {{ block.settings.grid_line_width }}px, transparent {{ block.settings.grid_line_width }}px);
+    background-size: {{ block.settings.grid_size }}px {{ block.settings.grid_size }}px;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .ai-hero-secondary-image-{{ ai_gen_id }} {
     width: 100%;
     position: relative;
-    overflow: hidden;
-  }
-
-  .ai-hero-secondary-image-{{ ai_gen_id }} img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
   }
 
   .ai-hero-secondary-image-wrapper-{{ ai_gen_id }} {
     width: 100%;
     position: relative;
-  }
-
-  .ai-hero-secondary-image-wrapper-{{ ai_gen_id }}--natural {
-    aspect-ratio: auto;
-  }
-
-  .ai-hero-secondary-image-wrapper-{{ ai_gen_id }}--square {
-    aspect-ratio: 1 / 1;
-  }
-
-  .ai-hero-secondary-image-wrapper-{{ ai_gen_id }}--portrait {
-    aspect-ratio: 2 / 3;
-  }
-
-  .ai-hero-secondary-image-wrapper-{{ ai_gen_id }}--landscape {
-    aspect-ratio: 4 / 3;
-  }
-
-  .ai-hero-secondary-image-wrapper-{{ ai_gen_id }}--widescreen {
-    aspect-ratio: 16 / 9;
-  }
-
-  .ai-hero-secondary-image-placeholder-{{ ai_gen_id }} {
-    width: 100%;
-    height: 100%;
-    background-color: #f4f4f4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    min-height: 300px;
-  }
-
-  .ai-hero-secondary-image-placeholder-{{ ai_gen_id }} svg {
-    width: 100%;
-    height: 100%;
-    max-width: 500px;
-    max-height: 500px;
+    padding: 60px 20px;
   }
 
   .ai-hero-content-wrapper-{{ ai_gen_id }} {
@@ -333,24 +298,7 @@
 
   <div class="ai-hero-secondary-section-{{ ai_gen_id }}">
     <div class="ai-hero-secondary-image-{{ ai_gen_id }}">
-      <div class="ai-hero-secondary-image-wrapper-{{ ai_gen_id }} ai-hero-secondary-image-wrapper-{{ ai_gen_id }}--{{ block.settings.secondary_image_size }}">
-        {% if block.settings.secondary_image %}
-          <img
-            src="{{ block.settings.secondary_image | image_url: width: 2000 }}"
-            alt="{{ block.settings.secondary_image.alt | escape }}"
-            loading="lazy"
-            width="{{ block.settings.secondary_image.width }}"
-            height="{{ block.settings.secondary_image.height }}"
-          >
-        {% else %}
-          <div class="ai-hero-secondary-image-placeholder-{{ ai_gen_id }}">
-            {{ 'image' | placeholder_svg_tag }}
-            <div class="ai-hero-empty-state-{{ ai_gen_id }}">
-              Add a secondary image
-            </div>
-          </div>
-        {% endif %}
-
+      <div class="ai-hero-secondary-image-wrapper-{{ ai_gen_id }}">
         {% if block.settings.headline != blank or block.settings.subheading != blank or block.settings.button_primary_label != blank or block.settings.button_secondary_label != blank %}
           <div class="ai-hero-content-wrapper-{{ ai_gen_id }}">
             {% if block.settings.headline != blank %}
@@ -593,40 +541,40 @@
     },
     {
       "type": "header",
-      "content": "Secondary image"
+      "content": "Secondary section - Grid background"
     },
     {
-      "type": "image_picker",
-      "id": "secondary_image",
-      "label": "Image"
+      "type": "color",
+      "id": "grid_background_color",
+      "label": "Background color",
+      "default": "#000000"
     },
     {
-      "type": "select",
-      "id": "secondary_image_size",
-      "label": "Image size",
-      "options": [
-        {
-          "value": "natural",
-          "label": "Natural"
-        },
-        {
-          "value": "square",
-          "label": "Square (1:1)"
-        },
-        {
-          "value": "portrait",
-          "label": "Portrait (2:3)"
-        },
-        {
-          "value": "landscape",
-          "label": "Landscape (4:3)"
-        },
-        {
-          "value": "widescreen",
-          "label": "Widescreen (16:9)"
-        }
-      ],
-      "default": "landscape"
+      "type": "color",
+      "id": "grid_line_color",
+      "label": "Grid line color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "grid_size",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Grid size",
+      "default": 50,
+      "info": "Size of each grid cell"
+    },
+    {
+      "type": "range",
+      "id": "grid_line_width",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Grid line width",
+      "default": 1
     },
     {
       "type": "header",
