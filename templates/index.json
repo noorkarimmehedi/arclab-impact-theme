@@ -120,7 +120,7 @@
             "main_image_size": "square",
             "grid_section_size": "landscape",
             "grid_background_color": "#f5ece1",
-            "grid_line_color": "#ffffff",
+            "grid_line_color": "#f5ece1",
             "grid_size": 20,
             "grid_line_width": 1,
             "headline": "You found it! Just great coffee.",
