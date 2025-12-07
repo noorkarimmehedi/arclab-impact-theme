@@ -6139,6 +6139,7 @@ split-lines {
   --drawer-body-padding: var(--spacing-6);
   --navigation-drawer-width: 100vw;
   width: var(--navigation-drawer-width);
+  font-family: 'Gloock', var(--heading-font-family);
 }
 
 .navigation-drawer::part(body) {
