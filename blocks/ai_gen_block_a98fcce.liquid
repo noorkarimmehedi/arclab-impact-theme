@@ -162,11 +162,8 @@
     color: {{ block.settings.product_title_color }};
     margin: 0 0 {{ block.settings.title_price_spacing }}px;
     line-height: 1.3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .ai-product-card__price-wrapper-{{ ai_gen_id }} {
