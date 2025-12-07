@@ -448,7 +448,10 @@
       "type": "featured-collection",
       "settings": {
         "collection": "frontpage",
-        "products": [],
+        "products": [
+          "rosetta-sari",
+          "hazelnut-cold-coffee-cans-pack-of-6"
+        ],
         "full_width": true,
         "stack_products": true,
         "show_progress_bar": false,
