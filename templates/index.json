@@ -1040,6 +1040,49 @@
         "hot_spot_content_blur_radius": 3
       }
     },
+    "blocks_f9eALd": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_eeb503e_jnPiww": {
+          "type": "ai_gen_block_eeb503e",
+          "settings": {
+            "wave_style": "flowing",
+            "wave_position": "bottom",
+            "wave_height": 120,
+            "wave_amplitude": 0.5,
+            "wave_spacing": 0,
+            "wave_color": "#0000ff",
+            "wave_opacity": 100,
+            "wave_secondary_color": "#1e316a",
+            "wave_secondary_opacity": 60,
+            "heading": "",
+            "text": "",
+            "content_width": 1200,
+            "text_alignment": "center",
+            "heading_color": "#1a1a1a",
+            "heading_size": 48,
+            "heading_spacing": 20,
+            "text_color": "#677279",
+            "text_size": 16,
+            "background_color": "#f5ece1",
+            "top_spacing": 0,
+            "bottom_spacing": 0,
+            "horizontal_padding": 20,
+            "enable_border": false,
+            "border_width": 2,
+            "border_style": "solid",
+            "border_color": "#000000",
+            "border_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_eeb503e_jnPiww"
+      ],
+      "name": "Wave design",
+      "settings": {}
+    },
     "17650418872641b7b2": {
       "type": "_blocks",
       "blocks": {
@@ -1247,6 +1290,7 @@
     "media-grid",
     "press",
     "hot-spots",
+    "blocks_f9eALd",
     "17650418872641b7b2",
     "faq"
   ]
