@@ -506,7 +506,7 @@
       if (!response.ok) throw new Error('Network response was not ok');
       return response.json();
     })
-    .then(data => {
+    .then(addedItem => {
       button.classList.remove('is-loading');
       button.classList.add('is-added');
       button.innerHTML = `
@@ -515,7 +515,7 @@
         </svg>
       `;
 
-      // Fetch updated cart data
+      // Fetch updated cart to get accurate count
       return fetch('/cart.js', {
         method: 'GET',
         headers: { 'Accept': 'application/json' }
@@ -523,39 +523,54 @@
     })
     .then(response => response.json())
     .then(cart => {
-      // Update Focal theme's cart-count component (in header)
+      // Update Focal theme's cart-count web component
       const cartCountElements = document.querySelectorAll('cart-count');
       cartCountElements.forEach(el => {
+        // Update text content
         el.textContent = cart.item_count;
-        // Remove opacity-0 class to show the count bubble
+        
+        // Show/hide based on count (Focal theme behavior)
         if (cart.item_count > 0) {
           el.classList.remove('opacity-0');
+          el.classList.add('count-bubble');
+        } else {
+          el.classList.add('opacity-0');
+        }
+        
+        // Trigger animation if available
+        el.setAttribute('aria-hidden', 'true');
+      });
+
+      // Also update the parent container if it has specific classes
+      const cartCountContainers = document.querySelectorAll('.header__cart-count');
+      cartCountContainers.forEach(container => {
+        const countElement = container.querySelector('cart-count');
+        if (countElement) {
+          if (cart.item_count > 0) {
+            countElement.classList.remove('opacity-0');
+          }
         }
       });
 
-      // Update other cart count elements if they exist
-      const otherCartCounts = document.querySelectorAll('.header__cart-count, [data-cart-count], .cart-count-bubble, .cart-count');
-      otherCartCounts.forEach(el => {
-        if (!el.tagName || el.tagName.toLowerCase() !== 'cart-count') {
-          el.textContent = cart.item_count;
-        }
-      });
+      // Dispatch Shopify Section Rendering API event (Focal theme standard)
+      document.dispatchEvent(new CustomEvent('cart:updated', {
+        bubbles: true,
+        detail: { cart: cart }
+      }));
 
-      // Dispatch Shopify cart events for theme compatibility
+      // Also dispatch on documentElement for broader compatibility
       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
         bubbles: true,
         detail: { cart: cart }
       }));
 
-      document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
-        bubbles: true,
-        detail: { cart: cart }
-      }));
-
-      // Try to trigger Focal theme's cart drawer if it exists
+      // Try to open cart drawer if it exists and is configured
       const cartDrawer = document.querySelector('cart-drawer');
-      if (cartDrawer && typeof cartDrawer.open === 'function') {
-        cartDrawer.open();
+      if (cartDrawer) {
+        // Check if cart drawer should open (not on cart page)
+        if (window.location.pathname !== '/cart' && typeof cartDrawer.open === 'function') {
+          cartDrawer.open();
+        }
       }
 
       // Reset button after 2 seconds
