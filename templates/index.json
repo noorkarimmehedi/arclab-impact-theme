@@ -1159,7 +1159,6 @@
       "block_order": [
         "ai_gen_block_eeb503e_jnPiww"
       ],
-      "disabled": true,
       "name": "Wave design",
       "settings": {}
     },
@@ -1293,7 +1292,6 @@
       "block_order": [
         "ai_gen_block_3c3c400_7amnBq"
       ],
-      "disabled": true,
       "settings": {}
     },
     "faq": {
