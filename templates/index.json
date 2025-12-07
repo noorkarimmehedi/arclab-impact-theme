@@ -49,6 +49,7 @@
       "block_order": [
         "ai_gen_block_eeb503e_DQzAXH"
       ],
+      "disabled": true,
       "name": "Wave design",
       "settings": {}
     },
@@ -106,7 +107,6 @@
       "block_order": [
         "ai_gen_block_f031582_LFGh7x"
       ],
-      "disabled": true,
       "settings": {}
     },
     "1765088875e62e364a": {
@@ -167,6 +167,7 @@
       "block_order": [
         "ai_gen_block_d31d8bd_ym6iGg"
       ],
+      "disabled": true,
       "settings": {}
     },
     "1765031093b9f12b37": {
@@ -202,6 +203,7 @@
       "block_order": [
         "ai_gen_block_f2895dd_Uki9YE"
       ],
+      "disabled": true,
       "settings": {}
     },
     "blocks_QpwCX9": {
@@ -244,6 +246,7 @@
       "block_order": [
         "ai_gen_block_eeb503e_VN6jyt"
       ],
+      "disabled": true,
       "name": "Wave design",
       "settings": {}
     },
@@ -279,6 +282,7 @@
       "block_order": [
         "ai_gen_block_f139fd5_MUmmfL"
       ],
+      "disabled": true,
       "settings": {}
     },
     "1765008928d2016f31": {
@@ -339,6 +343,7 @@
       "block_order": [
         "ai_gen_block_e61687c_xFkQCa"
       ],
+      "disabled": true,
       "settings": {}
     },
     "image-link-blocks": {
@@ -484,6 +489,7 @@
       "block_order": [
         "ai_gen_block_eeb503e_YYCWeL"
       ],
+      "disabled": true,
       "settings": {}
     },
     "featured-collection": {
@@ -554,6 +560,7 @@
       "block_order": [
         "ai_gen_block_eeb503e_nQKNxf"
       ],
+      "disabled": true,
       "name": "Wave design",
       "settings": {}
     },
@@ -626,6 +633,7 @@
       "block_order": [
         "ai_gen_block_b41673b_qA4QcG"
       ],
+      "disabled": true,
       "settings": {}
     },
     "collection-list": {
@@ -737,6 +745,7 @@
       "block_order": [
         "ai_gen_block_eeb503e_643Tja"
       ],
+      "disabled": true,
       "name": "Wave design",
       "settings": {}
     },
@@ -905,6 +914,7 @@
     },
     "176503862783039357": {
       "type": "_blocks",
+      "disabled": true,
       "settings": {}
     },
     "media-grid": {
@@ -1157,6 +1167,7 @@
       "block_order": [
         "ai_gen_block_eeb503e_jnPiww"
       ],
+      "disabled": true,
       "name": "Wave design",
       "settings": {}
     },
@@ -1290,6 +1301,7 @@
       "block_order": [
         "ai_gen_block_3c3c400_7amnBq"
       ],
+      "disabled": true,
       "settings": {}
     },
     "faq": {
