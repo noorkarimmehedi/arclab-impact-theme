@@ -1,7 +1,3 @@
-{% doc %}
-  @prompt
-    create a hero section where the there will be a image, should have the option for desktop and mobile version upload section and below that there should be a another image section where there will have headline and sub heading option , for main image and secondary image should have the option for image size like portrait square like this , should have the option for font picker for headline and sub headline and also between two image i don't want any divider. , add two button should be in same row in both mobile and desktop. also should have the option for rearrange the main image and secondary imag. the buttons should have all the customization from color to font to radius 
-{% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -172,6 +168,27 @@
     line-height: 1.2;
   }
 
+  .ai-hero-headline-{{ ai_gen_id }} .underline-animated {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 4px;
+  }
+
+  .ai-hero-headline-{{ ai_gen_id }} .underline-animated::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: {{ block.settings.underline_thickness }}px;
+    background-color: {{ block.settings.underline_color }};
+    transition: width {{ block.settings.underline_duration }}s ease-in-out;
+  }
+
+  .ai-hero-headline-{{ ai_gen_id }} .underline-animated.animate::after {
+    width: 100%;
+  }
+
   .ai-hero-subheading-{{ ai_gen_id }} {
     color: {{ block.settings.subheading_color }};
     font-size: {{ block.settings.subheading_size_mobile }}px;
@@ -330,7 +347,7 @@
         {% if block.settings.headline != blank or block.settings.subheading != blank or block.settings.button_primary_label != blank or block.settings.button_secondary_label != blank %}
           <div class="ai-hero-content-wrapper-{{ ai_gen_id }}">
             {% if block.settings.headline != blank %}
-              <h2 class="ai-hero-headline-{{ ai_gen_id }}">{{ block.settings.headline }}</h2>
+              <h2 class="ai-hero-headline-{{ ai_gen_id }}" id="headline-{{ ai_gen_id }}">{{ block.settings.headline }}</h2>
             {% endif %}
 
             {% if block.settings.subheading != blank %}
@@ -364,6 +381,39 @@
     </div>
   </div>
 </div>
+
+<script>
+  (function() {
+    const headline = document.getElementById('headline-{{ ai_gen_id }}');
+    if (!headline) return;
+
+    const text = headline.textContent.trim();
+    const words = text.split(' ');
+    
+    if (words.length >= 2) {
+      const lastTwoWords = words.slice(-2).join(' ');
+      const remainingText = words.slice(0, -2).join(' ');
+      
+      headline.innerHTML = remainingText + ' <span class="underline-animated">' + lastTwoWords + '</span>';
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const underlinedSpan = headline.querySelector('.underline-animated');
+            if (underlinedSpan) {
+              setTimeout(() => {
+                underlinedSpan.classList.add('animate');
+              }, {{ block.settings.underline_delay | times: 1000 }});
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(headline);
+    }
+  })();
+</script>
 
 {% schema %}
 {
@@ -540,6 +590,46 @@
       "id": "headline_color",
       "label": "Headline color",
       "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Underline animation"
+    },
+    {
+      "type": "color",
+      "id": "underline_color",
+      "label": "Underline color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "underline_thickness",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Underline thickness",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "underline_duration",
+      "min": 0.3,
+      "max": 2,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Animation duration",
+      "default": 0.8
+    },
+    {
+      "type": "range",
+      "id": "underline_delay",
+      "min": 0,
+      "max": 2,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Animation delay",
+      "default": 0.3
     },
     {
       "type": "font_picker",
