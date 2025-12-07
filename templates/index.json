@@ -125,6 +125,61 @@
       "block_order": [
         "ai_gen_block_f031582_LFGh7x"
       ],
+      "disabled": true,
+      "settings": {}
+    },
+    "1765088875e62e364a": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d31d8bd_ym6iGg": {
+          "type": "ai_gen_block_d31d8bd",
+          "settings": {
+            "layout_order": "secondary_first",
+            "mobile_image": "shopify://shop_images/imgi_161_SSP_7966.jpg",
+            "main_image_size": "square",
+            "secondary_image": "shopify://shop_images/s___s.jpg",
+            "secondary_image_size": "landscape",
+            "headline": "Welcome to our store",
+            "subheading": "Discover amazing products",
+            "text_alignment": "center",
+            "headline_font": "sans_serif_n7",
+            "headline_size_mobile": 28,
+            "headline_size_desktop": 48,
+            "headline_color": "#0000ff",
+            "subheading_font": "sans_serif_n4",
+            "subheading_size_mobile": 14,
+            "subheading_size_desktop": 18,
+            "subheading_color": "#0000ff",
+            "button_primary_label": "Shop now",
+            "button_primary_link": "",
+            "button_primary_font": "sans_serif_n4",
+            "button_primary_font_size": 16,
+            "button_primary_bg": "#000000",
+            "button_primary_text_color": "#ffffff",
+            "button_primary_bg_hover": "#333333",
+            "button_primary_text_hover": "#ffffff",
+            "button_primary_radius": 0,
+            "button_secondary_label": "Learn more",
+            "button_secondary_link": "",
+            "button_secondary_font": "sans_serif_n4",
+            "button_secondary_font_size": 16,
+            "button_secondary_bg": "#ffffff",
+            "button_secondary_text_color": "#000000",
+            "button_secondary_bg_hover": "#f0f0f0",
+            "button_secondary_text_hover": "#000000",
+            "button_secondary_radius": 0,
+            "button_spacing": 20,
+            "button_gap": 12,
+            "button_padding_vertical": 8,
+            "button_padding_horizontal": 30,
+            "text_spacing": 12
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d31d8bd_ym6iGg"
+      ],
       "settings": {}
     },
     "1765031093b9f12b37": {
@@ -1305,6 +1360,7 @@
   "order": [
     "slideshow",
     "1762676303578b860e",
+    "1765088875e62e364a",
     "1765031093b9f12b37",
     "blocks_QpwCX9",
     "17650149705e0d2fbe",
