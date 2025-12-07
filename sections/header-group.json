@@ -11,6 +11,11 @@
   "type": "header",
   "name": "Header group",
   "sections": {
+    "blocks_3tDDf3": {
+      "type": "_blocks",
+      "name": "Wave design",
+      "settings": {}
+    },
     "announce_rGdPiY": {
       "type": "announce",
       "name": "Announcement Bar - V2",
@@ -83,6 +88,7 @@
     }
   },
   "order": [
+    "blocks_3tDDf3",
     "announce_rGdPiY",
     "announcement-bar",
     "header"
