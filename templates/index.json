@@ -738,7 +738,7 @@
             "glass_shadow_y": 8,
             "glass_shadow_blur": 20,
             "glass_shadow_color": "#00000026",
-            "image_aspect_ratio": 140,
+            "image_aspect_ratio": 150,
             "image_border_radius": 4,
             "atc_button_size": 40,
             "atc_icon_size": 18,
