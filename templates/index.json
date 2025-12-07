@@ -748,7 +748,7 @@
             "atc_button_border_width": 1,
             "atc_button_border_color": "#ffffff4d",
             "atc_icon_color": "#ffffff",
-            "atc_icon_color_hover": "#ffffff",
+            "atc_icon_color_hover": "#0000ff",
             "atc_success_color": "#22c55e",
             "product_title_size": 14,
             "price_size": 16,
