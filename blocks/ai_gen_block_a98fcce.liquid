@@ -1,7 +1,7 @@
-{% doc %}
+{% comment %}
   @prompt
     build a collection section where there will be 6 heading. each heading will have a individual collection. the heading should be scrollable and also the heading text should be in squared box. all should be customizable from font to color to radius to vertical padding , add a section title option and also the collection headings should be in the center in desktop version . keep same for mobile version. , i want a littlt bit more gap on left and right side on mobile version and desktop version too
-{% enddoc %}
+{% endcomment %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -83,33 +83,167 @@
     gap: 20px;
   }
 
-  .ai-collection-tabs__product-{{ ai_gen_id }} {
-    text-align: center;
-  }
-
-  .ai-collection-tabs__product-image-{{ ai_gen_id }} {
-    position: relative;
-    margin-bottom: 12px;
+  /* Product Card Styling - Matching the design */
+  .ai-product-card-{{ ai_gen_id }} {
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
   }
 
-  .ai-collection-tabs__product-image-{{ ai_gen_id }} img {
+  .ai-product-card-{{ ai_gen_id }}:hover {
+    border-color: #CCCCCC;
+  }
+
+  .ai-product-card__image-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px 4px 0 0;
+    flex-shrink: 0;
+    aspect-ratio: 1;
+  }
+
+  .ai-product-card__image-{{ ai_gen_id }} img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
+    border-radius: 4px 4px 0 0;
   }
 
-  .ai-collection-tabs__product-title-{{ ai_gen_id }} {
-    font-size: 14px;
+  .ai-product-card__info-{{ ai_gen_id }} {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .ai-product-card__content-{{ ai_gen_id }} {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-product-card__title-{{ ai_gen_id }} {
+    min-height: 40px;
+    display: block;
     margin-bottom: 8px;
-    color: {{ block.settings.product_title_color }};
   }
 
-  .ai-collection-tabs__product-price-{{ ai_gen_id }} {
+  .ai-product-card__title-{{ ai_gen_id }} a {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    max-height: calc(1.4em * 2);
+    color: {{ block.settings.product_title_color }};
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .ai-product-card__price-{{ ai_gen_id }} {
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     font-size: 16px;
     font-weight: 600;
     color: {{ block.settings.product_price_color }};
+    margin-bottom: 12px;
+  }
+
+  .ai-product-card__add-to-cart-{{ ai_gen_id }} {
+    margin-top: auto;
+    padding-top: 12px;
+    width: 100%;
+  }
+
+  .ai-product-card__btn-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding: 10px 16px;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #0000FF;
+    border: 1px solid #E0E0E0;
+    border-radius: 0;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.7px;
+    text-align: center;
+    font-family: inherit;
+    z-index: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+    transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+  }
+
+  .ai-product-card__btn-{{ ai_gen_id }}:hover {
+    border-color: #CCCCCC;
+    animation: rotate624-{{ ai_gen_id }} 0.7s ease-in-out both;
+  }
+
+  @keyframes rotate624-{{ ai_gen_id }} {
+    0% { transform: rotate(0deg) translate3d(0, 0, 0); }
+    25% { transform: rotate(3deg) translate3d(0, 0, 0); }
+    50% { transform: rotate(-3deg) translate3d(0, 0, 0); }
+    75% { transform: rotate(1deg) translate3d(0, 0, 0); }
+    100% { transform: rotate(0deg) translate3d(0, 0, 0); }
+  }
+
+  @keyframes storm1261-{{ ai_gen_id }} {
+    0% { transform: translate3d(0, 0, 0) translateZ(0); }
+    25% { transform: translate3d(4px, 0, 0) translateZ(0); }
+    50% { transform: translate3d(-3px, 0, 0) translateZ(0); }
+    75% { transform: translate3d(2px, 0, 0) translateZ(0); }
+    100% { transform: translate3d(0, 0, 0) translateZ(0); }
+  }
+
+  .ai-product-card__btn-{{ ai_gen_id }} span {
+    color: #ffffff;
+    z-index: 20;
+    animation: storm1261-{{ ai_gen_id }} 0.7s ease-in-out both;
+    animation-delay: 0.06s;
+  }
+
+  .ai-product-card__btn-{{ ai_gen_id }}:after {
+    background: #38ef7d;
+    content: "";
+    height: 155px;
+    left: -75px;
+    opacity: 0.4;
+    position: absolute;
+    top: -50px;
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 50px;
+    z-index: -10;
+  }
+
+  .ai-product-card__btn-{{ ai_gen_id }}:hover:after {
+    left: 120%;
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .ai-product-card__btn-{{ ai_gen_id }}:disabled,
+  .ai-product-card__btn-{{ ai_gen_id }}--unavailable {
+    background-color: #999999;
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 
   .ai-collection-tabs__empty-{{ ai_gen_id }} {
@@ -141,6 +275,16 @@
 
     .ai-collection-tabs__title-{{ ai_gen_id }} {
       padding: 0 25px;
+    }
+
+    .ai-product-card__title-{{ ai_gen_id }} {
+      min-height: 44px;
+      font-size: 14px;
+    }
+
+    .ai-product-card__btn-{{ ai_gen_id }} {
+      padding: 8px 12px;
+      font-size: 13px;
     }
   }
 {% endstyle %}
@@ -192,27 +336,54 @@
           {% if collection.products.size > 0 %}
             <div class="ai-collection-tabs__grid-{{ ai_gen_id }}">
               {% for product in collection.products limit: block.settings.products_per_collection %}
-                <div class="ai-collection-tabs__product-{{ ai_gen_id }}">
-                  <a href="{{ product.url }}" class="ai-collection-tabs__product-image-{{ ai_gen_id }}">
+                <div class="ai-product-card-{{ ai_gen_id }}">
+                  <a href="{{ product.url }}" class="ai-product-card__image-{{ ai_gen_id }}">
                     {% if product.featured_image %}
                       <img
-                        src="{{ product.featured_image | image_url: width: 400 }}"
+                        src="{{ product.featured_image | image_url: width: 500 }}"
                         alt="{{ product.featured_image.alt | escape }}"
                         loading="lazy"
-                        width="400"
-                        height="400"
+                        width="500"
+                        height="500"
                       >
                     {% else %}
-                      <div class="ai-collection-tabs__placeholder-{{ ai_gen_id }}">
+                      <div style="background: #f5f5f5; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
                         {{ 'product-1' | placeholder_svg_tag }}
                       </div>
                     {% endif %}
                   </a>
-                  <h3 class="ai-collection-tabs__product-title-{{ ai_gen_id }}">
-                    <a href="{{ product.url }}">{{ product.title }}</a>
-                  </h3>
-                  <div class="ai-collection-tabs__product-price-{{ ai_gen_id }}">
-                    {{ product.price | money }}
+                  
+                  <div class="ai-product-card__info-{{ ai_gen_id }}">
+                    <div class="ai-product-card__content-{{ ai_gen_id }}">
+                      <h3 class="ai-product-card__title-{{ ai_gen_id }}">
+                        <a href="{{ product.url }}">{{ product.title }}</a>
+                      </h3>
+                      
+                      <div class="ai-product-card__price-{{ ai_gen_id }}">
+                        {{ product.price | money }}
+                      </div>
+                    </div>
+                    
+                    <div class="ai-product-card__add-to-cart-{{ ai_gen_id }}">
+                      {% if product.available %}
+                        {% if product.variants.size == 1 %}
+                          <form action="/cart/add" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                            <button type="submit" class="ai-product-card__btn-{{ ai_gen_id }}">
+                              <span>Add to Cart</span>
+                            </button>
+                          </form>
+                        {% else %}
+                          <a href="{{ product.url }}" class="ai-product-card__btn-{{ ai_gen_id }}" style="text-decoration: none;">
+                            <span>Select Options</span>
+                          </a>
+                        {% endif %}
+                      {% else %}
+                        <button type="button" class="ai-product-card__btn-{{ ai_gen_id }} ai-product-card__btn-{{ ai_gen_id }}--unavailable" disabled>
+                          <span>Sold Out</span>
+                        </button>
+                      {% endif %}
+                    </div>
                   </div>
                 </div>
               {% endfor %}
@@ -460,16 +631,6 @@
       "id": "heading_active_border_color",
       "label": "Active border",
       "default": "#000000"
-    },
-    {
-      "type": "header",
-      "content": "Scrollbar"
-    },
-    {
-      "type": "color",
-      "id": "scrollbar_color",
-      "label": "Scrollbar color",
-      "default": "#cccccc"
     },
     {
       "type": "header",
