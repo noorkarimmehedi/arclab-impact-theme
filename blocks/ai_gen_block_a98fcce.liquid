@@ -173,7 +173,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .ai-product-card__price-{{ ai_gen_id }} {
@@ -181,6 +181,7 @@
     font-weight: 600;
     color: {{ block.settings.product_price_color }};
     margin: 0;
+    white-space: nowrap;
   }
 
   .ai-product-card__price--sale-{{ ai_gen_id }} {
